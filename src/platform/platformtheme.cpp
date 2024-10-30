@@ -380,9 +380,11 @@ public:
             }
         }
 
-        PlatformThemeChangeTracker tracker(theme, PlatformThemeChangeTracker::PropertyChange::Color);
-
-        if (data) {
+        // Only mark colors as changed if the value will actually change; the
+        // subclasses reset all colors when e.g. the window's active state
+        // changes.
+        if (data && data->owner == theme && data->colors[color] != value) {
+            PlatformThemeChangeTracker tracker(theme, PlatformThemeChangeTracker::PropertyChange::Color);
             data->setColor(theme, color, value);
         }
     }
