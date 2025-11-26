@@ -39,6 +39,10 @@ set_target_properties(KirigamiTemplates PROPERTIES
 
 target_include_directories(KirigamiTemplates PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
+add_dependencies(KirigamiTemplates
+    KirigamiPrimitives
+    KirigamiLayouts
+)
 
 ecm_finalize_qml_module(KirigamiTemplates EXPORT KirigamiTargets)
 
