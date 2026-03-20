@@ -64,6 +64,7 @@ set_package_properties(ECM PROPERTIES TYPE REQUIRED DESCRIPTION "Extra CMake Mod
 include(ECMGenerateExportHeader)
 include(ECMSetupVersion)
 include(ECMGenerateHeaders)
+include(ECMGeneratePkgConfigFile)
 include(CMakePackageConfigHelpers)
 include(ECMPoQmTools)
 include(ECMFindQmlModule)
@@ -168,6 +169,24 @@ configure_package_config_file(
     "KF6Kirigami2Config.cmake"
     INSTALL_DESTINATION "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6Kirigami2"
     PATH_VARS CMAKE_INSTALL_PREFIX
+)
+
+ecm_generate_pkgconfig_file(BASE_NAME SonicKirigamiPlatform
+    LIB_NAME libKirigamiPlatform
+#    INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/Plasma
+    DEPS Qt6Core Qt6Qml Qt6Quick Qt6Concurrent
+    DESCRIPTION ""
+    FILENAME_VAR pc_file
+    INSTALL
+)
+
+ecm_generate_pkgconfig_file(BASE_NAME SonicKirigami
+    LIB_NAME libKirigami
+#    INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/Plasma
+    DEPS Qt6Core Qt6Qml Qt6Quick Qt6Concurrent SonicKirigamiPlatform
+    DESCRIPTION ""
+    FILENAME_VAR pc_file
+    INSTALL
 )
 
 install(
