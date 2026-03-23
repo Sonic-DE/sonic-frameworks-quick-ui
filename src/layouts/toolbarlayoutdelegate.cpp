@@ -248,7 +248,7 @@ void ToolBarLayoutDelegate::forceCompletion()
     if (m_fullIncubator) {
         m_fullIncubator->forceCompletion();
     }
-    m_ready = true;
+    m_ready = m_icon && m_full;
 }
 
 void ToolBarLayoutDelegate::setPosition(qreal x, qreal y)
