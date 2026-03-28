@@ -204,7 +204,7 @@ Item {
                 Layout.preferredWidth: height
                 Layout.maximumWidth: aboutItem.width / 3;
                 Layout.rightMargin: Platform.Units.largeSpacing
-                source: Platform.Settings.applicationWindowIcon || aboutItem.aboutData.programLogo || aboutItem.aboutData.componentName
+                source: aboutItem.aboutData.programLogo || Platform.Settings.applicationWindowIcon || aboutItem.aboutData.componentName
             }
 
             KC.Heading {
