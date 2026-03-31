@@ -293,7 +293,7 @@ Item {
             id: licenseSheet
             property alias text: bodyLabel.text
 
-            contentItem: SelectableLabel {
+            SelectableLabel {
                 id: bodyLabel
                 text: licenseSheet.text
                 wrapMode: Text.Wrap
