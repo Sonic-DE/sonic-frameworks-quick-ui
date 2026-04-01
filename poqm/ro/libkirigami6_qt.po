@@ -1,8 +1,8 @@
-# Sergiu Bivol <sergiu@cip.md>, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2026 Sergiu Bivol <sergiu@cip.md>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-12-28 20:59+0000\n"
+"PO-Revision-Date: 2026-03-31 13:55+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 25.12.3\n"
 "X-Qt-Contexts: true\n"
 
 #: controls/AboutItem.qml:166
@@ -34,15 +34,12 @@ msgstr "Implică-te"
 #: controls/AboutItem.qml:234
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Donați"
 
 #: controls/AboutItem.qml:251
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Report Bug…"
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "Raportează defect…"
+msgstr "Raportați un defect"
 
 #: controls/AboutItem.qml:264
 msgctxt "AboutItem|"
@@ -102,12 +99,9 @@ msgid "More Actions"
 msgstr "Acțiuni suplimentare"
 
 #: controls/Chip.qml:45
-#, fuzzy
-#| msgctxt "Chip|"
-#| msgid "Remove Tag"
 msgctxt "Chip|"
 msgid "Remove"
-msgstr "Elimină marcajul"
+msgstr "Elimină"
 
 #: controls/ContextDrawer.qml:65
 msgctxt "ContextDrawer|"
@@ -117,7 +111,7 @@ msgstr "Acțiuni"
 #: controls/ContextualHelpButton.qml:59
 msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
-msgstr ""
+msgstr "Arată ajutor contextual"
 
 #: controls/GlobalDrawer.qml:366
 msgctxt "GlobalDrawer|"
@@ -145,49 +139,31 @@ msgid "Password"
 msgstr "Parolă"
 
 #: controls/PasswordField.qml:46
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Hide Password"
-msgstr "Parolă"
+msgstr "Ascunde parola"
 
 #: controls/PasswordField.qml:46
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Show Password"
-msgstr "Parolă"
+msgstr "Arată parola"
 
 #: controls/private/globaltoolbar/HandleButton.qml:24
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
 msgctxt "HandleButton|"
 msgid "Close menu"
-msgstr "Închide"
+msgstr "Închide meniul"
 
 #: controls/private/globaltoolbar/HandleButton.qml:24
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Open"
 msgctxt "HandleButton|"
 msgid "Open menu"
-msgstr "Deschide"
+msgstr "Deschide meniul"
 
 #: controls/private/globaltoolbar/NavigationButtons.qml:102
-#, fuzzy
-#| msgctxt "BackButton|"
-#| msgid "Navigate Back"
 msgctxt "NavigationButtons|"
 msgid "Navigate Back"
 msgstr "Navighează înapoi"
 
 #: controls/private/globaltoolbar/NavigationButtons.qml:119
-#, fuzzy
-#| msgctxt "ForwardButton|"
-#| msgid "Navigate Forward"
 msgctxt "NavigationButtons|"
 msgid "Navigate Forward"
 msgstr "Navighează înainte"
@@ -196,12 +172,10 @@ msgstr "Navighează înainte"
 #, qt-format
 msgctxt "@info:tooltip %1 is a keyboard shorcut|"
 msgid "Trigger this action with %1"
-msgstr ""
+msgstr "Declanșați această acțiune cu %1"
 
 #: controls/private/PrivateActionToolButton.qml:125
-#, fuzzy, qt-format
-#| msgctxt "AboutItem|"
-#| msgid "%1 (%2)"
+#, qt-format
 msgctxt ""
 "@info:tooltip %1 is the tooltip of an action, %2 is its keyboard shorcut|"
 msgid "%1 (%2)"
@@ -220,34 +194,28 @@ msgstr "Caută"
 #: controls/SearchField.qml:100
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr ""
+msgstr "Șterge căutarea"
 
 #: controls/SelectableLabel.qml:297
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "Copyright"
 msgctxt "SelectableLabel|"
 msgid "Copy"
-msgstr "Drept de autor"
+msgstr "Copiază"
 
 #: controls/SelectableLabel.qml:310
 msgctxt "SelectableLabel|"
 msgid "Select All"
-msgstr ""
+msgstr "Selectează tot"
 
 #: controls/UrlButton.qml:52
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link %1"
-msgstr ""
+msgstr "Deschide legătura %1"
 
 #: controls/UrlButton.qml:53
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Open"
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
-msgstr "Deschide"
+msgstr "Deschide legătura"
 
 #: controls/UrlButton.qml:101
 msgctxt "UrlButton|"
@@ -255,33 +223,24 @@ msgid "Copy Link to Clipboard"
 msgstr "Copiază legătura în clipboard"
 
 #: dialogs/DialogHeaderTopContent.qml:103
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
 msgctxt "DialogHeaderTopContent|@action:button close dialog"
 msgid "Close"
 msgstr "Închide"
 
 #: platform/settings.cpp:219
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "KDE Frameworks %1"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "KDE Frameworks %1"
 
 #: platform/settings.cpp:221
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "The %1 windowing system"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "Sistemul de ferestre %1"
 
 #: platform/settings.cpp:222
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "Qt %2 (built against %3)"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (construit cu %3)"
@@ -289,27 +248,24 @@ msgstr "Qt %2 (construit cu %3)"
 #: templates/InlineMessage.qml:350
 msgctxt "InlineMessage|"
 msgid "Success"
-msgstr ""
+msgstr "Succes"
 
 #: templates/InlineMessage.qml:352
 msgctxt "InlineMessage|"
 msgid "Warning"
-msgstr ""
+msgstr "Avertisment"
 
 #: templates/InlineMessage.qml:354
 msgctxt "InlineMessage|"
 msgid "Error"
-msgstr ""
+msgstr "Eroare"
 
 #: templates/InlineMessage.qml:356
 msgctxt "InlineMessage|"
 msgid "Note"
-msgstr ""
+msgstr "Notă"
 
 #: templates/InlineMessage.qml:443
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
 msgctxt "InlineMessage|"
 msgid "Close"
 msgstr "Închide"
@@ -325,9 +281,6 @@ msgid "Open drawer"
 msgstr "Deschide sertarul"
 
 #: templates/OverlaySheet.qml:294
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "Închide"
