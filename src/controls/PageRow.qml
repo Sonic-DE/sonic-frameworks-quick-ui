@@ -356,6 +356,11 @@ QT.Control {
                     window.close();
                 }
             });
+            window.visibleChanged.connect(() => {
+                if (!window.visible) {
+                    window.destroy();
+                }
+            });
         }
         // Escape is considered a shortcut, so we need to override it. Or else we don't get any events!
         item.Keys.shortcutOverride.connect(event => event.accepted = (event.key === Qt.Key_Escape));
