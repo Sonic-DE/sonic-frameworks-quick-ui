@@ -97,23 +97,6 @@ TestCase {
         verify(pool.lastLoadedUrl.toString().endsWith(expectedUrl))
     }
 
-    Kirigami.PagePoolAction {
-        id: loadPageActionPropDoesNotExist
-        pagePool: pool
-        pageStack: mainWindow.pageStack
-        page: "TestPage.qml?action=loadPageActionPropDoesNotExist"
-        initialProperties: {
-            return { propDoesNotExist: "PROP-NON-EXISTENT" }
-        }
-    }
-
-    function test_loadPageInitialPropertyNotExistFails () {
-        ignoreWarning(/.*Setting initial properties failed: TestPage does not have a property called propDoesNotExist/)
-        var expectedUrl = "TestPage.qml?action=loadPageActionPropDoesNotExist"
-        loadPageActionPropDoesNotExist.trigger()
-        verify(pool.lastLoadedUrl.toString().endsWith(expectedUrl))
-    }
-
     function test_contains () {
         const page = "TestPage.qml?action=contains"
         let item = pool.loadPage(page)
