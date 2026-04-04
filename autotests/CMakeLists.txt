@@ -33,6 +33,7 @@ endmacro()
 kirigami_add_tests(
     tst_action.qml
     tst_actiontoolbar.qml
+    tst_badge.qml
     tst_card.qml
     tst_colorutils.qml
     tst_columnview.qml
