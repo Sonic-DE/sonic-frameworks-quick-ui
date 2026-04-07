@@ -66,15 +66,15 @@ FT.FormEntry {
         anchors.fill: parent
         implicitWidth: mainLayout.implicitWidth + leftPadding + rightPadding
         implicitHeight: mainLayout.implicitHeight + topPadding + bottomPadding
-        padding: Platform.Units.largeSpacing
+        padding: Platform.Units.largeSpacing + Platform.Units.smallSpacing
 
         leftPadding: impl.formLayout.__collapsed ? padding : root.parent?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
 
         readonly property bool nextIsFormEntry: root.parent?.visibleChildren[root.parent.visibleChildren.indexOf(root) + 1] instanceof FormEntry ?? false
         readonly property bool prevIsFormEntry: root.parent?.visibleChildren[root.parent.visibleChildren.indexOf(root) - 1] instanceof FormEntry ?? false
 
-        topPadding: prevIsFormEntry ? Platform.Units.smallSpacing : Platform.Units.largeSpacing + Platform.Units.smallSpacing
-        bottomPadding: nextIsFormEntry ? Platform.Units.smallSpacing : Platform.Units.largeSpacing + Platform.Units.smallSpacing
+        topPadding: prevIsFormEntry ? Platform.Units.largeSpacing : Platform.Units.largeSpacing + Platform.Units.smallSpacing
+        bottomPadding: nextIsFormEntry ? Platform.Units.largeSpacing : Platform.Units.largeSpacing + Platform.Units.smallSpacing
 
         readonly property Item formLayout: {
             let candidate = root.parent
@@ -131,7 +131,10 @@ FT.FormEntry {
                         ? Qt.application.layoutDirection === Qt.LeftToRight
                         : Qt.application.layoutDirection === Qt.RightToLeft
 
-                padding: 0
+                leftPadding: 0
+                rightPadding: 0
+                topPadding: 0
+                bottomPadding: 0
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
                 contentItem: root.contentItem
@@ -161,8 +164,8 @@ FT.FormEntry {
                 wrapMode: Text.WordWrap
                 elide: Text.ElideRight
                 leftPadding: Application.layoutDirection === Qt.LeftToRight
-                ? root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing * 2 + 1
-                : padding
+                    ? root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing
+                    : padding
             }
         }
 
