@@ -40,7 +40,7 @@ FT.FormGroup {
 
         header: KC.Heading {
             level: 5
-            leftPadding: Platform.Units.gridUnit + Platform.Units.cornerRadius
+            leftPadding: Platform.Units.cornerRadius + (layout.compactMargins ? Platform.Units.gridUnit : 0)
             font.weight: Font.DemiBold
             visible: text.length > 0
             text: root.title

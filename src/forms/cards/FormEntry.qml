@@ -106,8 +106,8 @@ FT.FormEntry {
 
         contentItem: GridLayout {
             id: mainLayout
-            columnSpacing: Platform.Units.largeSpacing
-            rowSpacing: Platform.Units.smallSpacing
+            columnSpacing: Platform.Units.smallSpacing
+            rowSpacing: 0
             columns: 1 + leadingItems.visible + trailingItems.visible
             QQC.Label {
                 Layout.fillWidth: true
@@ -146,7 +146,7 @@ FT.FormEntry {
             RowLayout {
                 id: trailingItems
                 Layout.rowSpan: subtitleLabel.visible ? 2 : 1
-                Layout.minimumWidth: implicitWidth
+                Layout.minimumWidth: visible ? implicitWidth : 0
                 visible: children.length > 0
                 spacing: Platform.Units.smallSpacing
                 children: root.trailingItems
@@ -160,6 +160,9 @@ FT.FormEntry {
                 text: root.subtitle
                 wrapMode: Text.WordWrap
                 elide: Text.ElideRight
+                leftPadding: Application.layoutDirection === Qt.LeftToRight
+                ? root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing * 2 + 1
+                : padding
             }
         }
 
