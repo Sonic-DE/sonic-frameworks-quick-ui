@@ -22,7 +22,7 @@ msgstr ""
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: controls/AboutItem.qml:186
 #, qt-format
@@ -176,14 +176,14 @@ msgstr "Navigovať dopredu"
 #, qt-format
 msgctxt "@info:tooltip %1 is a keyboard shorcut|"
 msgid "Trigger this action with %1"
-msgstr ""
+msgstr "Trigger this action with %1"
 
 #: controls/private/PrivateActionToolButton.qml:125
 #, qt-format
 msgctxt ""
 "@info:tooltip %1 is the tooltip of an action, %2 is its keyboard shorcut|"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: controls/SearchField.qml:88
 msgctxt "SearchField|"
@@ -214,7 +214,7 @@ msgstr "Vybrať všetko"
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link %1"
-msgstr ""
+msgstr "Open link %1"
 
 #: controls/UrlButton.qml:53
 msgctxt "UrlButton|@info:whatsthis"
@@ -282,7 +282,7 @@ msgstr "Zatvoriť bočný panel"
 #: templates/OverlayDrawer.qml:153
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
-msgstr ""
+msgstr "Otvoriť vysuvaciu ponuku"
 
 #: templates/OverlaySheet.qml:294
 msgctxt "OverlaySheet|@action:button close dialog"
