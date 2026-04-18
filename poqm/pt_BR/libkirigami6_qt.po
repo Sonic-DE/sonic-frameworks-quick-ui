@@ -6,14 +6,14 @@
 # André Marcelo Alvarenga <alvarenga@kde.org>, 2018, 2019.
 # Thiago Masato Costa Sueto <herzenschein@gmail.com>, 2021.
 # SPDX-FileCopyrightText: 2023 Geraldo Simiao <geraldosimiao@fedoraproject.org>
-# SPDX-FileCopyrightText: 2025 Guilherme Marçal Silva <guimarcalsilva@gmail.com>
+# SPDX-FileCopyrightText: 2025, 2026 Guilherme Marçal Silva <guimarcalsilva@gmail.com>
 # SPDX-FileCopyrightText: 2025, 2026 Marcus Gama <marcus.gama@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkirigami2plugin_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"PO-Revision-Date: 2026-02-16 08:54-0300\n"
-"Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
+"PO-Revision-Date: 2026-04-17 02:43-0300\n"
+"Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: controls/AboutItem.qml:166
 #, qt-format
@@ -181,7 +181,7 @@ msgstr "Avançar"
 #, qt-format
 msgctxt "@info:tooltip %1 is a keyboard shorcut|"
 msgid "Trigger this action with %1"
-msgstr "Acionar esta ação com %1"
+msgstr "Ative esta ação com %1"
 
 #: controls/private/PrivateActionToolButton.qml:125
 #, qt-format
@@ -224,7 +224,7 @@ msgstr "Abrir link %1"
 #: controls/UrlButton.qml:53
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
-msgstr " Abrir link"
+msgstr "Abrir link"
 
 #: controls/UrlButton.qml:101
 msgctxt "UrlButton|"
