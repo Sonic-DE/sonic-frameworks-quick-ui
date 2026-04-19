@@ -14,6 +14,8 @@ layout(std140, binding = 0) uniform buf {
     mediump float highlight_amount;
     mediump float desaturate_amount;
     mediump vec4 mask_color;
+    highp vec2 viewport_half;
+    highp vec2 inv_viewport_double;
 } uniforms;
 
 layout(location = 0) in highp vec4 in_vertex;
@@ -32,6 +34,10 @@ void main() {
 #ifdef ENABLE_MIX
     uv1 = in_uv1;
 #endif
-    gl_Position = uniforms.matrix * in_vertex;
+    highp vec4 position = uniforms.matrix * in_vertex;
+    highp vec2 pixel = ((position.xy / position.w) * uniforms.viewport_half)
+        + uniforms.viewport_half + 0.0001;
+    position.xy = (round(pixel) * uniforms.inv_viewport_double - 1.0)
+        * position.w;
+    gl_Position = position;
 }
-

@@ -25,6 +25,10 @@ target_sources(KirigamiPrimitives PRIVATE
     scenegraph/shadernode.h
     scenegraph/shadermaterial.cpp
     scenegraph/shadermaterial.h
+    scenegraph/iconmaterial.cpp
+    scenegraph/iconmaterial.h
+    scenegraph/iconnode.cpp
+    scenegraph/iconnode.h
     scenegraph/softwarerectanglenode.cpp
     scenegraph/softwarerectanglenode.h
     scenegraph/texturecache.cpp
