@@ -14,6 +14,8 @@ layout(std140, binding = 0) uniform buf {
     mediump float highlight_amount;
     mediump float desaturate_amount;
     mediump vec4 mask_color;
+    highp vec2 viewport_half;
+    highp vec2 inv_viewport_double;
 } uniforms;
 
 layout(binding = 1) uniform sampler2D texture_source_0;
