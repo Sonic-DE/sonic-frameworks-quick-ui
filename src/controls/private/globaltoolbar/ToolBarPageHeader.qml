@@ -54,8 +54,6 @@ KC.AbstractApplicationHeader {
         Primitives.Separator {
             id: separator
             Layout.fillHeight: true
-            Layout.topMargin: Platform.Units.largeSpacing
-            Layout.bottomMargin: Platform.Units.largeSpacing
             // This must appear at the control edges, disregarding the padding
             Layout.leftMargin: -root.leftPadding
             Platform.Theme.colorSet: Platform.Theme.Header
