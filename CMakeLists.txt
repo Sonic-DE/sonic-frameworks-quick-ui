@@ -57,6 +57,8 @@ if(NOT BUILD_SHARED_LIBS)
     add_definitions(-DQT_STATICPLUGIN=1)
 endif()
 
+qt_policy(SET QTP0005 NEW)
+
 ################# set KDE specific information #################
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set_package_properties(ECM PROPERTIES TYPE REQUIRED DESCRIPTION "Extra CMake Modules." URL "https://commits.kde.org/extra-cmake-modules")
