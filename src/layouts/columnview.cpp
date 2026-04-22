@@ -1053,7 +1053,9 @@ ColumnView::ColumnView(QQuickItem *parent)
                 if ((newState == QAbstractAnimation::Running) == (oldState == QAbstractAnimation::Running)) {
                     return;
                 }
-                m_moving = newState == QAbstractAnimation::Running;
+                // If the user is still dragging, then it's still moving as well,
+                // even if the animation stopped
+                m_moving = newState == QAbstractAnimation::Running || m_dragging;
                 Q_EMIT movingChanged();
             });
     connect(m_contentItem, &ContentItem::widthChanged, this, &ColumnView::contentWidthChanged);
@@ -1792,12 +1794,17 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
 
         // m_acceptsMouse is a noop now
 
+        // If it was still moving due to the animation, drag immediately
+        if (m_moving) {
+            m_dragging = true;
+        }
         m_contentItem->m_slideAnim->stop();
         if (item->property("preventStealing").toBool()) {
             m_contentItem->snapToItem();
             return false;
         }
 
+        m_contentItem->m_touchDownX = m_contentItem->x();
         te->setAccepted(false);
 
         break;
@@ -1809,9 +1816,9 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
             return false;
         }
 
-        const QPointF pressPos = mapFromItem(item, te->points().first().pressPosition());
-        const QPointF lastPos = mapFromItem(item, te->points().first().lastPosition());
-        const QPointF pos = mapFromItem(item, te->points().first().position());
+        const QPointF pressPos = te->points().first().scenePressPosition();
+        const QPointF lastPos = te->points().first().sceneLastPosition();
+        const QPointF pos = te->points().first().scenePosition();
 
         m_verticalScrollIntercepted = m_verticalScrollIntercepted || std::abs(pos.y() - pressPos.y()) > qApp->styleHints()->startDragDistance() * 3;
 
@@ -1865,7 +1872,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
         m_contentItem->m_lastDragDelta = pos.x() - lastPos.x();
 
         if (m_dragging) {
-            m_contentItem->setBoundedX(m_contentItem->x() + m_contentItem->m_lastDragDelta);
+            m_contentItem->setBoundedX(m_contentItem->m_touchDownX - pressPos.x() + pos.x());
         }
 
         te->setAccepted(m_dragging);
@@ -1929,6 +1936,7 @@ bool ColumnView::event(QEvent *event)
             m_contentItem->snapToItem();
             m_dragging = false;
         }
+        m_contentItem->m_touchDownX = m_contentItem->x();
         break;
     }
     case QEvent::TouchUpdate: {
@@ -1944,8 +1952,8 @@ bool ColumnView::event(QEvent *event)
 
         const QEventPoint point = te->points().first();
 
-        m_contentItem->m_lastDragDelta = point.position().x() - point.lastPosition().x();
-        m_contentItem->setBoundedX(m_contentItem->x() + m_contentItem->m_lastDragDelta);
+        m_contentItem->m_lastDragDelta = point.scenePosition().x() - point.sceneLastPosition().x();
+        m_contentItem->setBoundedX(m_contentItem->m_touchDownX - point.scenePressPosition().x() + point.scenePosition().x());
         break;
     }
     case QEvent::TouchEnd:
