@@ -577,7 +577,8 @@ qreal ContentItem::childWidth(QQuickItem *child)
         }
 
         if (attached->minimumWidth() >= 0 && attached->maximumWidth() >= 0) {
-            width = std::clamp(width, attached->minimumWidth(), attached->maximumWidth());
+            // Use this instead of std::clamp because it asserts for a situation that can be caused from qml code
+            width = std::min(std::max(width, attached->minimumWidth()), attached->maximumWidth());
         } else if (attached->minimumWidth() >= 0) {
             width = std::max(width, attached->minimumWidth());
         } else if (attached->maximumWidth() >= 0) {
@@ -630,7 +631,7 @@ void ContentItem::layoutItems()
             if (attached->isPinned() && m_view->columnResizeMode() != ColumnView::SingleColumn) {
                 const qreal width = childWidth(child);
                 const qreal widthDiff = std::max(0.0, m_view->width() - child->width()); // it's possible for the view width to be smaller than the child width
-                const qreal pageX = std::clamp(partialWidth, -x(), -x() + widthDiff);
+                const qreal pageX = std::min(std::max(partialWidth, -x()), -x() + widthDiff);
                 qreal headerHeight = .0;
                 qreal footerHeight = .0;
                 if (QQuickItem *header = attached->globalHeader()) {
