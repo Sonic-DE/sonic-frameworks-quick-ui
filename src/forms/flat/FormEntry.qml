@@ -108,7 +108,7 @@ FT.FormEntry {
                 //Layout.fillWidth: contentItem?.Layout.fillWidth
 
                 header: QQC.Label {
-                    topPadding: root.y > 0 ? Platform.Units.largeSpacing : 0
+                    topPadding: root.parent.children[0] === root ? 0 : Platform.Units.largeSpacing
                     visible: impl.formLayout.__collapsed && text.length > 0
                     text: label.Primitives.MnemonicData.richTextLabel
                 }
