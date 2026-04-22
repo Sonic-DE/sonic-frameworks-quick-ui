@@ -87,7 +87,10 @@ private:
     qreal m_rightPinnedSpace = 0;
 
     qreal m_columnWidth = 0;
+    // This used just to figure out if the user intends to scroll left or right
     qreal m_lastDragDelta = 0;
+    // This used for item dragging
+    qreal m_touchDownX = 0;
     ColumnView::ColumnResizeMode m_columnResizeMode = ColumnView::FixedColumns;
     bool m_shouldAnimate = false;
     bool m_creationInProgress = true;
