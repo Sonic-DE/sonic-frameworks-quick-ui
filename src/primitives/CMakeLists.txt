@@ -4,7 +4,9 @@ ecm_add_qml_module(KirigamiPrimitives URI "org.kde.kirigami.primitives"
     VERSION 2.0
     GENERATE_PLUGIN_SOURCE
     INSTALLED_PLUGIN_TARGET KF6KirigamiPrimitives
-    DEPENDENCIES QtQuick org.kde.kirigami.platform
+    DEPENDENCIES
+        QtQuick
+        TARGET KirigamiPlatform
 )
 
 target_sources(KirigamiPrimitives PRIVATE

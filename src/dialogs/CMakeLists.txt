@@ -4,7 +4,9 @@ ecm_add_qml_module(KirigamiDialogs URI "org.kde.kirigami.dialogs"
     VERSION 2.0
     GENERATE_PLUGIN_SOURCE
     INSTALLED_PLUGIN_TARGET KF6KirigamiDialogsplugin
-    DEPENDENCIES QtQuick org.kde.kirigami.platform
+    DEPENDENCIES
+        QtQuick
+        TARGET KirigamiPlatform
 )
 
 
