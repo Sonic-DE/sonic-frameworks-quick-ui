@@ -1065,13 +1065,15 @@ QT.Control {
                             }
 
                             const animDistance = Platform.Units.gridUnit * 4;
-                            if (progress < 0) {
-                                return columnView.contentX - page.x;
-                            } else if (!wasDragging && progress > 1e-9) {
-                                return - (columnView.width - animDistance) * Math.min(1,  progress);
+                            if (!wasDragging && Math.abs(progress) > 1e-9) {
+                                // Cancel the natural full‑width slide and add a partial offset
+                                return (columnView.contentX - page.x) + animDistance * progress;
                             }
                             return 0;
                         }
+
+                        // Opacity binding: crossfade both pages.
+                        // Fade out when being pushed away, fade in when returning from pop.
                         component OpacityBinding: Binding {
                             target: transitionTransform.page
                             property: "opacity"
@@ -1079,7 +1081,13 @@ QT.Control {
                                 if (transitionTransform.wasDragging || !transitionTransform.active) {
                                     return 1;
                                 }
-                                return Math.min(1, 1 - transitionTransform.progress);
+                                var animProgress = transitionTransform.progress;
+                                if (animProgress > 0) {
+                                    return 1 - Math.min(1, animProgress);
+                                } else if (animProgress < 0) {
+                                    return 1 + Math.min(1, animProgress);
+                                }
+                                return 1;
                             }
                         }
                         // NOTE: We use list<Binding> here instead of list<OpacityBinding> to work around QTBUG-144092
