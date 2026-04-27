@@ -739,12 +739,9 @@ void ContentItem::layoutPinnedItems()
     m_leftPinnedSpace = 0;
     m_rightPinnedSpace = 0;
 
-    QQuickItem *previousChild = nullptr;
-
     for (auto it = m_items.constBegin(); it != m_items.constEnd(); it++) {
         // for (QQuickItem *child : std::as_const(m_items)) {
         QQuickItem *child = *it;
-        QQuickItem *nextChild = *(it + 1);
         //  for (QQuickItem *child : std::as_const(m_items)) {
         ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(child, true));
 
