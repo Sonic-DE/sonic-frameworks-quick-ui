@@ -58,12 +58,9 @@ KirigamiControlsPlugin::KirigamiControlsPlugin(QObject *parent)
     auto filter = new ControlsLanguageChangeEventFilter;
     filter->moveToThread(QCoreApplication::instance()->thread());
     QCoreApplication::instance()->installEventFilter(filter);
-    QMetaObject::invokeMethod(
-        QCoreApplication::instance(),
-        [filter] {
-            filter->setParent(QCoreApplication::instance());
-        },
-        Qt::QueuedConnection);
+    connect(qApp, &QCoreApplication::destroyed, qApp, [filter] {
+        delete filter;
+    });
 }
 
 QUrl KirigamiControlsPlugin::componentUrl(const QString &fileName) const
