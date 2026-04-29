@@ -46,6 +46,8 @@ FT.FormEntry {
         Primitives.MnemonicData.label: root.title
         text: Primitives.MnemonicData.richTextLabel
         Accessible.name: Primitives.MnemonicData.plainTextLabel
+        // We should use this instead of the binding but this makes qt crash due to QTBUG-146127
+        // Accessible.labelFor: visible ? root.contentItem : null
         Shortcut {
             sequence: label.Primitives.MnemonicData.sequence
             onActivated: {
@@ -65,6 +67,13 @@ FT.FormEntry {
                 root.clicked();
             }
         }
+    }
+
+    // Replace with Accessible.labelFor once QTBUG-146127 is fixed
+    Binding {
+        target: root.contentItem.Accessible
+        property: "labelledBy"
+        value: label.visible ? label : layout.header
     }
 
     T.Control {
@@ -110,6 +119,7 @@ FT.FormEntry {
                 header: QQC.Label {
                     topPadding: root.parent.children[0] === root ? 0 : Platform.Units.largeSpacing
                     visible: impl.formLayout.__collapsed && text.length > 0
+               //     Accessible.labelFor: visible && root.contentItem ? root.contentItem : null
                     text: label.Primitives.MnemonicData.richTextLabel
                 }
 
