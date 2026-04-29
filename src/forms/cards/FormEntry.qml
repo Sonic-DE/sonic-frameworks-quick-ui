@@ -50,6 +50,8 @@ FT.FormEntry {
         text: Primitives.MnemonicData.richTextLabel
         wrapMode: Text.WordWrap
         Accessible.name: Primitives.MnemonicData.plainTextLabel
+        // We should use this instead of the binding but this makes qt crash due to QTBUG-146127
+        // Accessible.labelFor: visible ? root.contentItem : null
         Shortcut {
             sequence: label.Primitives.MnemonicData.sequence
             onActivated: {
@@ -59,6 +61,13 @@ FT.FormEntry {
                 buttonBuddy.animateClick();
             }
         }
+    }
+
+    // Replace with Accessible.labelFor once QTBUG-146127 is fixed
+    Binding {
+        target: root.contentItem.Accessible
+        property: "labelledBy"
+        value: label.visible ? label : inlineLabel
     }
 
     T.ItemDelegate {
@@ -110,6 +119,7 @@ FT.FormEntry {
             rowSpacing: Platform.Units.smallSpacing
             columns: 1 + leadingItems.visible + trailingItems.visible
             QQC.Label {
+                id: inlineLabel
                 Layout.fillWidth: true
                 Layout.columnSpan: mainLayout.columns
                 visible: text.length > 0 && impl.formLayout.__collapsed
