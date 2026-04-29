@@ -29,7 +29,7 @@ FT.FormEntry {
         anchors {
             top: parent.top
             right: parent.left
-            topMargin: root.contentItem.KirigamiLayouts.FormData.buddyFor.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.height/2 - label.height/2 + impl.topPadding
+            topMargin: root.contentItem.KirigamiLayouts.FormData.buddyFor.y + layout.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.height/2 - label.height/2 + impl.topPadding
         }
         visible: text.length > 0 && !impl.formLayout.__collapsed
         Primitives.MnemonicData.enabled: {
