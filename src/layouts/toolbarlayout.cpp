@@ -617,6 +617,7 @@ QList<ToolBarLayoutDelegate *> ToolBarLayoutPrivate::createDelegates()
     if (!moreButtonInstance) {
         moreButtonInstance = qobject_cast<QQuickItem *>(
             moreButton->createWithInitialProperties({{u"parent"_s, QVariant::fromValue(q)}, {u"visible"_s, false}}, qmlContext(moreButton)));
+        moreButtonInstance->setParent(q);
         QObject::connect(moreButtonInstance, &QQuickItem::visibleChanged, q, [this]() {
             moreButtonInstance->setVisible(shouldShowMoreButton);
         });
@@ -649,6 +650,7 @@ ToolBarLayoutDelegate *ToolBarLayoutPrivate::createDelegate(QObject *action)
     result->setAction(action);
     result->createItems(fullComponent, iconDelegate, [this, action](QQuickItem *newItem) {
         newItem->setParentItem(q);
+        newItem->setParent(q);
         auto attached = static_cast<ToolBarLayoutAttached *>(qmlAttachedPropertiesObject<ToolBarLayout>(newItem, true));
         attached->setAction(action);
 

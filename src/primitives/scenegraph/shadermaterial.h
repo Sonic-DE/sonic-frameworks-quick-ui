@@ -43,14 +43,18 @@ public:
     static QString nameForType(QSGMaterialType *type);
     static QSGMaterialType *typeForName(const QString &name);
 
+protected:
+    virtual void updateRenderStateUniforms(const QSGMaterialShader::RenderState &state);
+
 private:
     QString m_name;
     QSGMaterialType *m_type;
 
     QByteArray m_uniformData;
     QHash<int, QSGTexture *> m_textures;
-
     inline static std::unordered_map<QString, std::unique_ptr<QSGMaterialType>> s_materialTypes;
+
+    friend class ShaderMaterialShader;
 };
 
 class ShaderMaterialShader : public QSGMaterialShader

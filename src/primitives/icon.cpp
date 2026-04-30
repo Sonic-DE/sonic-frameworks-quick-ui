@@ -6,6 +6,7 @@
  */
 
 #include "icon.h"
+#include "scenegraph/iconnode.h"
 #include "scenegraph/shadernode.h"
 #include "scenegraph/softwarerectanglenode.h"
 
@@ -195,9 +196,9 @@ QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * 
         return rectangleNode;
     }
 
-    auto shaderNode = static_cast<ShaderNode *>(node);
+    auto shaderNode = static_cast<IconNode *>(node);
     if (!shaderNode) {
-        shaderNode = new ShaderNode{};
+        shaderNode = new IconNode{};
     }
 
     bool shouldBeAnimated = !m_oldIcon.isNull() && m_animated;
@@ -212,7 +213,7 @@ QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * 
         shaderName += u"default"_s;
     }
     shaderNode->setShader(shaderName);
-    shaderNode->setUniformBufferSize(sizeof(float) * 24);
+    shaderNode->setUniformBufferSize(sizeof(float) * 28);
 
     if (shouldBeAnimated) {
         shaderNode->setTextureChannels(2);

@@ -3,7 +3,11 @@ add_library(KirigamiDelegates)
 ecm_add_qml_module(KirigamiDelegates URI "org.kde.kirigami.delegates"
     GENERATE_PLUGIN_SOURCE
     INSTALLED_PLUGIN_TARGET KF6KirigamiDelegates
-    DEPENDENCIES QtQuick org.kde.kirigami.platform org.kde.kirigami.primitives
+    DEPENDENCIES
+        QtQuick
+        TARGET KirigamiPlatform
+        TARGET KirigamiPrimitives
+        TARGET KirigamiControls
 )
 
 ecm_target_qml_sources(KirigamiDelegates SOURCES

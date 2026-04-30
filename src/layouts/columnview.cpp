@@ -577,7 +577,8 @@ qreal ContentItem::childWidth(QQuickItem *child)
         }
 
         if (attached->minimumWidth() >= 0 && attached->maximumWidth() >= 0) {
-            width = std::clamp(width, attached->minimumWidth(), attached->maximumWidth());
+            // Use this instead of std::clamp because it asserts for a situation that can be caused from qml code
+            width = std::min(std::max(width, attached->minimumWidth()), attached->maximumWidth());
         } else if (attached->minimumWidth() >= 0) {
             width = std::max(width, attached->minimumWidth());
         } else if (attached->maximumWidth() >= 0) {
@@ -630,7 +631,7 @@ void ContentItem::layoutItems()
             if (attached->isPinned() && m_view->columnResizeMode() != ColumnView::SingleColumn) {
                 const qreal width = childWidth(child);
                 const qreal widthDiff = std::max(0.0, m_view->width() - child->width()); // it's possible for the view width to be smaller than the child width
-                const qreal pageX = std::clamp(partialWidth, -x(), -x() + widthDiff);
+                const qreal pageX = std::min(std::max(partialWidth, -x()), -x() + widthDiff);
                 qreal headerHeight = .0;
                 qreal footerHeight = .0;
                 if (QQuickItem *header = attached->globalHeader()) {
@@ -738,12 +739,9 @@ void ContentItem::layoutPinnedItems()
     m_leftPinnedSpace = 0;
     m_rightPinnedSpace = 0;
 
-    QQuickItem *previousChild = nullptr;
-
     for (auto it = m_items.constBegin(); it != m_items.constEnd(); it++) {
         // for (QQuickItem *child : std::as_const(m_items)) {
         QQuickItem *child = *it;
-        QQuickItem *nextChild = *(it + 1);
         //  for (QQuickItem *child : std::as_const(m_items)) {
         ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(child, true));
 
@@ -1053,7 +1051,9 @@ ColumnView::ColumnView(QQuickItem *parent)
                 if ((newState == QAbstractAnimation::Running) == (oldState == QAbstractAnimation::Running)) {
                     return;
                 }
-                m_moving = newState == QAbstractAnimation::Running;
+                // If the user is still dragging, then it's still moving as well,
+                // even if the animation stopped
+                m_moving = newState == QAbstractAnimation::Running || m_dragging;
                 Q_EMIT movingChanged();
             });
     connect(m_contentItem, &ContentItem::widthChanged, this, &ColumnView::contentWidthChanged);
@@ -1358,6 +1358,9 @@ void ColumnView::insertItem(int pos, QQuickItem *item)
 
     item->setVisible(true);
     m_contentItem->m_items.insert(qBound(0, pos, m_contentItem->m_items.length()), item);
+    if (!m_contentData.contains(item)) {
+        m_contentData.append(item);
+    }
 
     connect(item, &QObject::destroyed, m_contentItem, [this, item]() {
         removeItem(item);
@@ -1387,6 +1390,7 @@ void ColumnView::insertItem(int pos, QQuickItem *item)
     }
     // Animate shift to new item.
     m_contentItem->m_shouldAnimate = true;
+    Q_EMIT countChanged();
     m_contentItem->layoutItems();
     Q_EMIT contentChildrenChanged();
 
@@ -1499,6 +1503,7 @@ QQuickItem *ColumnView::removeItem(QQuickItem *item)
     }
 
     const int index = m_contentItem->m_items.indexOf(item);
+    m_contentData.removeAll(item);
 
     // In order to keep the same current item we need to increase the current index if displaced
     if (index >= 0 && m_currentIndex >= index) {
@@ -1700,6 +1705,7 @@ QQuickItem *ColumnView::pop()
     QQuickItem *item = get(count() - 1);
     m_contentItem->m_disappearingItems.append(item);
     m_contentItem->m_items.removeAll(item);
+    m_contentData.removeAll(item);
     // Count - 1 now is the previous item as we already removed this from m_items
     // The item in m_disappearingItems will be definitely removed/deleted as soon the animation stops
     setCurrentIndex(count() - 1);
@@ -1786,12 +1792,17 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
 
         // m_acceptsMouse is a noop now
 
+        // If it was still moving due to the animation, drag immediately
+        if (m_moving) {
+            m_dragging = true;
+        }
         m_contentItem->m_slideAnim->stop();
         if (item->property("preventStealing").toBool()) {
             m_contentItem->snapToItem();
             return false;
         }
 
+        m_contentItem->m_touchDownX = m_contentItem->x();
         te->setAccepted(false);
 
         break;
@@ -1803,9 +1814,9 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
             return false;
         }
 
-        const QPointF pressPos = mapFromItem(item, te->points().first().pressPosition());
-        const QPointF lastPos = mapFromItem(item, te->points().first().lastPosition());
-        const QPointF pos = mapFromItem(item, te->points().first().position());
+        const QPointF pressPos = te->points().first().scenePressPosition();
+        const QPointF lastPos = te->points().first().sceneLastPosition();
+        const QPointF pos = te->points().first().scenePosition();
 
         m_verticalScrollIntercepted = m_verticalScrollIntercepted || std::abs(pos.y() - pressPos.y()) > qApp->styleHints()->startDragDistance() * 3;
 
@@ -1859,7 +1870,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
         m_contentItem->m_lastDragDelta = pos.x() - lastPos.x();
 
         if (m_dragging) {
-            m_contentItem->setBoundedX(m_contentItem->x() + m_contentItem->m_lastDragDelta);
+            m_contentItem->setBoundedX(m_contentItem->m_touchDownX - pressPos.x() + pos.x());
         }
 
         te->setAccepted(m_dragging);
@@ -1923,6 +1934,7 @@ bool ColumnView::event(QEvent *event)
             m_contentItem->snapToItem();
             m_dragging = false;
         }
+        m_contentItem->m_touchDownX = m_contentItem->x();
         break;
     }
     case QEvent::TouchUpdate: {
@@ -1938,8 +1950,8 @@ bool ColumnView::event(QEvent *event)
 
         const QEventPoint point = te->points().first();
 
-        m_contentItem->m_lastDragDelta = point.position().x() - point.lastPosition().x();
-        m_contentItem->setBoundedX(m_contentItem->x() + m_contentItem->m_lastDragDelta);
+        m_contentItem->m_lastDragDelta = point.scenePosition().x() - point.sceneLastPosition().x();
+        m_contentItem->setBoundedX(m_contentItem->m_touchDownX - point.scenePressPosition().x() + point.scenePosition().x());
         break;
     }
     case QEvent::TouchEnd:
@@ -2028,20 +2040,10 @@ void ColumnView::contentChildren_append(QQmlListProperty<QQuickItem> *prop, QQui
 {
     // This can only be called from QML
     ColumnView *view = static_cast<ColumnView *>(prop->object);
-    if (!view) {
+    if (!view || !item) {
         return;
     }
-
-    view->m_contentItem->m_items.append(item);
-    connect(item, &QObject::destroyed, view->m_contentItem, [view, item]() {
-        view->removeItem(item);
-    });
-
-    ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
-    attached->setOriginalParent(item->parentItem());
-    attached->setShouldDeleteOnRemove(item->parentItem() == nullptr && QQmlEngine::objectOwnership(item) == QQmlEngine::JavaScriptOwnership);
-
-    item->setParentItem(view->m_contentItem);
+    view->addItem(item);
 }
 
 qsizetype ColumnView::contentChildren_count(QQmlListProperty<QQuickItem> *prop)
@@ -2074,7 +2076,7 @@ void ColumnView::contentChildren_clear(QQmlListProperty<QQuickItem> *prop)
         return;
     }
 
-    return view->m_contentItem->m_items.clear();
+    view->clear();
 }
 
 QQmlListProperty<QQuickItem> ColumnView::contentChildren()
@@ -2103,17 +2105,7 @@ void ColumnView::contentData_append(QQmlListProperty<QObject> *prop, QObject *ob
         connect(item, SIGNAL(modelChanged()), view->m_contentItem, SLOT(updateRepeaterModel()));
 
     } else if (item) {
-        view->m_contentItem->m_items.append(item);
-        connect(item, &QObject::destroyed, view->m_contentItem, [view, item]() {
-            view->removeItem(item);
-        });
-
-        ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
-        attached->setOriginalParent(item->parentItem());
-        attached->setShouldDeleteOnRemove(view->m_complete && !item->parentItem() && QQmlEngine::objectOwnership(item) == QQmlEngine::JavaScriptOwnership);
-
-        item->setParentItem(view->m_contentItem);
-
+        view->addItem(item);
     } else {
         object->setParent(view);
     }
@@ -2149,7 +2141,8 @@ void ColumnView::contentData_clear(QQmlListProperty<QObject> *prop)
         return;
     }
 
-    return view->m_contentData.clear();
+    view->clear();
+    view->m_contentData.clear();
 }
 
 QQmlListProperty<QObject> ColumnView::contentData()

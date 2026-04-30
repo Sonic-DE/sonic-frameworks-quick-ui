@@ -3,7 +3,11 @@ ecm_add_qml_module(KirigamiFormsPrivateTemplates URI "org.kde.kirigami.forms.pri
     VERSION 2.0
     GENERATE_PLUGIN_SOURCE
     INSTALLED_PLUGIN_TARGET KF6KirigamiFormsPrivateTemplatesplugin
-    DEPENDENCIES QtQuick org.kde.kirigami.platform org.kde.kirigami.primitives org.kde.kirigami.layouts
+    DEPENDENCIES
+        QtQuick
+        TARGET KirigamiPlatform
+        TARGET KirigamiPrimitives
+        TARGET KirigamiLayouts
 )
 
 set_target_properties(KirigamiFormsPrivateTemplates PROPERTIES
@@ -25,7 +29,11 @@ ecm_add_qml_module(KirigamiFormsPrivateFlat URI "org.kde.kirigami.forms.private.
     VERSION 2.0
     GENERATE_PLUGIN_SOURCE
     INSTALLED_PLUGIN_TARGET KF6KirigamiFormsPrivateFlatplugin
-    DEPENDENCIES QtQuick org.kde.kirigami.platform org.kde.kirigami.primitives org.kde.kirigami.layouts
+    DEPENDENCIES
+        QtQuick
+        TARGET KirigamiPlatform
+        TARGET KirigamiPrimitives
+        TARGET KirigamiLayouts
 )
 
 set_target_properties(KirigamiFormsPrivateFlat PROPERTIES
@@ -47,7 +55,11 @@ ecm_add_qml_module(KirigamiFormsPrivateCards URI "org.kde.kirigami.forms.private
     VERSION 2.0
     GENERATE_PLUGIN_SOURCE
     INSTALLED_PLUGIN_TARGET KF6KirigamiFormsPrivateCardsplugin
-    DEPENDENCIES QtQuick org.kde.kirigami.platform org.kde.kirigami.primitives org.kde.kirigami.layouts
+    DEPENDENCIES
+        QtQuick
+        TARGET KirigamiPlatform
+        TARGET KirigamiPrimitives
+        TARGET KirigamiLayouts
 )
 
 set_target_properties(KirigamiFormsPrivateCards PROPERTIES
@@ -70,13 +82,15 @@ ecm_add_qml_module(KirigamiForms URI "org.kde.kirigami.forms" VERSION 2.0
     CLASS_NAME KirigamiFormsPlugin
     INSTALLED_PLUGIN_TARGET KF6KirigamiFormsplugin
     DEPENDENCIES
-    "QtQuick.Controls"
-    "org.kde.kirigami.platform"
-    "org.kde.kirigami.primitives"
-    "org.kde.kirigami.layouts"
-    "org.kde.kirigami.forms.private.flat"
-    "org.kde.kirigami.forms.private.cards"
-    "org.kde.kirigami.forms.private.templates"
+        "QtQuick.Controls"
+        TARGET KirigamiPlatform
+        TARGET KirigamiPrimitives
+        TARGET KirigamiLayouts
+        TARGET KirigamiFormsPrivateTemplates
+    OPTIONAL_IMPORTS
+        TARGET KirigamiFormsPrivateFlat
+        TARGET KirigamiFormsPrivateCards
+    DEFAULT_IMPORTS TARGET KirigamiFormsPrivateFlat
 )
 
 set_target_properties(KirigamiForms PROPERTIES

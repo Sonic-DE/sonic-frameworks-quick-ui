@@ -29,7 +29,7 @@ FT.FormEntry {
         anchors {
             top: parent.top
             right: parent.left
-            topMargin: root.contentItem.KirigamiLayouts.FormData.buddyFor.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.height/2 - label.height/2 + impl.topPadding
+            topMargin: root.contentItem.KirigamiLayouts.FormData.buddyFor.y + layout.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.height/2 - label.height/2 + impl.topPadding
         }
         visible: text.length > 0 && !impl.formLayout.__collapsed
         Primitives.MnemonicData.enabled: {
@@ -46,6 +46,8 @@ FT.FormEntry {
         Primitives.MnemonicData.label: root.title
         text: Primitives.MnemonicData.richTextLabel
         Accessible.name: Primitives.MnemonicData.plainTextLabel
+        // We should use this instead of the binding but this makes qt crash due to QTBUG-146127
+        // Accessible.labelFor: visible ? root.contentItem : null
         Shortcut {
             sequence: label.Primitives.MnemonicData.sequence
             onActivated: {
@@ -65,6 +67,13 @@ FT.FormEntry {
                 root.clicked();
             }
         }
+    }
+
+    // Replace with Accessible.labelFor once QTBUG-146127 is fixed
+    Binding {
+        target: root.contentItem.Accessible
+        property: "labelledBy"
+        value: label.visible ? label : layout.header
     }
 
     T.Control {
@@ -105,11 +114,14 @@ FT.FormEntry {
             KirigamiLayouts.HeaderFooterLayout {
                 id: layout
                 Layout.fillWidth: true
-                //Layout.fillWidth: contentItem?.Layout.fillWidth
+                Layout.minimumWidth: contentItem?.Layout.minimumWidth
+                Layout.preferredWidth: contentItem?.Layout.preferredWidth
+                Layout.maximumWidth: contentItem?.Layout.maximumWidth
 
                 header: QQC.Label {
-                    topPadding: root.y > 0 ? Platform.Units.largeSpacing : 0
+                    topPadding: root.parent.children[0] === root ? 0 : Platform.Units.largeSpacing
                     visible: impl.formLayout.__collapsed && text.length > 0
+               //     Accessible.labelFor: visible && root.contentItem ? root.contentItem : null
                     text: label.Primitives.MnemonicData.richTextLabel
                 }
 

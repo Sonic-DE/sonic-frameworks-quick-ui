@@ -109,7 +109,7 @@ msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "操作"
 
-#: controls/ContextualHelpButton.qml:59
+#: controls/ContextualHelpButton.qml:60
 msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "显示相关帮助"
