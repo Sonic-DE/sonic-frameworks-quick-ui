@@ -114,7 +114,9 @@ FT.FormEntry {
             KirigamiLayouts.HeaderFooterLayout {
                 id: layout
                 Layout.fillWidth: true
-                //Layout.fillWidth: contentItem?.Layout.fillWidth
+                Layout.minimumWidth: contentItem?.Layout.minimumWidth
+                Layout.preferredWidth: contentItem?.Layout.preferredWidth
+                Layout.maximumWidth: contentItem?.Layout.maximumWidth
 
                 header: QQC.Label {
                     topPadding: root.parent.children[0] === root ? 0 : Platform.Units.largeSpacing
