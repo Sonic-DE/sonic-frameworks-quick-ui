@@ -1,6 +1,13 @@
 add_library(KirigamiPlatform)
 add_library(KF6::KirigamiPlatform ALIAS KirigamiPlatform)
 
+qt_extract_metatypes(KirigamiPlatform OUTPUT_FILES METATYPES_FILE)
+
+# see https://qt-project.atlassian.net/browse/QTBUG-123052
+# might be replaced with proper Qt API once that exists
+get_filename_component(METATYPES_FILE_NAME ${METATYPES_FILE} NAME)
+target_sources(KirigamiPlatform INTERFACE $<INSTALL_INTERFACE:${KDE_INSTALL_QTMETATYPESDIR}/${METATYPES_FILE_NAME}>)
+
 ecm_add_qml_module(KirigamiPlatform
     URI "org.kde.kirigami.platform"
     VERSION 2.0
@@ -138,6 +145,8 @@ install(FILES
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami/Platform # prefix matching C++ namespace
     COMPONENT Devel
 )
+
+install(FILES ${METATYPES_FILE} DESTINATION ${KDE_INSTALL_QTMETATYPESDIR})
 
 ecm_qt_install_logging_categories(
     EXPORT KIRIGAMI
