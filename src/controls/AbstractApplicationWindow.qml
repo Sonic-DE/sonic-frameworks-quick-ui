@@ -286,8 +286,6 @@ QQC2.ApplicationWindow {
         // compositor and then the bindings are reevaluated, then the window
         // size would reset ignoring what the compositor asked.
         // see BUG 433849
-        root.width = root.width;
-        root.height = root.height;
     }
 
     // This is needed because discover in mobile mode does not
