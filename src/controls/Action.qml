@@ -172,6 +172,12 @@ QQC2.Action {
     checked: fromQAction?.checked ?? false
     enabled: !fromQAction || fromQAction.enabled
 
+    readonly property Connections __changeConnection: Connections {
+        target: action.fromQAction
+        function onChanged() {
+            action.fromQActionChanged()
+        }
+    }
     readonly property Shortcut alternateShortcut : Shortcut {
         sequences: P.ActionHelper.alternateShortcuts(action.fromQAction)
         onActivated: action.trigger()
