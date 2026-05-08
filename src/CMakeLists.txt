@@ -82,7 +82,6 @@ ecm_qt_declare_logging_category(Kirigami
     IDENTIFIER KirigamiLog
     CATEGORY_NAME kf.kirigami
     DESCRIPTION "Kirigami"
-    DEFAULT_SEVERITY Warning
     EXPORT KIRIGAMI
 )
 

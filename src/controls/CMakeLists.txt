@@ -17,7 +17,6 @@ ecm_qt_declare_logging_category(KirigamiControls
     IDENTIFIER KirigamiControlsLog
     CATEGORY_NAME kf.kirigami.controls
     DESCRIPTION "KirigamiControls"
-    DEFAULT_SEVERITY Warning
     EXPORT KIRIGAMI
 )
 

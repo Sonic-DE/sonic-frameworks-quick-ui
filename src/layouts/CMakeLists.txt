@@ -39,7 +39,6 @@ ecm_qt_declare_logging_category(KirigamiLayouts
     IDENTIFIER KirigamiLayoutsLog
     CATEGORY_NAME kf.kirigami.layouts
     DESCRIPTION "KirigamiLayouts"
-    DEFAULT_SEVERITY Warning
     EXPORT KIRIGAMI
 )
 

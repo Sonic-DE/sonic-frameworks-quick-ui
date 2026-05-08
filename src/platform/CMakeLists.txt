@@ -64,7 +64,6 @@ ecm_qt_declare_logging_category(KirigamiPlatform
     IDENTIFIER KirigamiPlatform
     CATEGORY_NAME kf.kirigami.platform
     DESCRIPTION "Kirigami Platform"
-    DEFAULT_SEVERITY Warning
     EXPORT KIRIGAMI
 )
 
