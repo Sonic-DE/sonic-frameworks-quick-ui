@@ -147,12 +147,6 @@ install(FILES
 
 install(FILES ${METATYPES_FILE} DESTINATION ${KDE_INSTALL_QTMETATYPESDIR})
 
-ecm_qt_install_logging_categories(
-    EXPORT KIRIGAMI
-    FILE kirigami.categories
-    DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
-)
-
 ecm_finalize_qml_module(KirigamiPlatform EXPORT KF6KirigamiPlatformTargets)
 
 ecm_generate_qdoc(KirigamiPlatform kirigamiplatform.qdocconf)
