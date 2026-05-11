@@ -11,7 +11,6 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Templates as T
 
-import org.kde.kirigami.dialogs as KirigamiDialogs
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.controls as KirigamiControls
 import org.kde.kirigami.primitives as Primitives
