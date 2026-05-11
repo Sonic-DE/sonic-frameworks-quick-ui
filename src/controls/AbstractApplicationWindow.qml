@@ -280,14 +280,6 @@ QQC2.ApplicationWindow {
     height: Platform.Settings.isMobile ? Platform.Units.gridUnit * 45 : Platform.Units.gridUnit * 40
     visible: true
 
-    Component.onCompleted: {
-        // Explicitly break the binding as we need this to be set only at startup.
-        // if the bindings are active, after this the window is resized by the
-        // compositor and then the bindings are reevaluated, then the window
-        // size would reset ignoring what the compositor asked.
-        // see BUG 433849
-    }
-
     // This is needed because discover in mobile mode does not
     // close with the global drawer open.
     Shortcut {
