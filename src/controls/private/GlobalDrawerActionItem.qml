@@ -57,6 +57,7 @@ QQC2.ItemDelegate {
             text: width > height * 2 ? listItem.Primitives.MnemonicData.mnemonicLabel : ""
             Accessible.name: listItem.Primitives.MnemonicData.plainTextLabel
             Layout.preferredWidth: metrics.width
+            Layout.preferredHeight: metrics.height
             Layout.minimumWidth: 0
             // Work around Qt bug where left aligned text is not right aligned
             // in RTL mode unless horizontalAlignment is explicitly set.
