@@ -84,7 +84,7 @@ msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Penerjemah"
 
-#: controls/AboutPage.qml:103
+#: controls/AboutPage.qml:102
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
@@ -250,7 +250,7 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Salin Tautan ke Papan Klip"
 
-#: dialogs/DialogHeaderTopContent.qml:103
+#: dialogs/DialogHeaderTopContent.qml:104
 #, fuzzy
 #| msgctxt "OverlayDrawer|"
 #| msgid "Close drawer"
@@ -282,27 +282,27 @@ msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (dibangun terhadap %3)"
 
-#: templates/InlineMessage.qml:350
+#: templates/InlineMessage.qml:351
 msgctxt "InlineMessage|"
 msgid "Success"
 msgstr ""
 
-#: templates/InlineMessage.qml:352
+#: templates/InlineMessage.qml:353
 msgctxt "InlineMessage|"
 msgid "Warning"
 msgstr ""
 
-#: templates/InlineMessage.qml:354
+#: templates/InlineMessage.qml:355
 msgctxt "InlineMessage|"
 msgid "Error"
 msgstr ""
 
-#: templates/InlineMessage.qml:356
+#: templates/InlineMessage.qml:357
 msgctxt "InlineMessage|"
 msgid "Note"
 msgstr ""
 
-#: templates/InlineMessage.qml:443
+#: templates/InlineMessage.qml:444
 #, fuzzy
 #| msgctxt "OverlayDrawer|"
 #| msgid "Close drawer"
@@ -310,17 +310,17 @@ msgctxt "InlineMessage|"
 msgid "Close"
 msgstr "Tutup penggambar"
 
-#: templates/OverlayDrawer.qml:147
+#: templates/OverlayDrawer.qml:148
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Tutup penggambar"
 
-#: templates/OverlayDrawer.qml:153
+#: templates/OverlayDrawer.qml:154
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Buka penggambar"
 
-#: templates/OverlaySheet.qml:294
+#: templates/OverlaySheet.qml:298
 #, fuzzy
 #| msgctxt "OverlayDrawer|"
 #| msgid "Close drawer"

@@ -81,7 +81,7 @@ msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Översättare"
 
-#: controls/AboutPage.qml:103
+#: controls/AboutPage.qml:102
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
@@ -226,7 +226,7 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Kopiera länk till klippbordet"
 
-#: dialogs/DialogHeaderTopContent.qml:103
+#: dialogs/DialogHeaderTopContent.qml:104
 msgctxt "DialogHeaderTopContent|@action:button close dialog"
 msgid "Close"
 msgstr "Stäng"
@@ -249,42 +249,42 @@ msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (byggt för %3)"
 
-#: templates/InlineMessage.qml:350
+#: templates/InlineMessage.qml:351
 msgctxt "InlineMessage|"
 msgid "Success"
 msgstr "Lyckades"
 
-#: templates/InlineMessage.qml:352
+#: templates/InlineMessage.qml:353
 msgctxt "InlineMessage|"
 msgid "Warning"
 msgstr "Varning"
 
-#: templates/InlineMessage.qml:354
+#: templates/InlineMessage.qml:355
 msgctxt "InlineMessage|"
 msgid "Error"
 msgstr "Fel"
 
-#: templates/InlineMessage.qml:356
+#: templates/InlineMessage.qml:357
 msgctxt "InlineMessage|"
 msgid "Note"
 msgstr "Notera"
 
-#: templates/InlineMessage.qml:443
+#: templates/InlineMessage.qml:444
 msgctxt "InlineMessage|"
 msgid "Close"
 msgstr "Stäng"
 
-#: templates/OverlayDrawer.qml:147
+#: templates/OverlayDrawer.qml:148
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Stäng låda"
 
-#: templates/OverlayDrawer.qml:153
+#: templates/OverlayDrawer.qml:154
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Öppna låda"
 
-#: templates/OverlaySheet.qml:294
+#: templates/OverlaySheet.qml:298
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "Stäng"

@@ -81,7 +81,7 @@ msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "अनुवादकाः"
 
-#: controls/AboutPage.qml:103
+#: controls/AboutPage.qml:102
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
@@ -238,7 +238,7 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "क्लिप्बोर्ड् मध्ये लिङ्कं प्रतिलिख्यताम्"
 
-#: dialogs/DialogHeaderTopContent.qml:103
+#: dialogs/DialogHeaderTopContent.qml:104
 #, fuzzy
 #| msgctxt "InlineMessage|"
 #| msgid "Close"
@@ -264,42 +264,42 @@ msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (%3 विरुद्धं निर्मितम्) ."
 
-#: templates/InlineMessage.qml:350
+#: templates/InlineMessage.qml:351
 msgctxt "InlineMessage|"
 msgid "Success"
 msgstr "सफलता"
 
-#: templates/InlineMessage.qml:352
+#: templates/InlineMessage.qml:353
 msgctxt "InlineMessage|"
 msgid "Warning"
 msgstr "चेतवानी"
 
-#: templates/InlineMessage.qml:354
+#: templates/InlineMessage.qml:355
 msgctxt "InlineMessage|"
 msgid "Error"
 msgstr "त्रुटि"
 
-#: templates/InlineMessage.qml:356
+#: templates/InlineMessage.qml:357
 msgctxt "InlineMessage|"
 msgid "Note"
 msgstr "टीका"
 
-#: templates/InlineMessage.qml:443
+#: templates/InlineMessage.qml:444
 msgctxt "InlineMessage|"
 msgid "Close"
 msgstr "पिधानं करोतु"
 
-#: templates/OverlayDrawer.qml:147
+#: templates/OverlayDrawer.qml:148
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "दराजं बन्दं कुर्वन्तु"
 
-#: templates/OverlayDrawer.qml:153
+#: templates/OverlayDrawer.qml:154
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "दराजं उद्घाटयन्तु"
 
-#: templates/OverlaySheet.qml:294
+#: templates/OverlaySheet.qml:298
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "पिधानं करोतु"

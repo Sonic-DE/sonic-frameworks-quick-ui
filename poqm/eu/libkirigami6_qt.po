@@ -87,7 +87,7 @@ msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Itzultzaileak"
 
-#: controls/AboutPage.qml:103
+#: controls/AboutPage.qml:102
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
@@ -227,7 +227,7 @@ msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "Kopiatu esteka arbelera"
 
-#: dialogs/DialogHeaderTopContent.qml:103
+#: dialogs/DialogHeaderTopContent.qml:104
 msgctxt "DialogHeaderTopContent|@action:button close dialog"
 msgid "Close"
 msgstr "Itxi"
@@ -250,42 +250,42 @@ msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (%3 erabiliz eraikia)"
 
-#: templates/InlineMessage.qml:350
+#: templates/InlineMessage.qml:351
 msgctxt "InlineMessage|"
 msgid "Success"
 msgstr "Arrakasta"
 
-#: templates/InlineMessage.qml:352
+#: templates/InlineMessage.qml:353
 msgctxt "InlineMessage|"
 msgid "Warning"
 msgstr "Abisua"
 
-#: templates/InlineMessage.qml:354
+#: templates/InlineMessage.qml:355
 msgctxt "InlineMessage|"
 msgid "Error"
 msgstr "Errorea"
 
-#: templates/InlineMessage.qml:356
+#: templates/InlineMessage.qml:357
 msgctxt "InlineMessage|"
 msgid "Note"
 msgstr "Oharra"
 
-#: templates/InlineMessage.qml:443
+#: templates/InlineMessage.qml:444
 msgctxt "InlineMessage|"
 msgid "Close"
 msgstr "Itxi"
 
-#: templates/OverlayDrawer.qml:147
+#: templates/OverlayDrawer.qml:148
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Itxi tiradera"
 
-#: templates/OverlayDrawer.qml:153
+#: templates/OverlayDrawer.qml:154
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Ireki tiradera"
 
-#: templates/OverlaySheet.qml:294
+#: templates/OverlaySheet.qml:298
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "Itxi"
