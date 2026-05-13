@@ -86,12 +86,15 @@ Item {
             for (let entry of children) {
                 w = Math.max(w, entry?.__maxTextLabelWidth ?? 0);
             }
-            for (let form of root.Forms.FormAlignmentGroup.group.forms) {
-                if (!(form instanceof Form) || !form.visible) {
-                    continue;
-                }
-                for (let entry of form.entries) {
-                    w = Math.max(w, entry?.__maxTextLabelWidth ?? 0);
+
+            if (root.Forms.FormAlignmentGroup.group) {
+                for (let form of root.Forms.FormAlignmentGroup.group.forms) {
+                    if (!(form instanceof Form) || !form.visible) {
+                        continue;
+                    }
+                    for (let entry of form.entries) {
+                        w = Math.max(w, entry?.__maxTextLabelWidth ?? 0);
+                    }
                 }
             }
 
@@ -102,11 +105,13 @@ Item {
                 }
             }
 
-            for (let form of root.Forms.FormAlignmentGroup.group.forms) {
-                if (!(form instanceof Form) || !form.visible) {
-                    continue;
+            if (root.Forms.FormAlignmentGroup.group) {
+                for (let form of root.Forms.FormAlignmentGroup.group.forms) {
+                    if (!(form instanceof Form) || !form.visible) {
+                        continue;
+                    }
+                    twinImplicitWidth = Math.max(twinImplicitWidth, form.children[0]?.implicitWidth);
                 }
-                twinImplicitWidth = Math.max(twinImplicitWidth, form.children[0]?.implicitWidth);
             }
 
             root.__collapsed = Math.max(implicitWidth, twinImplicitWidth) > root.width;
