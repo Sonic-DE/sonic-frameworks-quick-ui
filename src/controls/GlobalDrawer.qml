@@ -582,7 +582,7 @@ KC.OverlayDrawer {
 
                         spacing: 0
 
-                        Layout.alignment: Qt.AlignHCenter
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                         Layout.leftMargin: root.leftPadding
                         Layout.rightMargin: root.rightPadding
                         Layout.bottomMargin: Platform.Units.smallSpacing
