@@ -637,12 +637,6 @@ QT.Control {
         }
     }
 
-    Keys.onReleased: event => {
-        if (event.key === Qt.Key_Back) {
-            this.goBack(event)
-        }
-    }
-
     onInitialPageChanged: {
         if (initialPage) {
             clear();
