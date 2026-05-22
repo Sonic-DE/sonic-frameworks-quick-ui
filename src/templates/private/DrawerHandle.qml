@@ -9,6 +9,7 @@ import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.templates as KT
+import org.kde.kirigami.primitives as Primitives
 
 Item {
     id: root
@@ -129,7 +130,7 @@ Item {
         when: root.handleAnchor && root.anchors.bottom
         target: root
         property: "y"
-        value: root.handleAnchor ? root.handleAnchor.Kirigami.ScenePosition.y : 0
+        value: root.handleAnchor ? root.handleAnchor.Primitives.ScenePosition.y : 0
         restoreMode: Binding.RestoreBinding
     }
 
