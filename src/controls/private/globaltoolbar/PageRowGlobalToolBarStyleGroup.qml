@@ -47,9 +47,12 @@ QtObject {
     property real minimumHeight: 0
 
     // NOTE: This 40 comes from Breeze but there are not magic units to get it from for now
-    property real preferredHeight: 40 + 6 // 6 is ToolBar_ItemMargin in BreezeMetrics
+    property real preferredHeight: 40 + 6 + (safeArea ? safeArea.margins.top : 0) // 6 is ToolBar_ItemMargin in BreezeMetrics
     property real maximumHeight: preferredHeight
 
     // Sets the minimum leading padding for the title in a page header
     property int titleLeftPadding: Platform.Units.gridUnit
+
+    // safe area margins from the item containing the toolbar
+    property SafeArea safeArea
 }

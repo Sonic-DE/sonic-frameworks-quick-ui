@@ -699,6 +699,7 @@ QT.Control {
         readonly property int height: globalToolBarUI.height
         readonly property Item leftHandleAnchor: (globalToolBarUI.item as GlobalToolBar.PageRowGlobalToolBarUI)?.leftHandleAnchor ?? null
         readonly property Item rightHandleAnchor: (globalToolBarUI.item as GlobalToolBar.PageRowGlobalToolBarUI)?.rightHandleAnchor ?? null
+        safeArea: root.SafeArea
     }
 
     QQC2.StackView {
