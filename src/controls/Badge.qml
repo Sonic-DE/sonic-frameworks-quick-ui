@@ -34,7 +34,11 @@ KT.Badge {
         id: internal
 
         // Size and layout
-        readonly property bool pillShaped: root.text.length === 0 || label.lineCount === 1
+        property bool pillShaped
+        Binding on pillShaped {
+            value: root.text.length === 0 || label.lineCount === 1
+            delayed: true // avoids binding loop; text may use two lines until the control resizes
+        }
         readonly property bool labelVisible: root.text.length > 0
         readonly property bool circular: root.implicitContentWidth + root.padding * 2 <= root.implicitHeight
         readonly property int extraTrailingPadding: internal.pillShaped && icon.visible && labelVisible ? Platform.Units.smallSpacing : 0
