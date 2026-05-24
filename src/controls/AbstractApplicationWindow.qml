@@ -239,11 +239,11 @@ QQC2.ApplicationWindow {
     // This is to make ApplicationWindow actually assign pageStack, as it replaces the property
     property alias __pageStackAlias: root.pageStack
     contentItem.z: 1
-    contentItem.anchors.left: contentItem.parent.left
-    contentItem.anchors.right: contentItem.parent.right
+    contentItem.anchors.fill: contentItem.parent
     contentItem.anchors.topMargin: root.wideScreen && header && controlsVisible ? header.height : 0
     contentItem.anchors.leftMargin: root.globalDrawer && root.globalDrawer.modal === false && (!root.pageStack || root.pageStack.leftSidebar !== root.globalDrawer) ? root.globalDrawer.width * root.globalDrawer.position : 0
     contentItem.anchors.rightMargin: root.contextDrawer && root.contextDrawer.modal === false ? root.contextDrawer.width * root.contextDrawer.position : 0
+    contentItem.anchors.bottomMargin: footer && footer.visible ? footer.height : 0
 
     Binding {
         target: root.header
