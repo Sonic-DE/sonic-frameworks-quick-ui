@@ -220,7 +220,7 @@ QQC2.Page {
             z: 9997
             anchors {
                 fill: parent
-                topMargin: globalToolBar.height
+                topMargin: globalToolBar.row ? 0 : globalToolBar.height
             }
         }
     ]
