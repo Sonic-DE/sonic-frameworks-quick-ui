@@ -33,7 +33,7 @@ QQC2.Page {
 //BEGIN properties
     padding: Platform.Units.gridUnit
     topPadding: padding + SafeArea.margins.top
-    bottomPadding: padding + SafeArea.margins.bottom
+    bottomPadding: padding + (footer && footer.visible ? 0 : SafeArea.margins.bottom)
     leftPadding: padding + SafeArea.margins.left
     rightPadding: padding + SafeArea.margins.right
 
