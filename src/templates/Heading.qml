@@ -7,6 +7,7 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
+import org.kde.kirigami.platform as Platform
 
 /*!
   \qmltype Heading
@@ -88,4 +89,6 @@ QQC2.Label {
     property int type: Heading.Type.Normal
 
     Accessible.role: Accessible.Heading
+
+    color: Platform.Theme.textColor
 }
