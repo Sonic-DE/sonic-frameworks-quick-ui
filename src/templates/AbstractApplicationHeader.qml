@@ -10,7 +10,6 @@ import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.controls as KirigamiControls
 import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.layouts as KirigamiLayouts
-import org.kde.kirigami.private.polyfill
 
 /*!
   \qmltype AbstractApplicationHeader

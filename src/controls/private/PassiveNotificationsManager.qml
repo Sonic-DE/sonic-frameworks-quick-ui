@@ -11,7 +11,6 @@ import QtQuick.Templates as T
 import QtQuick.Layouts
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
-import org.kde.kirigami.private.polyfill
 
 /*!
   \brief PassiveNotificatiomodelnManager is meant to display small, passive and inline notifications in the app.

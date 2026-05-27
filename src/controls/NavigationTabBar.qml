@@ -9,7 +9,6 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Controls as QQC
 import org.kde.kirigami.templates as KT
-import org.kde.kirigami.private.polyfill
 
 KT.NavigationTabBar {
     id: root

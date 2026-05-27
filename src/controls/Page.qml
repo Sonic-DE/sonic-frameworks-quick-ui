@@ -13,7 +13,6 @@ import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.layouts as KL
 import org.kde.kirigami.controls as KC
-import org.kde.kirigami.private.polyfill
 import "private" as P
 
 /*!
