@@ -102,7 +102,7 @@ msgctxt "Chip|"
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: controls/ContextDrawer.qml:65
+#: controls/ContextDrawer.qml:64
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Acties"
@@ -112,17 +112,17 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "Contextuele hulp tonen"
 
-#: controls/GlobalDrawer.qml:366
+#: controls/GlobalDrawer.qml:365
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Terug"
 
-#: controls/GlobalDrawer.qml:719
+#: controls/GlobalDrawer.qml:718
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Zijbalk sluiten"
 
-#: controls/GlobalDrawer.qml:724
+#: controls/GlobalDrawer.qml:723
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Zijbalk openen"

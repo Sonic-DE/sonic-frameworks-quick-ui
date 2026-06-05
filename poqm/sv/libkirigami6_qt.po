@@ -105,7 +105,7 @@ msgctxt "Chip|"
 msgid "Remove"
 msgstr "Ta bort etikett"
 
-#: controls/ContextDrawer.qml:65
+#: controls/ContextDrawer.qml:64
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Åtgärder"
@@ -115,17 +115,17 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "Visa sammanhangsberoende hjälp"
 
-#: controls/GlobalDrawer.qml:366
+#: controls/GlobalDrawer.qml:365
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Tillbaka"
 
-#: controls/GlobalDrawer.qml:719
+#: controls/GlobalDrawer.qml:718
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Stäng sidorad"
 
-#: controls/GlobalDrawer.qml:724
+#: controls/GlobalDrawer.qml:723
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Öppna sidorad"

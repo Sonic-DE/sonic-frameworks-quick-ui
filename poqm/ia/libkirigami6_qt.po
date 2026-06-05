@@ -102,7 +102,7 @@ msgctxt "Chip|"
 msgid "Remove"
 msgstr "Remove"
 
-#: controls/ContextDrawer.qml:65
+#: controls/ContextDrawer.qml:64
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Actiones"
@@ -112,17 +112,17 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "Monstra adjuta de contexto"
 
-#: controls/GlobalDrawer.qml:366
+#: controls/GlobalDrawer.qml:365
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Retro"
 
-#: controls/GlobalDrawer.qml:719
+#: controls/GlobalDrawer.qml:718
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Claude barra lateral"
 
-#: controls/GlobalDrawer.qml:724
+#: controls/GlobalDrawer.qml:723
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Aperi barra lateral"
