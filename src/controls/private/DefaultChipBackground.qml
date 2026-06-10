@@ -47,9 +47,6 @@ Rectangle {
      */
     property color hoveredBorderColor: Platform.Theme.hoverColor
 
-    Platform.Theme.colorSet: Platform.Theme.Header
-    Platform.Theme.inherit: false
-
     color: {
         const chip = parent as KT.Chip
         if (chip.down) {
