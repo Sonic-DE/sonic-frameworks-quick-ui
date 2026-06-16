@@ -62,10 +62,10 @@ KC.OverlayDrawer {
     handleClosedIcon.source: null
     handleOpenIcon.source: null
 
-    leftPadding: root.edge === Qt.LeftEdge ? parent.SafeArea.margins.left : 0
-    topPadding: parent.SafeArea.margins.top
-    rightPadding: root.edge === Qt.RightEdge ? parent.SafeArea.margins.right : 0
-    bottomPadding: parent.SafeArea.margins.bottom
+    leftPadding: root.edge === Qt.LeftEdge && parent ? parent.SafeArea.margins.left : 0
+    topPadding: parent ? parent.SafeArea.margins.top : 0
+    rightPadding: root.edge === Qt.RightEdge && parent ? parent.SafeArea.margins.right : 0
+    bottomPadding: parent ? parent.SafeArea.margins.bottom : 0
 
     handleVisible: {
         // When drawer is inline with content and opened, there is no point is showing handle.
@@ -507,10 +507,10 @@ KC.OverlayDrawer {
 
         anchors {
             fill: parent
-            topMargin: (root.collapsed && !root.showHeaderWhenCollapsed ? -contentItem.y : 0) + root.topPadding
-            bottomMargin: root.bottomPadding
             leftMargin: root.leftPadding
+            topMargin: root.topPadding + (root.collapsed && !root.showHeaderWhenCollapsed ? -contentItem.y : 0)
             rightMargin: root.rightPadding
+            bottomMargin: root.bottomPadding
         }
 
         Behavior on anchors.topMargin {
@@ -545,7 +545,7 @@ KC.OverlayDrawer {
             // HACK: workaround for https://bugreports.qt.io/browse/QTBUG-83890
             QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
-            implicitWidth: Math.min(mainColumn.implicitWidth, root.parent.width * 0.8)
+            implicitWidth: Math.min(mainColumn.implicitWidth, (root.parent ? root.parent.width : mainColumn.implicitWidth) * 0.8)
             Behavior on implicitWidth {
                 NumberAnimation {
                     duration: Platform.Units.longDuration
@@ -582,16 +582,12 @@ KC.OverlayDrawer {
                         spacing: 0
 
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                        Layout.leftMargin: root.leftPadding
-                        Layout.rightMargin: root.rightPadding
                         Layout.bottomMargin: Platform.Units.smallSpacing
-                        Layout.topMargin: root.topPadding
                         Layout.fillWidth: true
-                        Layout.fillHeight: true
                         Layout.preferredHeight: implicitHeight * opacity
                         // NOTE: why this? just Layout.fillWidth: true doesn't seem sufficient
                         // as items are added only after this column creation
-                        Layout.minimumWidth: parent.width - root.leftPadding - root.rightPadding
+                        Layout.minimumWidth: parent.width
 
                         visible: children.length > 0 && childrenRect.height > 0 && opacity > 0
                         opacity: !root.collapsed || root.showTopContentWhenCollapsed
@@ -673,13 +669,11 @@ KC.OverlayDrawer {
                     ColumnLayout {
                         id: mainContent
                         Layout.alignment: Qt.AlignHCenter
-                        Layout.leftMargin: root.leftPadding
-                        Layout.rightMargin: root.rightPadding
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         // NOTE: why this? just Layout.fillWidth: true doesn't seem sufficient
                         // as items are added only after this column creation
-                        Layout.minimumWidth: parent.width - root.leftPadding - root.rightPadding
+                        Layout.minimumWidth: parent.width
                         visible: children.length > 0 && (opacity > 0 || mainContentAnimator.running)
                         opacity: !root.collapsed || root.showContentWhenCollapsed
                         Behavior on opacity {
@@ -689,11 +683,6 @@ KC.OverlayDrawer {
                                 easing.type: Easing.InOutQuad
                             }
                         }
-                    }
-
-                    Item {
-                        Layout.minimumWidth: Platform.Units.smallSpacing
-                        Layout.minimumHeight: root.bottomPadding
                     }
 
                     QQC2.ToolButton {

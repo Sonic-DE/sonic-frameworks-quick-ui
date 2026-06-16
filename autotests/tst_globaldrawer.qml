@@ -63,14 +63,16 @@ TestCase {
                 }
             ]
 
-            // Create some item which we can use to measure actual header height
-            Rectangle {
-                id: topItem
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                color: "green"
-                radius: 20 // to see its bounds
-            }
+            topContent: [
+                // Create some item which we can use to measure actual header height
+                Rectangle {
+                    id: topItem
+                    Layout.fillWidth: true
+                    implicitHeight: 60
+                    color: "green"
+                    radius: 20 // to see its bounds
+                }
+            ]
         }
 
         pageStack.initialPage: startPage
@@ -101,33 +103,76 @@ TestCase {
         }
         const app = createTemporaryObject(appItemComponent, this);
         verify(app);
-        const { headerItem, topItem } = app;
+        const { headerItem } = app;
+        app.globalDrawer.showHeaderWhenCollapsed = true;
 
         compare(app.globalDrawer.parent, app.T.Overlay.overlay);
 
         waitForRendering(app.globalDrawer.contentItem);
 
-        const overlay = T.Overlay.overlay;
         verify(headerItem.height !== 0);
 
-        // Due to margins, position won't be exactly zero...
-        const position = topItem.mapToItem(overlay, 0, 0);
-        verify(position.y > 0);
-        const oldY = position.y;
+        const drawerLayout = app.globalDrawer.contentItem;
+        const oldY = drawerLayout.contentItem.y;
+        verify(oldY > 0);
 
-        // ...but with visible header it would be greater than with invisible.
+        // With visible header the content item is lower than with invisible header.
         headerItem.visible = false;
         tryVerify(() => {
-            const position = topItem.mapToItem(overlay, 0, 0);
-            return position.y < oldY;
+            return drawerLayout.contentItem.y < oldY;
         });
 
         // And now return it back to where we started.
         headerItem.visible = true;
         tryVerify(() => {
-            const position = topItem.mapToItem(overlay, 0, 0);
-            return position.y === oldY;
+            return drawerLayout.contentItem.y === oldY;
         });
+    }
+
+    function test_paddingAppliedOnce() {
+        const app = createTemporaryObject(appItemComponent, this);
+        verify(app);
+
+        const drawer = app.globalDrawer;
+        drawer.width = 300;
+        drawer.leftPadding = 0;
+        drawer.topPadding = 0;
+        drawer.rightPadding = 0;
+        drawer.bottomPadding = 0;
+        waitForRendering(drawer.contentItem);
+        tryCompare(drawer.contentItem.anchors, "topMargin", 0);
+
+        const initialLayoutPosition = drawer.contentItem.mapToItem(T.Overlay.overlay, 0, 0);
+        const initialLayoutWidth = drawer.contentItem.width;
+        const initialLayoutHeight = drawer.contentItem.height;
+
+        const leftPadding = 20;
+        const topPadding = 30;
+        const rightPadding = 40;
+        const bottomPadding = 50;
+        drawer.leftPadding = leftPadding;
+        drawer.topPadding = topPadding;
+        drawer.rightPadding = rightPadding;
+        drawer.bottomPadding = bottomPadding;
+
+        tryVerify(() => {
+            const paddedLayoutPosition = drawer.contentItem.mapToItem(T.Overlay.overlay, 0, 0);
+            return Math.round(paddedLayoutPosition.x - initialLayoutPosition.x) === leftPadding
+                && Math.round(paddedLayoutPosition.y - initialLayoutPosition.y) === topPadding
+                && Math.round(initialLayoutWidth - drawer.contentItem.width) === leftPadding + rightPadding
+                && Math.round(initialLayoutHeight - drawer.contentItem.height) === topPadding + bottomPadding;
+        });
+    }
+
+    function test_topContentUsesImplicitHeight() {
+        const app = createTemporaryObject(appItemComponent, this);
+        verify(app);
+        waitForRendering(app.globalDrawer.contentItem);
+
+        compare(Math.round(app.topItem.parent.height), Math.round(app.topItem.parent.implicitHeight));
+        compare(app.topItem.parent.Layout.leftMargin, 0);
+        compare(app.topItem.parent.Layout.topMargin, 0);
+        compare(app.topItem.parent.Layout.rightMargin, 0);
     }
 
     component AppItemLoaderComponent : Kirigami.ApplicationItem {

@@ -127,6 +127,13 @@ qt_target_qml_sources(Kirigami RESOURCES
     OUTPUT_TARGETS _out_targets_1
 )
 
+if (CMAKE_SYSTEM_NAME STREQUAL "iOS")
+    qt_target_qml_sources(Kirigami RESOURCES
+        styles/iOS/Theme.qml
+        OUTPUT_TARGETS _out_targets_ios
+    )
+endif()
+
 if (DESKTOP_ENABLED)
     qt_target_qml_sources(Kirigami RESOURCES
         styles/org.kde.desktop/AbstractApplicationHeader.qml
@@ -190,7 +197,7 @@ else()
     )
 endif()
 
-install(TARGETS Kirigami ${_out_targets_1} ${_out_targets_2} EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS Kirigami ${_out_targets_1} ${_out_targets_ios} ${_out_targets_2} EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 install(EXPORT KirigamiTargets
     DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6Kirigami
     FILE KF6KirigamiTargets.cmake
