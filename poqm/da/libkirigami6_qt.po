@@ -121,12 +121,12 @@ msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Tilbage"
 
-#: controls/GlobalDrawer.qml:718
+#: controls/GlobalDrawer.qml:707
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Luk sidepanel"
 
-#: controls/GlobalDrawer.qml:723
+#: controls/GlobalDrawer.qml:712
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Åbn sidepanel"
