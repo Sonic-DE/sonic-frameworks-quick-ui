@@ -154,8 +154,7 @@ class Icon : public QQuickItem
      * as a mask, all non-transparent colors are replaced with the color provided in the Icon's
      * color property.
      *
-     * By default, icons whose source name contains the \c -symbolic suffix
-     * are treated as masks. Other icons are not treated as masks.
+     * The default is \c false.
      *
      * \sa color
      */
@@ -325,7 +324,6 @@ private:
     bool m_selected;
     bool m_isMask;
     bool m_isMaskHeuristic = false;
-    bool m_isMaskExplicitlySet = false;
     QImage m_loadedImage;
     QColor m_color = Qt::transparent;
     QString m_fallback = QStringLiteral("unknown");

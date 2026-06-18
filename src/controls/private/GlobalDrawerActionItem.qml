@@ -28,22 +28,6 @@ QQC2.ItemDelegate {
     readonly property bool hasChildren: kAction ? kAction.children.length > 0 : false
     readonly property bool hasVisibleMenu: actionsMenu?.visible ?? false
     readonly property bool hasToolTip: kAction ? kAction.tooltip !== "" : false
-    readonly property bool iconHasExplicitColor: tAction.icon.color.a > 0
-    readonly property bool iconIsSymbolic: {
-        const iconName = tAction.icon.name.toString();
-        const iconSource = tAction.icon.source.toString();
-
-        return iconName.endsWith("-symbolic")
-            || iconName.endsWith("-symbolic.svg")
-            || iconName.includes("-symbolic.")
-            || iconName.includes("-symbolic-")
-            || iconSource.endsWith("-symbolic.svg")
-            || iconSource.includes("-symbolic.")
-            || iconSource.includes("-symbolic-");
-    }
-    readonly property color foregroundColor: highlighted || checked || down
-        ? Platform.Theme.highlightedTextColor
-        : Platform.Theme.textColor
 
     checked: checkedBinding()
     highlighted: checked
@@ -54,10 +38,7 @@ QQC2.ItemDelegate {
 
         Primitives.Icon {
             id: iconItem
-            color: listItem.iconHasExplicitColor
-                ? listItem.tAction.icon.color
-                : (listItem.iconIsSymbolic ? listItem.foregroundColor : "transparent")
-            isMask: listItem.iconHasExplicitColor || listItem.iconIsSymbolic
+            color: listItem.tAction.icon.color
             source: listItem.tAction.icon.name || listItem.tAction.icon.source
 
             readonly property int size: Platform.Units.iconSizes.smallMedium
@@ -85,7 +66,7 @@ QQC2.ItemDelegate {
 
             Layout.fillWidth: true
             mnemonicVisible: listItem.Primitives.MnemonicData.active
-            color: listItem.foregroundColor
+            color: (listItem.highlighted || listItem.checked || listItem.down) ? Platform.Theme.highlightedTextColor : Platform.Theme.textColor
             elide: Text.ElideRight
             font: listItem.font
             opacity: {

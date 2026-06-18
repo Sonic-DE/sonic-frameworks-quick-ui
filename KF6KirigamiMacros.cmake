@@ -6,15 +6,14 @@
 include(ExternalProject)
 
 function(kirigami_package_breeze_icons)
-    set(_oneValueArgs TARGET)
     set(_multiValueArgs ICONS)
-    cmake_parse_arguments(ARG "" "${_oneValueArgs}" "${_multiValueArgs}" ${ARGN} )
+    cmake_parse_arguments(ARG "" "" "${_multiValueArgs}" ${ARGN} )
 
     if(NOT ARG_ICONS)
         message(FATAL_ERROR "No ICONS argument given to kirigami_package_breeze_icons")
     endif()
 
-    if(NOT ANDROID AND NOT CMAKE_SYSTEM_NAME STREQUAL "iOS")
+    if(NOT ANDROID)
         return() # not needed on other platforms
     endif()
 
@@ -61,47 +60,6 @@ function(kirigami_package_breeze_icons)
         view-left-close
         view-right-close
     )
-
-    if(CMAKE_SYSTEM_NAME STREQUAL "iOS")
-        if(NOT ARG_TARGET)
-            message(FATAL_ERROR "No TARGET argument given to kirigami_package_breeze_icons on iOS")
-        endif()
-        if(NOT TARGET ${ARG_TARGET})
-            message(FATAL_ERROR "Target '${ARG_TARGET}' does not exist")
-        endif()
-
-        find_path(_BREEZE_THEME_DIR
-            NAMES index.theme
-            PATHS "${KDE_INSTALL_FULL_ICONDIR}/breeze"
-            NO_DEFAULT_PATH
-        )
-        if(NOT _BREEZE_THEME_DIR)
-            message(FATAL_ERROR "Could not find the installed Breeze icon theme")
-        endif()
-
-        set(_breeze_resource_files "${_BREEZE_THEME_DIR}/index.theme")
-        foreach(_iconName IN LISTS ARG_ICONS)
-            file(GLOB _icon_paths LIST_DIRECTORIES FALSE "${_BREEZE_THEME_DIR}/*/22/${_iconName}.svg")
-            list(LENGTH _icon_paths _count_paths)
-            if(_count_paths EQUAL 0)
-                message(WARNING "Could not find Breeze icon '${_iconName}'")
-                continue()
-            endif()
-            if(_count_paths GREATER 1)
-                message(WARNING "Found more than one version of '${_iconName}': ${_icon_paths}")
-            endif()
-            list(GET _icon_paths 0 _icon_path)
-            list(APPEND _breeze_resource_files "${_icon_path}")
-        endforeach()
-
-        list(REMOVE_DUPLICATES _breeze_resource_files)
-        qt_add_resources(${ARG_TARGET} ${ARG_TARGET}_kirigami_breeze_icons
-            PREFIX /icons/breeze
-            BASE "${_BREEZE_THEME_DIR}"
-            FILES ${_breeze_resource_files}
-        )
-        return()
-    endif()
 
     function(_find_breeze_icon icon)
         foreach(_size 48 32 22 16 12)

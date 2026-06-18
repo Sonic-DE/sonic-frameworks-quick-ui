@@ -77,7 +77,6 @@ void Icon::setSource(const QVariant &icon)
         return;
     }
     m_source = icon;
-    updateIsMaskHeuristic(icon.toString());
 
     if (!m_theme) {
         m_theme = static_cast<Kirigami::Platform::PlatformTheme *>(qmlAttachedPropertiesObject<Kirigami::Platform::PlatformTheme>(this, true));
@@ -146,21 +145,18 @@ bool Icon::selected() const
 
 void Icon::setIsMask(bool mask)
 {
-    const bool oldIsMask = isMask();
-    m_isMaskExplicitlySet = true;
-    m_isMask = mask;
-
-    if (oldIsMask == isMask()) {
+    if (m_isMask == mask) {
         return;
     }
 
+    m_isMask = mask;
     polish();
     Q_EMIT isMaskChanged();
 }
 
 bool Icon::isMask() const
 {
-    return m_isMaskExplicitlySet ? m_isMask : m_isMaskHeuristic;
+    return m_isMask;
 }
 
 void Icon::setColor(const QColor &color)
@@ -177,24 +173,6 @@ void Icon::setColor(const QColor &color)
 QColor Icon::color() const
 {
     return m_color;
-}
-
-void Icon::updateIsMaskHeuristic(const QString &iconSource)
-{
-    const bool oldIsMask = isMask();
-    const QString sourceName = iconSource.toLower();
-
-    m_isMaskHeuristic = sourceName.endsWith(QLatin1String("-symbolic"))
-        || sourceName.endsWith(QLatin1String("-symbolic.svg"))
-        || sourceName.contains(QLatin1String("-symbolic."))
-        || sourceName.contains(QLatin1String("-symbolic-"));
-
-    if (oldIsMask == isMask()) {
-        return;
-    }
-
-    polish();
-    Q_EMIT isMaskChanged();
 }
 
 QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * /*data*/)

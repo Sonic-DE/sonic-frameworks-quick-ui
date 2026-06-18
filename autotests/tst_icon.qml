@@ -23,10 +23,6 @@ TestCase {
     Component { id: sizeOnlyIcon; Kirigami.Icon { width: 50; height: 50 } }
     Component { id: sizeSourceIcon; Kirigami.Icon { width: 50; height: 50; source: "document-new" } }
     Component { id: minimalSizeIcon; Kirigami.Icon { width: 1; height: 1; source: "document-new" } }
-    Component { id: symbolicIcon; Kirigami.Icon { source: "document-new-symbolic" } }
-    Component { id: symbolicResourceIcon; Kirigami.Icon { source: "qrc:/icons/document-new-symbolic.svg" } }
-    Component { id: explicitNonMaskIcon; Kirigami.Icon { source: "document-new-symbolic"; isMask: false } }
-    Component { id: explicitMaskIcon; Kirigami.Icon { source: "document-new"; isMask: true } }
     Component {
         id: absolutePathIcon;
         Kirigami.Icon {
@@ -57,29 +53,6 @@ TestCase {
         var icon = createTemporaryObject(data.component, testCase)
         verify(icon)
         verify(waitForRendering(icon))
-    }
-
-    function test_symbolicMaskHeuristic() {
-        var symbolic = createTemporaryObject(symbolicIcon, testCase)
-        verify(symbolic)
-        compare(symbolic.isMask, true)
-
-        var symbolicResource = createTemporaryObject(symbolicResourceIcon, testCase)
-        verify(symbolicResource)
-        compare(symbolicResource.isMask, true)
-
-        symbolic.source = "document-new"
-        compare(symbolic.isMask, false)
-    }
-
-    function test_explicitMaskOverridesHeuristic() {
-        var explicitNonMask = createTemporaryObject(explicitNonMaskIcon, testCase)
-        verify(explicitNonMask)
-        compare(explicitNonMask.isMask, false)
-
-        var explicitMask = createTemporaryObject(explicitMaskIcon, testCase)
-        verify(explicitMask)
-        compare(explicitMask.isMask, true)
     }
 
     function test_absolutepath_recoloring() {
