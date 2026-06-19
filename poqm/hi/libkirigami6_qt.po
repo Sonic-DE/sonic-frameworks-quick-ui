@@ -145,12 +145,12 @@ msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "पीछे"
 
-#: controls/GlobalDrawer.qml:707
+#: controls/GlobalDrawer.qml:718
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "बाजूपट्टी बंद करें"
 
-#: controls/GlobalDrawer.qml:712
+#: controls/GlobalDrawer.qml:723
 #, fuzzy
 #| msgctxt "GlobalDrawer|"
 #| msgid "Close Sidebar"
