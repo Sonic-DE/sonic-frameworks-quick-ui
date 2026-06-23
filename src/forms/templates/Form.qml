@@ -101,7 +101,7 @@ Item {
             labelWidth = w;
             for (let entry of children) {
                 if ("__assignedWidthForLabels" in entry) {
-                    entry.__assignedWidthForLabels = w;
+                    entry.__assignedWidthForLabels = Math.round(w);
                 }
             }
 
