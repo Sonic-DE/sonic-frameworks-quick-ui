@@ -96,7 +96,7 @@ FT.FormEntry {
             return null
         }
 
-        hoverEnabled: clickEnabled && !Platform.Settings.hasTransientTouchInput
+        hoverEnabled: !Platform.Settings.hasTransientTouchInput
 
         onClicked: {
             if (!clickEnabled) {
