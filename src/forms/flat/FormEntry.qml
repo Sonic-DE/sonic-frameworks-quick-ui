@@ -91,7 +91,10 @@ FT.FormEntry {
         topPadding: 0
         bottomPadding: 0
         readonly property Item formLayout: {
-            let candidate = root.parent
+            let candidate = root.parent;
+            if (!candidate) {
+                return null;
+            }
             while (candidate) {
                 if (candidate instanceof Form) {
                     return candidate;
@@ -118,8 +121,14 @@ FT.FormEntry {
                 Layout.preferredWidth: contentItem?.Layout.preferredWidth
                 Layout.maximumWidth: contentItem?.Layout.maximumWidth
 
+                Binding {
+                    readonly property bool firstEntry: root.parent.children[0] === root
+                    when: firstEntry
+                    titleLabel.topPadding: 0
+                }
                 header: QQC.Label {
-                    topPadding: root.parent.children[0] === root ? 0 : Platform.Units.largeSpacing
+                    id: titleLabel
+                    topPadding: Platform.Units.largeSpacing
                     visible: impl.formLayout.__collapsed && text.length > 0
                //     Accessible.labelFor: visible && root.contentItem ? root.contentItem : null
                     text: label.Primitives.MnemonicData.richTextLabel
