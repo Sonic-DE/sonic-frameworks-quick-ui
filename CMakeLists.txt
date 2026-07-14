@@ -5,6 +5,8 @@ set(KF_DEP_VERSION "6.28.0") # handled by release scripts
 
 project(kirigami2 VERSION ${KF_VERSION})
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 set(REQUIRED_QT_VERSION 6.9.0)
 
 ################# Disallow in-source build #################
