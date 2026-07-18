@@ -610,7 +610,11 @@ void Icon::updatePaintedGeometry()
         }
         if (m_roundToIconSize && m_units) {
             if (m_icon.width() > m_icon.height()) {
+                // landscape image
                 newSize = QSizeF(roundedWidth, m_icon.height() * (roundedWidth / static_cast<qreal>(m_icon.width())));
+            } else if (m_icon.height() > m_icon.width()) {
+                // portrait image
+                newSize = QSizeF(m_icon.width() * (roundedWidth / static_cast<qreal>(m_icon.height())), roundedWidth);
             } else {
                 newSize = QSizeF(roundedWidth, roundedWidth);
             }
