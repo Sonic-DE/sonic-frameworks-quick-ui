@@ -627,6 +627,9 @@ void Icon::updatePaintedGeometry()
             } else if (heightScale < widthScale) {
                 newSize = QSizeF(heightScale * iconPixSize.width(), h);
             }
+            // Snap to whole device pixels so the texture stays crisp at fractional DPR.
+            newSize = QSizeF(std::round(newSize.width() * m_devicePixelRatio) / m_devicePixelRatio,
+                             std::round(newSize.height() * m_devicePixelRatio) / m_devicePixelRatio);
         }
     }
     if (newSize != m_paintedSize) {
