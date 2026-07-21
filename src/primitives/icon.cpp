@@ -480,7 +480,7 @@ QImage Icon::findIcon(const QSize &size)
         if (iconSource.startsWith(QLatin1String("qrc:/"))) {
             iconSource = iconSource.mid(3);
         } else if (iconSource.startsWith(QLatin1String("file:/"))) {
-            iconSource = QUrl(iconSource).path();
+            iconSource = QUrl(iconSource).toLocalFile();
         }
 
         const QIcon icon = loadFromTheme(iconSource);
