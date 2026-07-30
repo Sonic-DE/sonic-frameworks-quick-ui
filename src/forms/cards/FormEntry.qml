@@ -176,7 +176,7 @@ FT.FormEntry {
                 wrapMode: Text.WordWrap
                 elide: Text.ElideRight
                 leftPadding: Application.layoutDirection === Qt.LeftToRight
-                    ? root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0 + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing ?? 0
+                    ? (root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + (root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing ?? 0)
                     : padding
             }
         }
