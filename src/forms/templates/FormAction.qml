@@ -70,7 +70,7 @@ Forms.FormEntry { // Needs to be instantiated from the global forms import in or
 
     trailingItems: Primitives.Icon {
         Layout.fillHeight: true
-        Layout.maximumHeight: root.triggerIcon.height <= 0 ? Platform.Units.iconSizes.smallMedium : Infinity
+        Layout.maximumHeight: root.triggerIcon.height <= 0 ? Platform.Units.iconSizes.small : Infinity
         source: root.triggerIcon.name || root.triggerIcon.source
         color: root.triggerIcon.color
         Layout.preferredWidth: root.triggerIcon.width > 0 ? root.triggerIcon.width : -1
