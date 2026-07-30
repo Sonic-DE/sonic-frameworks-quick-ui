@@ -136,7 +136,7 @@ FT.FormEntry {
                 id: leadingItems
                 Layout.rowSpan: subtitleLabel.visible ? 2 : 1
                 visible: children.length > 0 && width > 0
-                spacing: parent.spacing
+                spacing: Platform.Units.smallSpacing
                 children: root.leadingItems
             }
             QQC.Control {
@@ -165,9 +165,8 @@ FT.FormEntry {
                 id: trailingItems
                 Layout.rowSpan: subtitleLabel.visible ? 2 : 1
                 Layout.minimumWidth: visible ? implicitWidth : 0
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                 visible: children.length > 0 && width > 0
-                spacing: parent.spacing
+                spacing: Platform.Units.smallSpacing
                 children: root.trailingItems
             }
 
@@ -207,4 +206,5 @@ FT.FormEntry {
         }
     }
 }
+
 
