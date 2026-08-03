@@ -145,7 +145,8 @@ FT.FormEntry {
                 rightPadding: 0
                 topPadding: 0
                 bottomPadding: 0
-                Layout.fillWidth: true
+                Layout.fillWidth: root.contentItem.Layout.fillWidth
+
                 Layout.alignment: Qt.AlignVCenter
                 visible: contentItem
                 contentItem: root.contentItem
