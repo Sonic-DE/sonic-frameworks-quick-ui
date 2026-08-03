@@ -146,13 +146,7 @@ FT.FormEntry {
                 rightPadding: 0
                 topPadding: 0
                 bottomPadding: 0
-
-                spacing: parent.spacing // Ensure that `contentItem.parent.spacing` works
-                implicitWidth: contentItem.Layout.preferredWidth > 0 ? contentItem.Layout.preferredWidth : contentItem.implicitWidth
-                Layout.fillWidth: contentItem.Layout.fillWidth
-                Layout.minimumWidth: contentItem.Layout.minimumWidth
-                Layout.preferredWidth: contentItem.Layout.preferredWidth
-                Layout.maximumWidth: contentItem.Layout.maximumWidth
+                Layout.fillWidth: root.contentItem.Layout.fillWidth
 
                 Layout.alignment: Qt.AlignVCenter
                 visible: contentItem
@@ -213,3 +207,4 @@ FT.FormEntry {
         }
     }
 }
+
