@@ -9,6 +9,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
+import QtQuick.Window
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.layouts as KL
@@ -377,6 +378,7 @@ Item {
         OverlaySheet {
             id: licenseSheet
             width: Math.min(aboutItem.width - Platform.Units.gridUnit * 2, bodyLabel.implicitWidth)
+            height: parent.Window.window.height - Platform.Units.gridUnit * 8
             property alias text: bodyLabel.text
 
             SelectableLabel {
