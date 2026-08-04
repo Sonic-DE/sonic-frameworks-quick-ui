@@ -51,25 +51,32 @@ FT.FormGroup {
             visible: text.length > 0
             text: root.title
         }
-        ColumnLayout {
-            id: innerLayout
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.preferredWidth: innerLayout.implicitWidthWithInvisible + root.__assignedWidthForLabels
-            Layout.preferredHeight: innerLayout.implicitHeight
-            property real labelWidth: 0
-            // Consider also invisible items when
-            property real implicitWidthWithInvisible: 0
-            onImplicitWidthChanged: {
-                let w = 0;
-                implicitWidthWithInvisible = 0
-                for (let entry of children) {
-                    w = Math.max(w, entry?.__textLabelWidth ?? 0);
-                    implicitWidthWithInvisible = Math.max(implicitWidthWithInvisible, entry.implicitWidth, entry.Layout.preferredWidth)
+        contentItem: Item {
+            implicitWidth: innerLayout.implicitWidthWithInvisible + __assignedWidthForLabels
+            implicitHeight: innerLayout.implicitHeight
+            ColumnLayout {
+                id: innerLayout
+                anchors {
+                    fill: parent
+                    leftMargin: root.parent.parent.__collapsed ? 0 : root.__assignedWidthForLabels
                 }
-                labelWidth = w;
+                property real labelWidth: 0
+                // Consider also invisible items when
+                property real implicitWidthWithInvisible: 0
+                onImplicitWidthChanged: {
+                    let w = 0;
+                    implicitWidthWithInvisible = 0
+                    for (let entry of children) {
+                        w = Math.max(w, entry?.__textLabelWidth ?? 0);
+                        implicitWidthWithInvisible = Math.max(implicitWidthWithInvisible, entry.implicitWidth, entry.Layout.preferredWidth)
+                    }
+                    labelWidth = w;
+                }
+                spacing: Platform.Units.smallSpacing
+                children: root.entries
             }
             spacing: Platform.Units.smallSpacing
         }
     }
 }
+
