@@ -429,7 +429,6 @@ KC.OverlayDrawer {
                 ? Platform.Theme.Window : parent.Platform.Theme.colorSet
 
             visible: !delegate.isExpanded
-            implicitWidth: parent.implicitWidth
 
             tAction: delegate.tAction
 
