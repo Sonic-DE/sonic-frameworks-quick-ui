@@ -162,6 +162,7 @@ FT.FormEntry {
                 id: trailingItems
                 Layout.rowSpan: subtitleLabel.visible ? 2 : 1
                 Layout.minimumWidth: visible ? implicitWidth : 0
+                Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                 visible: children.length > 0 && width > 0
                 spacing: Platform.Units.smallSpacing
                 children: root.trailingItems
