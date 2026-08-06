@@ -15,70 +15,75 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: controls/AboutItem.qml:166
+#: controls/AboutItem.qml:181
 #, qt-format
 msgctxt "AboutItem|"
-msgid "%1 (%2)"
-msgstr "%1 (%2)"
+msgid "Visit %1's KDE Store page"
+msgstr "Visitar a página do %1 na Loja do KDE"
 
-#: controls/AboutItem.qml:186
+#: controls/AboutItem.qml:197
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Enviar um e-mail para %1"
 
-#: controls/AboutItem.qml:228
-msgctxt "AboutItem|"
-msgid "Get Involved"
-msgstr "Envolva-se"
-
-#: controls/AboutItem.qml:234
-msgctxt "AboutItem|"
-msgid "Donate"
-msgstr "Doar"
-
-#: controls/AboutItem.qml:251
-msgctxt "AboutItem|"
-msgid "Report a Bug"
-msgstr "Comunicar um Erro"
-
-#: controls/AboutItem.qml:264
+#: controls/AboutItem.qml:235
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "'Copyright'"
 
-#: controls/AboutItem.qml:313
+#: controls/AboutItem.qml:244
+#, fuzzy
+#| msgctxt "AboutItem|"
+#| msgid "License:"
 msgctxt "AboutItem|"
-msgid "License:"
+msgid "License"
 msgstr "Licença:"
 
-#: controls/AboutItem.qml:336
-#, qt-format
+#: controls/AboutItem.qml:266
 msgctxt "AboutItem|"
-msgid "License: %1"
-msgstr "Licença: %1"
+msgid "Homepage"
+msgstr ""
 
-#: controls/AboutItem.qml:347
+#: controls/AboutItem.qml:280
+msgctxt "AboutItem|"
+msgid "Donate"
+msgstr "Doar"
+
+#: controls/AboutItem.qml:294
+msgctxt "AboutItem|"
+msgid "Get Involved"
+msgstr "Envolva-se"
+
+#: controls/AboutItem.qml:308
+#, fuzzy
+#| msgctxt "AboutItem|"
+#| msgid "Report a Bug"
+msgctxt "AboutItem|"
+msgid "Report a bug"
+msgstr "Comunicar um Erro"
+
+#: controls/AboutItem.qml:326
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Bibliotecas usadas"
 
-#: controls/AboutItem.qml:379
-msgctxt "AboutItem|"
-msgid "Authors"
-msgstr "Autores"
-
-#: controls/AboutItem.qml:389
+#: controls/AboutItem.qml:346
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Mostrar as fotografias dos autores"
 
-#: controls/AboutItem.qml:400
+#: controls/AboutItem.qml:349
+msgctxt "AboutItem|"
+msgid "Authors"
+msgstr "Autores"
+
+#: controls/AboutItem.qml:359
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Créditos"
 
-#: controls/AboutItem.qml:412
+#: controls/AboutItem.qml:369
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Tradutores"
@@ -122,12 +127,12 @@ msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Recuar"
 
-#: controls/GlobalDrawer.qml:718
+#: controls/GlobalDrawer.qml:717
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Fechar a Barra Lateral"
 
-#: controls/GlobalDrawer.qml:723
+#: controls/GlobalDrawer.qml:722
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Abrir a Barra Lateral"
@@ -330,6 +335,14 @@ msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "Fechar o menu"
 
+#~ msgctxt "AboutItem|"
+#~ msgid "%1 (%2)"
+#~ msgstr "%1 (%2)"
+
+#~ msgctxt "AboutItem|"
+#~ msgid "License: %1"
+#~ msgstr "Licença: %1"
+
 #, fuzzy
 #~| msgctxt "PageRowGlobalToolBarUI|"
 #~| msgid "Close menu"
@@ -372,7 +385,3 @@ msgstr "Fechar o menu"
 #~ msgctxt "ToolBarApplicationHeader|"
 #~ msgid "More Actions"
 #~ msgstr "Mais Acções"
-
-#~ msgctxt "AboutItem|"
-#~ msgid "Visit %1's KDE Store page"
-#~ msgstr "Visitar a página do %1 na Loja do KDE"
