@@ -15,70 +15,75 @@ msgstr ""
 "X-Crowdin-File: /kf6-trunk/messages/kirigami/libkirigami6_qt.pot\n"
 "X-Crowdin-File-ID: 42919\n"
 
-#: controls/AboutItem.qml:166
+#: controls/AboutItem.qml:181
 #, qt-format
 msgctxt "AboutItem|"
-msgid "%1 (%2)"
-msgstr "%1 (%2)"
+msgid "Visit %1's KDE Store page"
+msgstr ""
 
-#: controls/AboutItem.qml:186
+#: controls/AboutItem.qml:197
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "发送电子邮件到 %1"
 
-#: controls/AboutItem.qml:228
-msgctxt "AboutItem|"
-msgid "Get Involved"
-msgstr "参与贡献"
-
-#: controls/AboutItem.qml:234
-msgctxt "AboutItem|"
-msgid "Donate"
-msgstr "捐款"
-
-#: controls/AboutItem.qml:251
-msgctxt "AboutItem|"
-msgid "Report a Bug"
-msgstr "报告程序缺陷"
-
-#: controls/AboutItem.qml:264
+#: controls/AboutItem.qml:235
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "版权信息"
 
-#: controls/AboutItem.qml:313
+#: controls/AboutItem.qml:244
+#, fuzzy
+#| msgctxt "AboutItem|"
+#| msgid "License:"
 msgctxt "AboutItem|"
-msgid "License:"
+msgid "License"
 msgstr "许可证："
 
-#: controls/AboutItem.qml:336
-#, qt-format
+#: controls/AboutItem.qml:266
 msgctxt "AboutItem|"
-msgid "License: %1"
-msgstr "许可证：%1"
+msgid "Homepage"
+msgstr ""
 
-#: controls/AboutItem.qml:347
+#: controls/AboutItem.qml:280
+msgctxt "AboutItem|"
+msgid "Donate"
+msgstr "捐款"
+
+#: controls/AboutItem.qml:294
+msgctxt "AboutItem|"
+msgid "Get Involved"
+msgstr "参与贡献"
+
+#: controls/AboutItem.qml:308
+#, fuzzy
+#| msgctxt "AboutItem|"
+#| msgid "Report a Bug"
+msgctxt "AboutItem|"
+msgid "Report a bug"
+msgstr "报告程序缺陷"
+
+#: controls/AboutItem.qml:326
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "使用的程序库"
 
-#: controls/AboutItem.qml:379
-msgctxt "AboutItem|"
-msgid "Authors"
-msgstr "作者"
-
-#: controls/AboutItem.qml:389
+#: controls/AboutItem.qml:346
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "显示作者照片"
 
-#: controls/AboutItem.qml:400
+#: controls/AboutItem.qml:349
+msgctxt "AboutItem|"
+msgid "Authors"
+msgstr "作者"
+
+#: controls/AboutItem.qml:359
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "致谢"
 
-#: controls/AboutItem.qml:412
+#: controls/AboutItem.qml:369
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "翻译人员"
@@ -119,12 +124,12 @@ msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "返回"
 
-#: controls/GlobalDrawer.qml:718
+#: controls/GlobalDrawer.qml:717
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "隐藏侧边栏"
 
-#: controls/GlobalDrawer.qml:723
+#: controls/GlobalDrawer.qml:722
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "显示侧边栏"
@@ -285,3 +290,11 @@ msgstr "打开抽屉栏"
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "关闭"
+
+#~ msgctxt "AboutItem|"
+#~ msgid "%1 (%2)"
+#~ msgstr "%1 (%2)"
+
+#~ msgctxt "AboutItem|"
+#~ msgid "License: %1"
+#~ msgstr "许可证：%1"

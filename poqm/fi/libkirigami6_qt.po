@@ -14,70 +14,75 @@ msgstr ""
 "X-Generator: Lokalize 23.08.5\n"
 "X-Qt-Contexts: true\n"
 
-#: controls/AboutItem.qml:166
+#: controls/AboutItem.qml:181
 #, qt-format
 msgctxt "AboutItem|"
-msgid "%1 (%2)"
-msgstr "%1 (%2)"
+msgid "Visit %1's KDE Store page"
+msgstr "Käy KDE Storen %1 -sivulla"
 
-#: controls/AboutItem.qml:186
+#: controls/AboutItem.qml:197
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Lähetä sähköpostia: %1"
 
-#: controls/AboutItem.qml:228
-msgctxt "AboutItem|"
-msgid "Get Involved"
-msgstr "Ota osaa"
-
-#: controls/AboutItem.qml:234
-msgctxt "AboutItem|"
-msgid "Donate"
-msgstr "Lahjoita"
-
-#: controls/AboutItem.qml:251
-msgctxt "AboutItem|"
-msgid "Report a Bug"
-msgstr "Ilmoita viasta"
-
-#: controls/AboutItem.qml:264
+#: controls/AboutItem.qml:235
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Tekijänoikeudet"
 
-#: controls/AboutItem.qml:313
+#: controls/AboutItem.qml:244
+#, fuzzy
+#| msgctxt "AboutItem|"
+#| msgid "License:"
 msgctxt "AboutItem|"
-msgid "License:"
+msgid "License"
 msgstr "Lisenssi:"
 
-#: controls/AboutItem.qml:336
-#, qt-format
+#: controls/AboutItem.qml:266
 msgctxt "AboutItem|"
-msgid "License: %1"
-msgstr "Lisenssi: %1"
+msgid "Homepage"
+msgstr ""
 
-#: controls/AboutItem.qml:347
+#: controls/AboutItem.qml:280
+msgctxt "AboutItem|"
+msgid "Donate"
+msgstr "Lahjoita"
+
+#: controls/AboutItem.qml:294
+msgctxt "AboutItem|"
+msgid "Get Involved"
+msgstr "Ota osaa"
+
+#: controls/AboutItem.qml:308
+#, fuzzy
+#| msgctxt "AboutItem|"
+#| msgid "Report a Bug"
+msgctxt "AboutItem|"
+msgid "Report a bug"
+msgstr "Ilmoita viasta"
+
+#: controls/AboutItem.qml:326
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Käytetyt kirjastot"
 
-#: controls/AboutItem.qml:379
-msgctxt "AboutItem|"
-msgid "Authors"
-msgstr "Tekijät"
-
-#: controls/AboutItem.qml:389
+#: controls/AboutItem.qml:346
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Näytä tekijöiden valokuvat"
 
-#: controls/AboutItem.qml:400
+#: controls/AboutItem.qml:349
+msgctxt "AboutItem|"
+msgid "Authors"
+msgstr "Tekijät"
+
+#: controls/AboutItem.qml:359
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Kiitokset"
 
-#: controls/AboutItem.qml:412
+#: controls/AboutItem.qml:369
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Kääntäjät"
@@ -121,12 +126,12 @@ msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Takaisin"
 
-#: controls/GlobalDrawer.qml:718
+#: controls/GlobalDrawer.qml:717
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "Sulje sivupaneeli"
 
-#: controls/GlobalDrawer.qml:723
+#: controls/GlobalDrawer.qml:722
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Avaa sivupaneeli"
@@ -308,6 +313,14 @@ msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "Sulje"
 
+#~ msgctxt "AboutItem|"
+#~ msgid "%1 (%2)"
+#~ msgstr "%1 (%2)"
+
+#~ msgctxt "AboutItem|"
+#~ msgid "License: %1"
+#~ msgstr "Lisenssi: %1"
+
 #~ msgctxt "Dialog|@action:button close dialog"
 #~ msgid "Close"
 #~ msgstr "Sulje"
@@ -347,10 +360,6 @@ msgstr "Sulje"
 #~ msgctxt "ToolBarApplicationHeader|"
 #~ msgid "More Actions"
 #~ msgstr "Lisää toimintoja"
-
-#~ msgctxt "AboutItem|"
-#~ msgid "Visit %1's KDE Store page"
-#~ msgstr "Käy KDE Storen %1 -sivulla"
 
 #~ msgctxt "UrlButton|"
 #~ msgid "Copy link address"
