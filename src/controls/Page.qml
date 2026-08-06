@@ -270,7 +270,7 @@ QQC2.Page {
     KL.ColumnView.globalFooter: Loader {
         id: bottomToolBar
 
-        property T.Page page: root
+        property QQC2.Page page: root
         property bool pageComplete: false
 
         visible: active
