@@ -152,8 +152,8 @@ QQC2.Control {
     property alias heightMode: layout.heightMode
 //END properties
 
-    implicitHeight: layout.implicitHeight
-    implicitWidth: layout.implicitWidth
+    implicitHeight: layout.implicitHeight + bottomPadding + topPadding
+    implicitWidth: layout.implicitWidth + leftPadding + rightPadding
 
     Layout.minimumWidth: layout.minimumWidth
     Layout.preferredWidth: 0
