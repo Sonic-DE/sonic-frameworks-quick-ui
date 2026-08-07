@@ -22,7 +22,7 @@ msgstr ""
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
-msgstr ""
+msgstr "Gå til %1-sida i KDE-butikken"
 
 #: controls/AboutItem.qml:197
 #, qt-format
@@ -37,8 +37,6 @@ msgstr "Opphavsrett"
 
 #: controls/AboutItem.qml:244
 #, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "License:"
 msgctxt "AboutItem|"
 msgid "License"
 msgstr "Lisens:"
@@ -60,8 +58,6 @@ msgstr "Vert med"
 
 #: controls/AboutItem.qml:308
 #, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "Report a Bug"
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "Meld frå om feil"
@@ -293,11 +289,3 @@ msgstr "Opna skuff"
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "Lukk"
-
-#~ msgctxt "AboutItem|"
-#~ msgid "%1 (%2)"
-#~ msgstr "%1 (%2)"
-
-#~ msgctxt "AboutItem|"
-#~ msgid "License: %1"
-#~ msgstr "Lisens: %1"

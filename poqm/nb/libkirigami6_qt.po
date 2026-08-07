@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "PO-Revision-Date: 2026-03-03 12:14+0100\n"
-"Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
+"Last-Translator: Kjetil Sørlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@nuug.no>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
-msgstr ""
+msgstr "Besøk %1-siden i KDE-butikken"
 
 #: controls/AboutItem.qml:197
 #, qt-format
@@ -38,8 +38,6 @@ msgstr "Opphavsrett"
 
 #: controls/AboutItem.qml:244
 #, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "License:"
 msgctxt "AboutItem|"
 msgid "License"
 msgstr "Lisens:"
@@ -61,8 +59,6 @@ msgstr "Bli med"
 
 #: controls/AboutItem.qml:308
 #, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "Report a Bug"
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "Meld fra om feil"
@@ -294,11 +290,3 @@ msgstr "Åpne skuff"
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "Lukk"
-
-#~ msgctxt "AboutItem|"
-#~ msgid "%1 (%2)"
-#~ msgstr "%1 (%2)"
-
-#~ msgctxt "AboutItem|"
-#~ msgid "License: %1"
-#~ msgstr "Lisens: %1"
