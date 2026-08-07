@@ -22,7 +22,7 @@ import org.kde.kirigami.primitives as Primitives
 
   OverlaySheet is used for auxiliary display of narrow, read-only, scrollable
   content. For more details, see
-  https://develop.kde.org/hig/displaying_content/#page-vs-dialog-vs-overlaysheet.
+  \l { https://develop.kde.org/hig/displaying_content/#page-vs-dialog-vs-overlaysheet } { https://develop.kde.org/hig/displaying_content/#page-vs-dialog-vs-overlaysheet }.
 
   Can be dismissed with a touch swipe when scrolled to the top or bottom.
 
