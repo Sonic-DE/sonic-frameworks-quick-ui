@@ -5,12 +5,12 @@
 #
 # SPDX-FileCopyrightText: 2016, 2020, 2021 Antoni Bella Pérez <antonibella5@yahoo.com>
 # SPDX-FileCopyrightText: 2019 Empar Montoro Martín <montoro_mde@gva.es>
-# SPDX-FileCopyrightText: 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2017-2026 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kirigami\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"PO-Revision-Date: 2026-02-16 10:31+0100\n"
+"PO-Revision-Date: 2026-08-06 10:12+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -20,13 +20,13 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #: controls/AboutItem.qml:181
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
-msgstr ""
+msgstr "Visita la pàgina %1 de la KDE Store"
 
 #: controls/AboutItem.qml:197
 #, qt-format
@@ -40,17 +40,14 @@ msgid "Copyright"
 msgstr "Drets d'autoria"
 
 #: controls/AboutItem.qml:244
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "License:"
 msgctxt "AboutItem|"
 msgid "License"
-msgstr "Llicència:"
+msgstr "Llicència"
 
 #: controls/AboutItem.qml:266
 msgctxt "AboutItem|"
 msgid "Homepage"
-msgstr ""
+msgstr "Pàgina web"
 
 #: controls/AboutItem.qml:280
 msgctxt "AboutItem|"
@@ -63,9 +60,6 @@ msgid "Get Involved"
 msgstr "Col·laboreu-hi"
 
 #: controls/AboutItem.qml:308
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "Report a Bug"
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "Informeu d'un error"
@@ -297,11 +291,3 @@ msgstr "Obri el calaix"
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "Tanca"
-
-#~ msgctxt "AboutItem|"
-#~ msgid "%1 (%2)"
-#~ msgstr "%1 (%2)"
-
-#~ msgctxt "AboutItem|"
-#~ msgid "License: %1"
-#~ msgstr "Llicència: %1"

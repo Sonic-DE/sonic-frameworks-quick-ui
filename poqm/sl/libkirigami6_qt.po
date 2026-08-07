@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-02-16 06:55+0100\n"
+"PO-Revision-Date: 2026-08-06 07:14+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
 "%100<=4 ? 2 : 3);\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: controls/AboutItem.qml:181
 #, qt-format
@@ -37,17 +37,14 @@ msgid "Copyright"
 msgstr "Copyright"
 
 #: controls/AboutItem.qml:244
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "License:"
 msgctxt "AboutItem|"
 msgid "License"
-msgstr "Dovoljenje:"
+msgstr "Licenca"
 
 #: controls/AboutItem.qml:266
 msgctxt "AboutItem|"
 msgid "Homepage"
-msgstr ""
+msgstr "Domača stran"
 
 #: controls/AboutItem.qml:280
 msgctxt "AboutItem|"
@@ -60,9 +57,6 @@ msgid "Get Involved"
 msgstr "Sodelujte"
 
 #: controls/AboutItem.qml:308
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "Report a Bug"
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "Poročajte o napaki"

@@ -1,8 +1,8 @@
-# SPDX-FileCopyrightText: 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2016-2026 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2026-02-16 10:14+0100\n"
+"PO-Revision-Date: 2026-08-06 12:05+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #: controls/AboutItem.qml:181
 #, qt-format
@@ -31,17 +31,14 @@ msgid "Copyright"
 msgstr "Copyright"
 
 #: controls/AboutItem.qml:244
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "License:"
 msgctxt "AboutItem|"
 msgid "License"
-msgstr "Licentie:"
+msgstr "Licentie"
 
 #: controls/AboutItem.qml:266
 msgctxt "AboutItem|"
 msgid "Homepage"
-msgstr ""
+msgstr "Homepagina"
 
 #: controls/AboutItem.qml:280
 msgctxt "AboutItem|"
@@ -54,9 +51,6 @@ msgid "Get Involved"
 msgstr "Doe mee"
 
 #: controls/AboutItem.qml:308
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "Report a Bug"
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "Een bug rapporteren"
