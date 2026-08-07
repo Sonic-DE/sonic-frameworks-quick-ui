@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: controls/AboutItem.qml:181
 #, qt-format
@@ -31,17 +31,14 @@ msgid "Copyright"
 msgstr "საავტორო უფლებები"
 
 #: controls/AboutItem.qml:244
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "License:"
 msgctxt "AboutItem|"
 msgid "License"
-msgstr "ლიცენზია:"
+msgstr "ლიცენზია"
 
 #: controls/AboutItem.qml:266
 msgctxt "AboutItem|"
 msgid "Homepage"
-msgstr ""
+msgstr "საწყისი გვერდი"
 
 #: controls/AboutItem.qml:280
 msgctxt "AboutItem|"
@@ -54,9 +51,6 @@ msgid "Get Involved"
 msgstr "შემოგვიერთდით"
 
 #: controls/AboutItem.qml:308
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "Report a Bug"
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "შეცდომის პატაკი"

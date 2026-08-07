@@ -19,7 +19,7 @@ msgstr ""
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
-msgstr ""
+msgstr "Navštívit stránku KDE Store od %1"
 
 #: controls/AboutItem.qml:197
 #, qt-format
