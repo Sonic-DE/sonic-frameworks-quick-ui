@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2026-02-26 18:46+0100\n"
+"PO-Revision-Date: 2026-08-07 22:38+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.03.70\n"
+"X-Generator: Lokalize 26.11.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: qtrich\n"
@@ -36,15 +36,14 @@ msgid "Copyright"
 msgstr "Opphavsrett"
 
 #: controls/AboutItem.qml:244
-#, fuzzy
 msgctxt "AboutItem|"
 msgid "License"
-msgstr "Lisens:"
+msgstr "Lisens"
 
 #: controls/AboutItem.qml:266
 msgctxt "AboutItem|"
 msgid "Homepage"
-msgstr ""
+msgstr "Heimeside"
 
 #: controls/AboutItem.qml:280
 msgctxt "AboutItem|"
@@ -57,7 +56,6 @@ msgid "Get Involved"
 msgstr "Vert med"
 
 #: controls/AboutItem.qml:308
-#, fuzzy
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "Meld frå om feil"
