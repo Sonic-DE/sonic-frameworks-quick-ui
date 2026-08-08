@@ -216,6 +216,7 @@ QQC2.Control {
             menuActions: root.actions
 
             menuComponent: P.ActionsMenu {
+                x: root.position === QQC2.ToolBar.Footer ? parent.width - width : 0
                 y: root.position === QQC2.ToolBar.Footer ? -height : 0
                 submenuComponent: P.ActionsMenu {
                     id: actionsMenu
