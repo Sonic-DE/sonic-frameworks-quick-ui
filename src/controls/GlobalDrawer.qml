@@ -82,10 +82,10 @@ KC.OverlayDrawer {
         }
 
         // ...but it still performs additional checks.
-        return !isMenu || Platform.Settings.isMobile;
+        return !isMenu;
     }
 
-    enabled: !isMenu || Platform.Settings.isMobile
+    enabled: !isMenu
 
 //BEGIN properties
     /*!
@@ -255,7 +255,13 @@ KC.OverlayDrawer {
     readonly property T.Action currentSubMenu: stackView.currentItem?.current ?? null
 
     /*!
-      \brief This property sets whether the drawer becomes a menu on the desktop.
+      \brief This property sets whether the drawer becomes a menu.
+
+      Prior to 6.21 this option had no effect for mobile applications.
+      If you wish to keep that behaviour you can use something like:
+      \code
+      isMenu: !Platform.Settings.isMobile
+      \endcode
 
       default: \c false
 
