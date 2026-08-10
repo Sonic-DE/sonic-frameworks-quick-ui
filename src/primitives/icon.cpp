@@ -493,7 +493,9 @@ QImage Icon::findIcon(const QSize &size)
 
     if (!iconSource.isEmpty() && img.isNull()) {
         setStatus(Error);
-        img = iconPixmap(QIcon::fromTheme(m_fallback));
+        // Qt as of 6.11.1 will try accessing icon files even when given an empty icon name.
+        // Reported upstream: https://qt-project.atlassian.net/browse/QTBUG-149099
+        img = m_fallback.isEmpty() ? QImage{} : iconPixmap(QIcon::fromTheme(m_fallback));
     }
     return img;
 }
