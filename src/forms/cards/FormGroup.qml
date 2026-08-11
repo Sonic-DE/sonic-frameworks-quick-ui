@@ -20,7 +20,7 @@ FT.FormGroup {
 
     default property alias entries: innerLayout.data
     // remove the margins in order to not have relayouting loops
-    implicitWidth: layout.implicitWidth - Layout.leftMargin - Layout.rightMargin
+    implicitWidth: Math.max(Platform.Units.gridUnit * 30, layout.implicitWidth - Layout.leftMargin - Layout.rightMargin)
     implicitHeight: layout.implicitHeight
 
     readonly property real __maxTextLabelWidth: innerLayout.labelWidth
