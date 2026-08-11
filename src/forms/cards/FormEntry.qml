@@ -183,6 +183,10 @@ FT.FormEntry {
                 leftPadding: Application.layoutDirection === Qt.LeftToRight
                     ? (root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + (root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing ?? 0)
                     : padding
+                onLinkActivated: (link) => Qt.openUrlExternally(link)
+                HoverHandler {
+                    cursorShape: parent.hoveredLink.length > 0 ? Qt.PointingHandCursor : Qt.ArrowCursor
+                }
             }
         }
 
