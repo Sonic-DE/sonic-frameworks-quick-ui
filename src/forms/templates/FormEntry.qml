@@ -125,6 +125,14 @@ Item {
         return buddy instanceof T.AbstractButton || buddy instanceof T.ComboBox || buddy instanceof T.TextField || buddy instanceof T.SpinBox || buddy instanceof T.TextArea;
     }
 
+    /*!
+     \brief Make sure the contentItem will always take the full width
+
+     When true, there will never be a label laid out on the left of the contentItem.
+     If a title is set, it will always be on top
+     */
+    property bool forceExpandedContents: false
+
     property bool hovered: false
 
     /*!
