@@ -62,10 +62,7 @@ FT.FormGroup {
             implicitHeight: innerLayout.implicitHeight
             ColumnLayout {
                 id: innerLayout
-                anchors {
-                    fill: parent
-                  //  leftMargin: root.parent.parent.__collapsed ? 0 : root.__assignedWidthForLabels
-                }
+                anchors.fill: parent
                 property real labelWidth: 0
                 // Consider also invisible items when
                 property real implicitWidthWithInvisible: 0

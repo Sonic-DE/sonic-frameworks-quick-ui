@@ -16,7 +16,7 @@ import org.kde.kirigami.forms.private.templates as FT
 FT.FormEntry {
     id: root
 
-    implicitWidth: Math.max(mainLayout.implicitWidth + impl.padding * 2, Math.min(contentItemWrapper.implicitWidth, Platform.Units.gridUnit * 20 + impl.padding * 2))
+    implicitWidth: Math.max(contentItem.implicitWidth +  Platform.Units.largeSpacing * 2, Platform.Units.gridUnit * 20 +  Platform.Units.largeSpacing * 2)
     implicitHeight: impl.implicitHeight
 
     Layout.fillWidth: true
