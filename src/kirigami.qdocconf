@@ -16,6 +16,8 @@ excludedirs = platform
 
 navigation.landingpage  = "Kirigami"
 
+spurious = "Can't link to 'index.html'"
+
 qhp.projects            = Kirigami
 
 qhp.Kirigami.file          = kirigami.qhp
