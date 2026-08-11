@@ -16,8 +16,8 @@ import org.kde.kirigami.forms.private.templates as FT
 FT.FormEntry {
     id: root
 
-    implicitWidth: Math.max(contentItem.implicitWidth + impl.leftPadding * 2, Math.min(impl.implicitWidth, Platform.Units.gridUnit * 20 + impl.leftPadding * 2))
-    implicitHeight: impl.implicitHeight
+    implicitWidth: Math.max(contentItem.implicitWidth +  Platform.Units.largeSpacing * 2, Platform.Units.gridUnit * 20 +  Platform.Units.largeSpacing * 2)
+    implicitHeight: mainLayout.implicitHeight
 
     Layout.fillWidth: true
 
@@ -28,10 +28,11 @@ FT.FormEntry {
         id: label
         anchors {
             top: parent.top
-            right: impl.left
-            topMargin: root.contentItem.KirigamiLayouts.FormData.buddyFor.y + layout.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.height/2 - label.height/2 + impl.topPadding
+            right: mainLayout.left
+            rightMargin: Platform.Units.largeSpacing
+            topMargin: root.contentItem.parent.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.y + layout.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.height/2 - label.height/2
         }
-        visible: text.length > 0 && !impl.formLayout.__collapsed && !root.forceExpandedContents
+        visible: text.length > 0 && !mainLayout.formLayout.__collapsed && !root.forceExpandedContents
         Primitives.MnemonicData.enabled: {
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
                 if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
@@ -80,22 +81,18 @@ FT.FormEntry {
         value: label.visible ? label : layout.header
     }
 
-    T.Control {
-        id: impl
+    RowLayout {
+        id: mainLayout
         anchors {
             left: parent.left
+            right: parent.right
             top: parent.top
             bottom: parent.bottom
-            leftMargin: impl.formLayout.__collapsed || root.forceExpandedContents ? padding : formGroup?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
+            leftMargin: mainLayout.formLayout.__collapsed || root.forceExpandedContents ? padding : formGroup?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
         }
 
-        width: layout.contentItem?.Layout.fillWidth ? parent.width - anchors.leftMargin : Math.min(implicitWidth, parent.width)
-        implicitWidth: mainLayout.implicitWidth + leftPadding + rightPadding
-        implicitHeight: mainLayout.implicitHeight + topPadding + bottomPadding
-        leftPadding: Platform.Units.largeSpacing
-        rightPadding: leftPadding
-        topPadding: 0
-        bottomPadding: 0
+        spacing: Platform.Units.smallSpacing
+
         readonly property Item formLayout: {
             let candidate = root.parent;
             if (!candidate) {
@@ -125,62 +122,76 @@ FT.FormEntry {
             return null
         }
 
-        contentItem: RowLayout {
-            id: mainLayout
+
+
+        RowLayout {
+            id: leadingItems
+            visible: children.length > 0
             spacing: Platform.Units.smallSpacing
-            RowLayout {
-                id: leadingItems
-                visible: children.length > 0
-                spacing: Platform.Units.smallSpacing
-                children: root.leadingItems
+            children: root.leadingItems
+        }
+        ColumnLayout {
+            id: layout
+            Layout.fillWidth: true
+            Layout.minimumWidth: contentItem?.Layout.minimumWidth
+            Layout.preferredWidth: {
+                if (!contentItem) {
+                    return -1;
+                } else if (contentItem.Layout.preferredWidth > 0) {
+                    return contentItem.Layout.preferredWidth;
+                }
+                return contentItem.implicitWidth;
             }
-            KirigamiLayouts.HeaderFooterLayout {
-                id: layout
+
+            Layout.maximumWidth: contentItem?.Layout.maximumWidth
+
+            Binding {
+                readonly property bool firstEntry: root.parent.children[0] === root
+                when: firstEntry
+                titleLabel.topPadding: 0
+            }
+
+            QQC.Label {
+                id: titleLabel
                 Layout.fillWidth: true
-                Layout.minimumWidth: contentItem?.Layout.minimumWidth
-                Layout.preferredWidth: contentItem?.Layout.preferredWidth
-                Layout.maximumWidth: contentItem?.Layout.maximumWidth
-
-                Binding {
-                    readonly property bool firstEntry: root.parent.children[0] === root
-                    when: firstEntry
-                    titleLabel.topPadding: 0
-                }
-                header: QQC.Label {
-                    id: titleLabel
-                    topPadding: Platform.Units.largeSpacing
-                    visible: (impl.formLayout.__collapsed  || root.forceExpandedContents) && text.length > 0
-               //     Accessible.labelFor: visible && root.contentItem ? root.contentItem : null
-                    text: label.Primitives.MnemonicData.richTextLabel
-                }
-
-                footer: QQC.Label {
-                    font: Platform.Theme.smallFont
-                    wrapMode: Text.WordWrap
-                    elide: Text.ElideRight
-                    visible: text.length > 0
-                    text: root.subtitle
-                    leftPadding:
-                        Application.layoutDirection === Qt.LeftToRight
-                        ? (root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing
-                        : padding
-                    rightPadding: Application.layoutDirection === Qt.RightToLeft
-                        ? (root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing
-                        : padding
-                    onLinkActivated: (link) => Qt.openUrlExternally(link)
-                    HoverHandler {
-                        cursorShape: parent.hoveredLink.length > 0 ? Qt.PointingHandCursor : Qt.ArrowCursor
-                    }
-                }
-
-                contentItem: root.contentItem
+                topPadding: Platform.Units.largeSpacing
+                visible: (mainLayout.formLayout.__collapsed  || root.forceExpandedContents) && text.length > 0
+                text: label.Primitives.MnemonicData.richTextLabel
             }
+
             RowLayout {
-                id: trailingItems
-                Layout.minimumWidth: implicitWidth
-                visible: children.length > 0
-                spacing: Platform.Units.smallSpacing
-                children: root.trailingItems
+                Layout.fillWidth: true
+                QQC.Control {
+                    Layout.fillWidth: root.contentItem.Layout.fillWidth
+                    contentItem: root.contentItem
+                }
+                RowLayout {
+                    id: trailingItems
+                    Layout.minimumWidth: implicitWidth
+                    visible: children.length > 0
+                    spacing: Platform.Units.smallSpacing
+                    children: root.trailingItems
+                }
+            }
+
+            QQC.Label {
+                Layout.fillWidth: true
+                font: Platform.Theme.smallFont
+                wrapMode: Text.WordWrap
+                elide: Text.ElideRight
+                visible: text.length > 0
+                text: root.subtitle
+                leftPadding:
+                    Application.layoutDirection === Qt.LeftToRight
+                    ? (root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing
+                    : padding
+                rightPadding: Application.layoutDirection === Qt.RightToLeft
+                    ? (root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing
+                    : padding
+                onLinkActivated: (link) => Qt.openUrlExternally(link)
+                HoverHandler {
+                    cursorShape: parent.hoveredLink.length > 0 ? Qt.PointingHandCursor : Qt.ArrowCursor
+                }
             }
         }
     }
