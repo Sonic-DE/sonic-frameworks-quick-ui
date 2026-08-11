@@ -16,9 +16,8 @@ import org.kde.kirigami.forms.private.templates as FT
 FT.FormEntry {
     id: root
 
-    implicitWidth: Math.max(contentItemWrapper.implicitWidth + Platform.Units.largeSpacing * 2,
-                            Math.min(mainLayout.implicitWidth, Platform.Units.gridUnit * 20 + Platform.Units.largeSpacing * 2))
-    implicitHeight: mainLayout.implicitHeight
+    implicitWidth: Math.max(contentItem.implicitWidth + impl.leftPadding * 2, Math.min(impl.implicitWidth, Platform.Units.gridUnit * 20 + impl.leftPadding * 2))
+    implicitHeight: impl.implicitHeight
 
     Layout.fillWidth: true
 
@@ -29,11 +28,10 @@ FT.FormEntry {
         id: label
         anchors {
             top: parent.top
-            right: mainLayout.left
-            rightMargin: Platform.Units.largeSpacing
-            topMargin: root.contentItem?.parent.y + root.contentItem?.KirigamiLayouts.FormData.buddyFor.y + layout.y + root.contentItem?.KirigamiLayouts.FormData.buddyFor.height/2 - label.height/2 ?? 0
+            right: impl.left
+            topMargin: root.contentItem.KirigamiLayouts.FormData.buddyFor.y + layout.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.height/2 - label.height/2 + impl.topPadding
         }
-        visible: text.length > 0 && (!mainLayout.formLayout?.__collapsed ?? true) && !root.fullWidth
+        visible: text.length > 0 && !impl.formLayout.__collapsed && !root.forceExpandedContents
         Primitives.MnemonicData.enabled: {
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
                 if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
@@ -54,9 +52,6 @@ FT.FormEntry {
             sequence: label.Primitives.MnemonicData.sequence
             onActivated: {
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
-                if (!buddy) {
-                    return;
-                }
                 buddy.forceActiveFocus(Qt.ShortcutFocusReason);
 
                 if (buddy instanceof T.AbstractButton) {
@@ -72,9 +67,6 @@ FT.FormEntry {
                     return;
                 }
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
-                if (!buddy) {
-                    return;
-                }
                 buddy.forceActiveFocus(Qt.ShortcutFocusReason);
                 root.clicked();
             }
@@ -83,25 +75,27 @@ FT.FormEntry {
 
     // Replace with Accessible.labelFor once QTBUG-146127 is fixed
     Binding {
-        target: root.contentItem?.Accessible ?? null
+        target: root.contentItem.Accessible
         property: "labelledBy"
-        value: label.visible ? label : titleLabel
+        value: label.visible ? label : layout.header
     }
 
-    RowLayout {
-        id: mainLayout
+    T.Control {
+        id: impl
         anchors {
             left: parent.left
-            right: parent.right
             top: parent.top
             bottom: parent.bottom
-            leftMargin: !mainLayout.formLayout || mainLayout.formLayout.__collapsed || root.fullWidth || !mainLayout.formGroup
-                ? Platform.Units.largeSpacing
-                : mainLayout.formGroup.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
+            leftMargin: impl.formLayout.__collapsed || root.forceExpandedContents ? padding : formGroup?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
         }
 
-        spacing: Platform.Units.smallSpacing
-
+        width: layout.contentItem?.Layout.fillWidth ? parent.width - anchors.leftMargin : Math.min(implicitWidth, parent.width)
+        implicitWidth: mainLayout.implicitWidth + leftPadding + rightPadding
+        implicitHeight: mainLayout.implicitHeight + topPadding + bottomPadding
+        leftPadding: Platform.Units.largeSpacing
+        rightPadding: leftPadding
+        topPadding: 0
+        bottomPadding: 0
         readonly property Item formLayout: {
             let candidate = root.parent;
             if (!candidate) {
@@ -131,86 +125,58 @@ FT.FormEntry {
             return null
         }
 
-
-
-        RowLayout {
-            id: leadingItems
-            visible: children.length > 0
-            spacing: parent.spacing
-            children: root.leadingItems
-        }
-        ColumnLayout {
-            id: layout
-            spacing: parent.spacing
-            Layout.fillWidth: true
-            Layout.minimumWidth: contentItemWrapper.Layout.minimumWidth
-            Layout.preferredWidth: contentItemWrapper.implicitWidth
-            Layout.maximumWidth: contentItemWrapper.Layout.maximumWidth
-
-            Binding {
-                readonly property bool firstEntry: root.parent?.children[0] === root
-                when: firstEntry
-                titleLabel.topPadding: 0
-            }
-
-            QQC.Label {
-                id: titleLabel
-                Layout.fillWidth: true
-                topPadding: Platform.Units.largeSpacing
-                visible: ((mainLayout.formLayout?.__collapsed ?? true) || root.fullWidth) && text.length > 0
-                text: label.Primitives.MnemonicData.richTextLabel
-            }
-
+        contentItem: RowLayout {
+            id: mainLayout
+            spacing: Platform.Units.smallSpacing
             RowLayout {
-                id: contentItemAndTrailingLayout
-                Layout.fillWidth: true
-                spacing: parent.spacing
-                QQC.Control {
-                    id: contentItemWrapper
-
-                    leftPadding: 0
-                    rightPadding: 0
-                    topPadding: 0
-                    bottomPadding: 0
-
-                    spacing: parent.spacing // Ensure that `contentItem.parent.spacing` works
-                    implicitWidth: contentItem?.Layout.preferredWidth > 0 ? (contentItem?.Layout.preferredWidth ?? 0) : (contentItem?.implicitWidth ?? 0)
-                    Layout.fillWidth: contentItem?.Layout.fillWidth ?? false
-                    Layout.minimumWidth: contentItem?.Layout.minimumWidth ?? -1
-                    Layout.maximumWidth: contentItem?.Layout.maximumWidth ?? -1
-                    contentItem: root.contentItem
-                }
-
-                RowLayout {
-                    id: trailingItems
-                    Layout.fillHeight: true
-                    Layout.maximumHeight: Infinity
-
-                    Layout.minimumWidth: implicitWidth
-                    visible: children.length > 0
-                    spacing: parent.spacing
-                    children: root.trailingItems
-                }
+                id: leadingItems
+                visible: children.length > 0
+                spacing: Platform.Units.smallSpacing
+                children: root.leadingItems
             }
-
-            QQC.Label {
+            KirigamiLayouts.HeaderFooterLayout {
+                id: layout
                 Layout.fillWidth: true
-                font: Platform.Theme.smallFont
-                wrapMode: Text.WordWrap
-                elide: Text.ElideRight
-                visible: text.length > 0
-                text: root.subtitle
-                leftPadding:
-                    Application.layoutDirection === Qt.LeftToRight
-                    ? (root.contentItem?.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + (root.contentItem?.KirigamiLayouts.FormData.buddyFor?.spacing ?? 0)
-                    : padding
-                rightPadding: Application.layoutDirection === Qt.RightToLeft
-                    ? (root.contentItem?.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + (root.contentItem?.KirigamiLayouts.FormData.buddyFor?.spacing ?? 0)
-                    : padding
-                onLinkActivated: (link) => Qt.openUrlExternally(link)
-                HoverHandler {
-                    cursorShape: parent.hoveredLink.length > 0 ? Qt.PointingHandCursor : Qt.ArrowCursor
+                Layout.minimumWidth: contentItem?.Layout.minimumWidth
+                Layout.preferredWidth: contentItem?.Layout.preferredWidth
+                Layout.maximumWidth: contentItem?.Layout.maximumWidth
+
+                Binding {
+                    readonly property bool firstEntry: root.parent.children[0] === root
+                    when: firstEntry
+                    titleLabel.topPadding: 0
                 }
+                header: QQC.Label {
+                    id: titleLabel
+                    topPadding: Platform.Units.largeSpacing
+                    visible: (impl.formLayout.__collapsed  || root.forceExpandedContents) && text.length > 0
+               //     Accessible.labelFor: visible && root.contentItem ? root.contentItem : null
+                    text: label.Primitives.MnemonicData.richTextLabel
+                }
+
+                footer: QQC.Label {
+                    font: Platform.Theme.smallFont
+                    wrapMode: Text.WordWrap
+                    elide: Text.ElideRight
+                    visible: text.length > 0
+                    text: root.subtitle
+                    leftPadding:
+                        Application.layoutDirection === Qt.LeftToRight
+                        ? (root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing
+                        : padding
+                    rightPadding: Application.layoutDirection === Qt.RightToLeft
+                        ? (root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing
+                        : padding
+                }
+
+                contentItem: root.contentItem
+            }
+            RowLayout {
+                id: trailingItems
+                Layout.minimumWidth: implicitWidth
+                visible: children.length > 0
+                spacing: Platform.Units.smallSpacing
+                children: root.trailingItems
             }
         }
     }

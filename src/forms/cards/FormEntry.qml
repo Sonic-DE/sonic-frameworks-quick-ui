@@ -16,7 +16,7 @@ import org.kde.kirigami.forms.private.templates as FT
 FT.FormEntry {
     id: root
 
-    implicitWidth: Math.max(contentItemWrapper.implicitWidth +  Platform.Units.largeSpacing * 2, Platform.Units.gridUnit * 20 +  Platform.Units.largeSpacing * 2)
+    implicitWidth: Math.max(mainLayout.implicitWidth + impl.padding * 2, Math.min(contentItemWrapper.implicitWidth, Platform.Units.gridUnit * 20 + impl.padding * 2))
     implicitHeight: impl.implicitHeight
 
     Layout.fillWidth: true
@@ -34,7 +34,7 @@ FT.FormEntry {
             rightMargin: -impl.leftPadding + Platform.Units.largeSpacing
             topMargin: root.contentItem.KirigamiLayouts.FormData.buddyFor.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.height/2 - label.height/2 + contentItemWrapper.y + impl.topPadding
         }
-        visible: text.length > 0 && !impl.formLayout.__collapsed && !root.fullWidth
+        visible: text.length > 0 && !impl.formLayout.__collapsed && !root.forceExpandedContents
         Primitives.MnemonicData.enabled: {
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
                 if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
@@ -81,7 +81,7 @@ FT.FormEntry {
         implicitHeight: mainLayout.implicitHeight + topPadding + bottomPadding
         padding: Platform.Units.largeSpacing + Platform.Units.smallSpacing
 
-        leftPadding: impl.formLayout.__collapsed || root.fullWidth ? padding : root.parent?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
+        leftPadding: impl.formLayout.__collapsed || root.forceExpandedContents ? padding : root.parent?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
 
         readonly property bool nextIsFormEntry: root.parent?.visibleChildren[root.parent.visibleChildren.indexOf(root) + 1] instanceof FormEntry ?? false
         readonly property bool prevIsFormEntry: root.parent?.visibleChildren[root.parent.visibleChildren.indexOf(root) - 1] instanceof FormEntry ?? false
@@ -119,15 +119,14 @@ FT.FormEntry {
 
         contentItem: GridLayout {
             id: mainLayout
-            readonly property real spacing: Platform.Units.smallSpacing
-            columnSpacing: spacing
-            rowSpacing: spacing
+            columnSpacing: Platform.Units.smallSpacing
+            rowSpacing: Platform.Units.smallSpacing
             columns: 1 + leadingItems.visible + trailingItems.visible
             QQC.Label {
                 id: inlineLabel
                 Layout.fillWidth: true
                 Layout.columnSpan: mainLayout.columns
-                visible: text.length > 0 && (impl.formLayout.__collapsed || root.fullWidth)
+                visible: (text.length > 0 || root.forceExpandedContents) && impl.formLayout.__collapsed
                 text: label.Primitives.MnemonicData.richTextLabel
                 wrapMode: Text.WordWrap
                 Accessible.name: label.Primitives.MnemonicData.plainTextLabel
@@ -141,6 +140,10 @@ FT.FormEntry {
             }
             QQC.Control {
                 id: contentItemWrapper
+                LayoutMirroring.childrenInherit: true
+                LayoutMirroring.enabled: contentItem instanceof QQC.Switch
+                        ? Qt.application.layoutDirection === Qt.LeftToRight
+                        : Qt.application.layoutDirection === Qt.RightToLeft
 
                 leftPadding: 0
                 rightPadding: 0
@@ -152,12 +155,10 @@ FT.FormEntry {
                 visible: contentItem
                 contentItem: root.contentItem
                 Binding {
-                    when: contentItemWrapper.contentItem instanceof QQC.Switch
-                    target: contentItemWrapper.contentItem
+                    when: (contentItemWrapper.contentItem instanceof QQC.Switch) && (contentItemWrapper.contentItem?.contentItem ?? false)
+                    target: contentItemWrapper.contentItem?.contentItem ?? null
                     property: "LayoutMirroring.enabled"
-                    value: contentItemWrapper.contentItem instanceof QQC.Switch
-                        ? Qt.application.layoutDirection === Qt.LeftToRight
-                        : Qt.application.layoutDirection === Qt.RightToLeft
+                    value: !contentItemWrapper.LayoutMirroring.enabled
                 }
             }
 
@@ -182,10 +183,6 @@ FT.FormEntry {
                 leftPadding: Application.layoutDirection === Qt.LeftToRight
                     ? (root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + (root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing ?? 0)
                     : padding
-                onLinkActivated: (link) => Qt.openUrlExternally(link)
-                HoverHandler {
-                    cursorShape: parent.hoveredLink.length > 0 ? Qt.PointingHandCursor : Qt.ArrowCursor
-                }
             }
         }
 
@@ -207,5 +204,3 @@ FT.FormEntry {
         }
     }
 }
-
-
