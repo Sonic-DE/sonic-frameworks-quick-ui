@@ -50,6 +50,8 @@ class FormAlignmentGroup : public QObject
 {
     Q_OBJECT
     /*!
+      \qmlproperty list<Item> FormAlignmentGroup::forms
+
       All the forms in this group.
      */
     Q_PROPERTY(QQmlListProperty<QQuickItem> forms READ forms NOTIFY formsChanged FINAL)
@@ -84,6 +86,8 @@ class FormAlignmentGroupAttached : public QObject
 {
     Q_OBJECT
     /*!
+      \qmlattachedproperty FormAlignmentGroup FormAlignmentGroup::group
+
       The group this form belongs to. The attached property makes sense to be used only inside a Form
      */
     Q_PROPERTY(FormAlignmentGroup *group READ group WRITE setGroup NOTIFY groupChanged FINAL)
