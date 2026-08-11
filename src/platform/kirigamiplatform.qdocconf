@@ -12,6 +12,8 @@ depends = kde qtcore qtgui qtqml qtquick qtquickcontrols
 
 navigation.landingpage = "Kirigami"
 
+spurious = "Can't link to 'index.html'"
+
 qhp.projects            = KirigamiPlatform
 
 qhp.KirigamiPlatform.file          = kirigamiplatform.qhp
