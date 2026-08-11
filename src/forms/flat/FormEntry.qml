@@ -28,10 +28,10 @@ FT.FormEntry {
         id: label
         anchors {
             top: parent.top
-            right: parent.left
+            right: impl.left
             topMargin: root.contentItem.KirigamiLayouts.FormData.buddyFor.y + layout.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.height/2 - label.height/2 + impl.topPadding
         }
-        visible: text.length > 0 && !impl.formLayout.__collapsed
+        visible: text.length > 0 && !impl.formLayout.__collapsed && !root.forceExpandedContents
         Primitives.MnemonicData.enabled: {
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
                 if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
@@ -52,9 +52,13 @@ FT.FormEntry {
             sequence: label.Primitives.MnemonicData.sequence
             onActivated: {
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
+                buddy.forceActiveFocus(Qt.ShortcutFocusReason);
 
-                const buttonBuddy = buddy as T.AbstractButton;
-                buttonBuddy.animateClick();
+                if (buddy instanceof T.AbstractButton) {
+                    buddy.animateClick();
+                } else if (buddy instanceof T.ComboBox) {
+                    buddy.popup.open();
+                }
             }
         }
         TapHandler {
@@ -82,8 +86,10 @@ FT.FormEntry {
             left: parent.left
             top: parent.top
             bottom: parent.bottom
+            leftMargin: impl.formLayout.__collapsed || root.forceExpandedContents ? padding : formGroup?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
         }
-        width: layout.contentItem?.Layout.fillWidth ? parent.width : Math.min(implicitWidth, parent.width)
+
+        width: layout.contentItem?.Layout.fillWidth ? parent.width - anchors.leftMargin : Math.min(implicitWidth, parent.width)
         implicitWidth: mainLayout.implicitWidth + leftPadding + rightPadding
         implicitHeight: mainLayout.implicitHeight + topPadding + bottomPadding
         leftPadding: Platform.Units.largeSpacing
@@ -102,6 +108,20 @@ FT.FormEntry {
                 candidate = candidate.parent
             }
             console.warn("Warning: FormEntry not inside a Form")
+            return null
+        }
+        readonly property Item formGroup: {
+            let candidate = root.parent;
+            if (!candidate) {
+                return null;
+            }
+            while (candidate) {
+                if (candidate instanceof FormGroup) {
+                    return candidate;
+                }
+                candidate = candidate.parent
+            }
+            console.warn("Warning: FormEntry not inside a FormGroup")
             return null
         }
 
@@ -129,7 +149,7 @@ FT.FormEntry {
                 header: QQC.Label {
                     id: titleLabel
                     topPadding: Platform.Units.largeSpacing
-                    visible: impl.formLayout.__collapsed && text.length > 0
+                    visible: (impl.formLayout.__collapsed  || root.forceExpandedContents) && text.length > 0
                //     Accessible.labelFor: visible && root.contentItem ? root.contentItem : null
                     text: label.Primitives.MnemonicData.richTextLabel
                 }

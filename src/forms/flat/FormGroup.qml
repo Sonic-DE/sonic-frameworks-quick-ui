@@ -64,7 +64,7 @@ FT.FormGroup {
                 id: innerLayout
                 anchors {
                     fill: parent
-                    leftMargin: root.parent.parent.__collapsed ? 0 : root.__assignedWidthForLabels
+                  //  leftMargin: root.parent.parent.__collapsed ? 0 : root.__assignedWidthForLabels
                 }
                 property real labelWidth: 0
                 // Consider also invisible items when

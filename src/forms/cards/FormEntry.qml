@@ -34,7 +34,7 @@ FT.FormEntry {
             rightMargin: -impl.leftPadding + Platform.Units.largeSpacing
             topMargin: root.contentItem.KirigamiLayouts.FormData.buddyFor.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.height/2 - label.height/2 + contentItemWrapper.y + impl.topPadding
         }
-        visible: text.length > 0 && !impl.formLayout.__collapsed
+        visible: text.length > 0 && !impl.formLayout.__collapsed && !root.forceExpandedContents
         Primitives.MnemonicData.enabled: {
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
                 if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
@@ -56,9 +56,13 @@ FT.FormEntry {
             sequence: label.Primitives.MnemonicData.sequence
             onActivated: {
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
+                buddy.forceActiveFocus(Qt.ShortcutFocusReason);
 
-                const buttonBuddy = buddy as T.AbstractButton;
-                buttonBuddy.animateClick();
+                if (buddy instanceof T.AbstractButton) {
+                    buddy.animateClick();
+                } else if (buddy instanceof T.ComboBox) {
+                    buddy.popup.open();
+                }
             }
         }
     }
@@ -77,7 +81,7 @@ FT.FormEntry {
         implicitHeight: mainLayout.implicitHeight + topPadding + bottomPadding
         padding: Platform.Units.largeSpacing + Platform.Units.smallSpacing
 
-        leftPadding: impl.formLayout.__collapsed ? padding : root.parent?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
+        leftPadding: impl.formLayout.__collapsed || root.forceExpandedContents ? padding : root.parent?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
 
         readonly property bool nextIsFormEntry: root.parent?.visibleChildren[root.parent.visibleChildren.indexOf(root) + 1] instanceof FormEntry ?? false
         readonly property bool prevIsFormEntry: root.parent?.visibleChildren[root.parent.visibleChildren.indexOf(root) - 1] instanceof FormEntry ?? false
@@ -122,7 +126,7 @@ FT.FormEntry {
                 id: inlineLabel
                 Layout.fillWidth: true
                 Layout.columnSpan: mainLayout.columns
-                visible: text.length > 0 && impl.formLayout.__collapsed
+                visible: (text.length > 0 || root.forceExpandedContents) && impl.formLayout.__collapsed
                 text: label.Primitives.MnemonicData.richTextLabel
                 wrapMode: Text.WordWrap
                 Accessible.name: label.Primitives.MnemonicData.plainTextLabel
