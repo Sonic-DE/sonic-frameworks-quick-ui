@@ -26,7 +26,7 @@ QtObject {
         return style;
     }
 
-    /*! @property kirigami::ApplicationHeaderStyle::NavigationButtons */
+    /* @property kirigami::ApplicationHeaderStyle::NavigationButtons */
     property int showNavigationButtons: (!Platform.Settings.isMobile || Qt.platform.os === "ios")
         ? (KC.ApplicationHeaderStyle.ShowBackButton | KC.ApplicationHeaderStyle.ShowForwardButton)
         : KC.ApplicationHeaderStyle.NoNavigationButtons
@@ -37,7 +37,7 @@ QtObject {
     // "pushed" back when scrolling using the
     // touch screen
     property bool hideWhenTouchScrolling: false
-    /*!
+    /*
      * If true, when any kind of toolbar is shown, the drawer handles will be shown inside the toolbar, if they're present
      */
     property bool canContainHandles: true
