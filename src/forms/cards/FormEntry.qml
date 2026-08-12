@@ -140,10 +140,6 @@ FT.FormEntry {
             }
             QQC.Control {
                 id: contentItemWrapper
-                LayoutMirroring.childrenInherit: true
-                LayoutMirroring.enabled: contentItem instanceof QQC.Switch
-                        ? Qt.application.layoutDirection === Qt.LeftToRight
-                        : Qt.application.layoutDirection === Qt.RightToLeft
 
                 leftPadding: 0
                 rightPadding: 0
@@ -155,10 +151,12 @@ FT.FormEntry {
                 visible: contentItem
                 contentItem: root.contentItem
                 Binding {
-                    when: (contentItemWrapper.contentItem instanceof QQC.Switch) && (contentItemWrapper.contentItem?.contentItem ?? false)
-                    target: contentItemWrapper.contentItem?.contentItem ?? null
+                    when: contentItemWrapper.contentItem instanceof QQC.Switch
+                    target: contentItemWrapper.contentItem
                     property: "LayoutMirroring.enabled"
-                    value: !contentItemWrapper.LayoutMirroring.enabled
+                    value: contentItemWrapper.contentItem instanceof QQC.Switch
+                        ? Qt.application.layoutDirection === Qt.LeftToRight
+                        : Qt.application.layoutDirection === Qt.RightToLeft
                 }
             }
 
