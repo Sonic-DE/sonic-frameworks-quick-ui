@@ -16,7 +16,7 @@ import org.kde.kirigami.forms.private.templates as FT
 FT.FormEntry {
     id: root
 
-    implicitWidth: Math.max(contentItem.implicitWidth +  Platform.Units.largeSpacing * 2, Platform.Units.gridUnit * 20 +  Platform.Units.largeSpacing * 2)
+    implicitWidth: Math.max(contentItemWrapper.implicitWidth +  Platform.Units.largeSpacing * 2, Platform.Units.gridUnit * 20 +  Platform.Units.largeSpacing * 2)
     implicitHeight: impl.implicitHeight
 
     Layout.fillWidth: true
@@ -141,11 +141,12 @@ FT.FormEntry {
             QQC.Control {
                 id: contentItemWrapper
 
-                leftPadding: 0
-                rightPadding: 0
-                topPadding: 0
-                bottomPadding: 0
-                Layout.fillWidth: root.contentItem.Layout.fillWidth
+                padding: 0
+                implicitWidth: contentItem.Layout.preferredWidth > 0 ? contentItem.Layout.preferredWidth : contentItem.implicitWidth
+                Layout.fillWidth: contentItem.Layout.fillWidth
+                Layout.minimumWidth: contentItem.Layout.minimumWidth
+                Layout.preferredWidth: contentItem.Layout.preferredWidth
+                Layout.maximumWidth: contentItem.Layout.maximumWidth
 
                 Layout.alignment: Qt.AlignVCenter
                 visible: contentItem
