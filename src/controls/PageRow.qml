@@ -1141,6 +1141,7 @@ QT.Control {
 
                         // pop every page that isn't visible and at the top of the stack
                         while (lastItem && columnView.trailingVisibleItem &&
+                            columnView.currentIndex !== columnView.contentChildren.length - 1 &&
                             lastItem !== columnView.trailingVisibleItem && columnView.containsItem(lastItem)) {
                             root.pop();
                         }
