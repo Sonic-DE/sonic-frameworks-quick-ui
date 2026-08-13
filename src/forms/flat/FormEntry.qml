@@ -32,7 +32,7 @@ FT.FormEntry {
             rightMargin: Platform.Units.largeSpacing
             topMargin: root.contentItem.parent.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.y + layout.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.height/2 - label.height/2
         }
-        visible: text.length > 0 && !mainLayout.formLayout.__collapsed && !root.forceExpandedContents
+        visible: text.length > 0 && !mainLayout.formLayout.__collapsed && !root.fullWidth
         Primitives.MnemonicData.enabled: {
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
                 if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
@@ -88,7 +88,7 @@ FT.FormEntry {
             right: parent.right
             top: parent.top
             bottom: parent.bottom
-            leftMargin: mainLayout.formLayout.__collapsed || root.forceExpandedContents ? padding : formGroup?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
+            leftMargin: mainLayout.formLayout.__collapsed || root.fullWidth ? padding : formGroup?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
         }
 
         spacing: Platform.Units.smallSpacing
@@ -155,7 +155,7 @@ FT.FormEntry {
                 id: titleLabel
                 Layout.fillWidth: true
                 topPadding: Platform.Units.largeSpacing
-                visible: (mainLayout.formLayout.__collapsed  || root.forceExpandedContents) && text.length > 0
+                visible: (mainLayout.formLayout.__collapsed  || root.fullWidth) && text.length > 0
                 text: label.Primitives.MnemonicData.richTextLabel
             }
 
