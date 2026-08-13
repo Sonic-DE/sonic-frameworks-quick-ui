@@ -116,7 +116,11 @@ Item {
 
             root.__collapsed = Math.max(implicitWidth, twinImplicitWidth) > root.width;
         }
-        anchors.centerIn: parent
+        anchors {
+            top: parent.top
+            topMargin: Platform.Units.largeSpacing
+            horizontalCenter: parent.horizontalCenter
+        }
 
         width: root.__collapsed
                 ? Math.min(implicitWidth, parent.width, Platform.Units.gridUnit * 30)
