@@ -30,9 +30,9 @@ FT.FormEntry {
             top: parent.top
             right: mainLayout.left
             rightMargin: Platform.Units.largeSpacing
-            topMargin: root.contentItem.parent.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.y + layout.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.height/2 - label.height/2
+            topMargin: root.contentItem?.parent.y + root.contentItem?.KirigamiLayouts.FormData.buddyFor.y + layout.y + root.contentItem?.KirigamiLayouts.FormData.buddyFor.height/2 - label.height/2 ?? 0
         }
-        visible: text.length > 0 && !mainLayout.formLayout.__collapsed && !root.fullWidth
+        visible: text.length > 0 && (!mainLayout.formLayout?.__collapsed ?? true) && !root.fullWidth
         Primitives.MnemonicData.enabled: {
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
                 if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
@@ -53,6 +53,9 @@ FT.FormEntry {
             sequence: label.Primitives.MnemonicData.sequence
             onActivated: {
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
+                if (!buddy) {
+                    return;
+                }
                 buddy.forceActiveFocus(Qt.ShortcutFocusReason);
 
                 if (buddy instanceof T.AbstractButton) {
@@ -68,6 +71,9 @@ FT.FormEntry {
                     return;
                 }
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
+                if (!buddy) {
+                    return;
+                }
                 buddy.forceActiveFocus(Qt.ShortcutFocusReason);
                 root.clicked();
             }
@@ -76,9 +82,9 @@ FT.FormEntry {
 
     // Replace with Accessible.labelFor once QTBUG-146127 is fixed
     Binding {
-        target: root.contentItem.Accessible
+        target: root.contentItem?.Accessible ?? null
         property: "labelledBy"
-        value: label.visible ? label : layout.header
+        value: label.visible ? label : titleLabel
     }
 
     RowLayout {
@@ -88,7 +94,7 @@ FT.FormEntry {
             right: parent.right
             top: parent.top
             bottom: parent.bottom
-            leftMargin: mainLayout.formLayout.__collapsed || root.fullWidth ? padding : formGroup?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
+            leftMargin: !mainLayout.formLayout || mainLayout.formLayout.__collapsed || root.fullWidth || !formGroup ? padding : formGroup.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
         }
 
         spacing: Platform.Units.smallSpacing
@@ -133,20 +139,20 @@ FT.FormEntry {
         ColumnLayout {
             id: layout
             Layout.fillWidth: true
-            Layout.minimumWidth: contentItem?.Layout.minimumWidth
+            Layout.minimumWidth: root.contentItem?.Layout.minimumWidth ?? 0
             Layout.preferredWidth: {
-                if (!contentItem) {
+                if (!root.contentItem) {
                     return -1;
-                } else if (contentItem.Layout.preferredWidth > 0) {
-                    return contentItem.Layout.preferredWidth;
+                } else if (root.contentItem?.Layout.preferredWidth > 0) {
+                    return root.contentItem?.Layout.preferredWidth ?? -1;
                 }
-                return contentItem.implicitWidth;
+                return root.contentItem?.implicitWidth ?? 0;
             }
 
-            Layout.maximumWidth: contentItem?.Layout.maximumWidth
+            Layout.maximumWidth: root.contentItem?.Layout.maximumWidth ?? -1
 
             Binding {
-                readonly property bool firstEntry: root.parent.children[0] === root
+                readonly property bool firstEntry: root.parent?.children[0] === root
                 when: firstEntry
                 titleLabel.topPadding: 0
             }
@@ -155,7 +161,7 @@ FT.FormEntry {
                 id: titleLabel
                 Layout.fillWidth: true
                 topPadding: Platform.Units.largeSpacing
-                visible: (mainLayout.formLayout.__collapsed  || root.fullWidth) && text.length > 0
+                visible: ((mainLayout.formLayout?.__collapsed ?? true) || root.fullWidth) && text.length > 0
                 text: label.Primitives.MnemonicData.richTextLabel
             }
 
@@ -164,11 +170,11 @@ FT.FormEntry {
                 QQC.Control {
                     id: contentItemWrapper
                     padding: 0
-                    implicitWidth: contentItem.Layout.preferredWidth > 0 ? contentItem.Layout.preferredWidth : contentItem.implicitWidth
-                    Layout.fillWidth: contentItem.Layout.fillWidth
-                    Layout.minimumWidth: contentItem.Layout.minimumWidth
-                    Layout.preferredWidth: contentItem.Layout.preferredWidth
-                    Layout.maximumWidth: contentItem.Layout.maximumWidth
+                    implicitWidth: contentItem?.Layout.preferredWidth > 0 ? (contentItem?.Layout.preferredWidth ?? 0) : (contentItem?.implicitWidth ?? 0)
+                    Layout.fillWidth: contentItem?.Layout.fillWidth ?? false
+                    Layout.minimumWidth: contentItem?.Layout.minimumWidth ?? -1
+                    Layout.preferredWidth: contentItem?.Layout.preferredWidth ?? -1
+                    Layout.maximumWidth: contentItem?.Layout.maximumWidth ?? -1
                     contentItem: root.contentItem
                 }
                 RowLayout {
@@ -189,10 +195,10 @@ FT.FormEntry {
                 text: root.subtitle
                 leftPadding:
                     Application.layoutDirection === Qt.LeftToRight
-                    ? (root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing
+                    ? (root.contentItem?.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + root.contentItem?.KirigamiLayouts.FormData.buddyFor?.spacing
                     : padding
                 rightPadding: Application.layoutDirection === Qt.RightToLeft
-                    ? (root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing
+                    ? (root.contentItem?.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + root.contentItem?.KirigamiLayouts.FormData.buddyFor?.spacing
                     : padding
                 onLinkActivated: (link) => Qt.openUrlExternally(link)
                 HoverHandler {
