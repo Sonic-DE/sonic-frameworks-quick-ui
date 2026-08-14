@@ -169,8 +169,12 @@ FT.FormEntry {
                     Layout.maximumWidth: contentItem?.Layout.maximumWidth ?? -1
                     contentItem: root.contentItem
                 }
+
                 RowLayout {
                     id: trailingItems
+                    Layout.fillHeight: true
+                    Layout.maximumHeight: Infinity
+
                     Layout.minimumWidth: implicitWidth
                     visible: children.length > 0
                     spacing: Platform.Units.smallSpacing
