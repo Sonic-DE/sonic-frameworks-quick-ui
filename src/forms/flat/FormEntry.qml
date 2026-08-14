@@ -139,17 +139,9 @@ FT.FormEntry {
         ColumnLayout {
             id: layout
             Layout.fillWidth: true
-            Layout.minimumWidth: root.contentItem?.Layout.minimumWidth ?? 0
-            Layout.preferredWidth: {
-                if (!root.contentItem) {
-                    return -1;
-                } else if (root.contentItem?.Layout.preferredWidth > 0) {
-                    return root.contentItem?.Layout.preferredWidth ?? -1;
-                }
-                return root.contentItem?.implicitWidth ?? 0;
-            }
-
-            Layout.maximumWidth: root.contentItem?.Layout.maximumWidth ?? -1
+            Layout.minimumWidth: contentItemWrapper.Layout.minimumWidth
+            Layout.preferredWidth: contentItemWrapper.implicitWidth
+            Layout.maximumWidth: contentItemWrapper.Layout.maximumWidth
 
             Binding {
                 readonly property bool firstEntry: root.parent?.children[0] === root
@@ -166,6 +158,7 @@ FT.FormEntry {
             }
 
             RowLayout {
+                id: contentItemAndTrailingLayout
                 Layout.fillWidth: true
                 QQC.Control {
                     id: contentItemWrapper
@@ -173,7 +166,6 @@ FT.FormEntry {
                     implicitWidth: contentItem?.Layout.preferredWidth > 0 ? (contentItem?.Layout.preferredWidth ?? 0) : (contentItem?.implicitWidth ?? 0)
                     Layout.fillWidth: contentItem?.Layout.fillWidth ?? false
                     Layout.minimumWidth: contentItem?.Layout.minimumWidth ?? -1
-                    Layout.preferredWidth: contentItem?.Layout.preferredWidth ?? -1
                     Layout.maximumWidth: contentItem?.Layout.maximumWidth ?? -1
                     contentItem: root.contentItem
                 }
