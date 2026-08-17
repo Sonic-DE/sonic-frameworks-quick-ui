@@ -119,8 +119,9 @@ FT.FormEntry {
 
         contentItem: GridLayout {
             id: mainLayout
-            columnSpacing: Platform.Units.smallSpacing
-            rowSpacing: Platform.Units.smallSpacing
+            readonly property real spacing: Platform.Units.smallSpacing
+            columnSpacing: spacing
+            rowSpacing: spacing
             columns: 1 + leadingItems.visible + trailingItems.visible
             QQC.Label {
                 id: inlineLabel
@@ -135,7 +136,7 @@ FT.FormEntry {
                 id: leadingItems
                 Layout.rowSpan: subtitleLabel.visible ? 2 : 1
                 visible: children.length > 0 && width > 0
-                spacing: Platform.Units.smallSpacing
+                spacing: parent.spacing
                 children: root.leadingItems
             }
             QQC.Control {
@@ -167,7 +168,7 @@ FT.FormEntry {
                 Layout.minimumWidth: visible ? implicitWidth : 0
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                 visible: children.length > 0 && width > 0
-                spacing: Platform.Units.smallSpacing
+                spacing: parent.spacing
                 children: root.trailingItems
             }
 
