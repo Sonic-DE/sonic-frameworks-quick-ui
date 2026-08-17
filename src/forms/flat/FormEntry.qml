@@ -165,6 +165,7 @@ FT.FormEntry {
                 QQC.Control {
                     id: contentItemWrapper
                     padding: 0
+                    spacing: parent.spacing // Ensure that `contentItem.parent.spacing` works
                     implicitWidth: contentItem?.Layout.preferredWidth > 0 ? (contentItem?.Layout.preferredWidth ?? 0) : (contentItem?.implicitWidth ?? 0)
                     Layout.fillWidth: contentItem?.Layout.fillWidth ?? false
                     Layout.minimumWidth: contentItem?.Layout.minimumWidth ?? -1
