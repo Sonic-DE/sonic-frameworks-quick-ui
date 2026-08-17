@@ -133,11 +133,12 @@ FT.FormEntry {
         RowLayout {
             id: leadingItems
             visible: children.length > 0
-            spacing: Platform.Units.smallSpacing
+            spacing: parent.spacing
             children: root.leadingItems
         }
         ColumnLayout {
             id: layout
+            spacing: parent.spacing
             Layout.fillWidth: true
             Layout.minimumWidth: contentItemWrapper.Layout.minimumWidth
             Layout.preferredWidth: contentItemWrapper.implicitWidth
@@ -160,6 +161,7 @@ FT.FormEntry {
             RowLayout {
                 id: contentItemAndTrailingLayout
                 Layout.fillWidth: true
+                spacing: parent.spacing
                 QQC.Control {
                     id: contentItemWrapper
                     padding: 0
@@ -177,7 +179,7 @@ FT.FormEntry {
 
                     Layout.minimumWidth: implicitWidth
                     visible: children.length > 0
-                    spacing: Platform.Units.smallSpacing
+                    spacing: parent.spacing
                     children: root.trailingItems
                 }
             }
