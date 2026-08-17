@@ -143,6 +143,7 @@ FT.FormEntry {
                 id: contentItemWrapper
 
                 padding: 0
+                spacing: parent.spacing // Ensure that `contentItem.parent.spacing` works
                 implicitWidth: contentItem.Layout.preferredWidth > 0 ? contentItem.Layout.preferredWidth : contentItem.implicitWidth
                 Layout.fillWidth: contentItem.Layout.fillWidth
                 Layout.minimumWidth: contentItem.Layout.minimumWidth
