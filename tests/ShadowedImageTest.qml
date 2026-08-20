@@ -29,7 +29,7 @@ Kirigami.ApplicationWindow {
 
                 color: Kirigami.Theme.highlightColor
 
-                source: Qt.url("file:///usr/share/wallpapers/Next/contents/images/1024x768.png")
+                source: Qt.url("file:///usr/share/wallpapers/Silver/contents/images/1280x800.png")
 
                 radius: radiusSlider.value
 

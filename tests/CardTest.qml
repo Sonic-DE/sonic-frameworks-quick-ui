@@ -15,7 +15,7 @@ Item {
         banner.title: "Card"
         banner.titleIcon: "document-new"
         banner.titleAlignment: alignCombo.currentValue
-        banner.source: "/usr/share/wallpapers/Next/contents/screenshot.png"
+        banner.source: "/usr/share/wallpapers/Silver/contents/screenshot.png"
 
         contentItem: Label {
             text: "Card Contents"
