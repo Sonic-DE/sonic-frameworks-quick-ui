@@ -172,6 +172,32 @@ TestCase {
         AppWindowLoaderComponent {}
     }
 
+    component PlainWindowComponent : Window {
+        property alias drawer: drawer
+
+        width: 200
+        height: 160
+        visible: true
+
+        Kirigami.OverlayDrawer {
+            id: drawer
+        }
+    }
+
+    Component {
+        id: plainWindowComponent
+        PlainWindowComponent {}
+    }
+
+    function test_maximumSizeInPlainWindow() {
+        const plainWindow = createTemporaryObject(plainWindowComponent, this);
+        verify(plainWindow);
+
+        compare(plainWindow.drawer.maximumSize, Math.round(plainWindow.width * 0.8));
+        plainWindow.drawer.edge = Qt.BottomEdge;
+        compare(plainWindow.drawer.maximumSize, Math.round(plainWindow.height * 0.5));
+    }
+
     function test_reparentingFromLoader_data() {
         return [
             { tag: "item", component: appItemLoaderComponent },

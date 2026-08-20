@@ -217,12 +217,13 @@ T.Drawer {
       the window height
     */
     property real maximumSize: {
+        const containingWindow = root.parent ? root.parent.Window.window : null;
         switch (edge) {
         case Qt.TopEdge:
         case Qt.BottomEdge:
-            return Math.round(Math.min(T.ApplicationWindow.window.height * 0.5, Platform.Units.gridUnit * 15));
+            return Math.round(Math.min(containingWindow ? containingWindow.height * 0.5 : Infinity, Platform.Units.gridUnit * 15));
         default:
-            return Math.round(Math.min(T.ApplicationWindow.window.width * 0.8, Platform.Units.gridUnit * 25));
+            return Math.round(Math.min(containingWindow ? containingWindow.width * 0.8 : Infinity, Platform.Units.gridUnit * 25));
         }
     }
 
