@@ -51,6 +51,7 @@ else()
     set(HAVE_QTGUI_OPENGL 0)
 endif()
 add_feature_info(QtGuiOpenGL HAVE_QTGUI_OPENGL "QtGui built with support for OpenGL")
+set(AUTOMOC_MOC_OPTIONS -Muri=org.kde.kirigami)
 
 if(NOT BUILD_SHARED_LIBS)
     add_definitions(-DKIRIGAMI_BUILD_TYPE_STATIC)
@@ -185,4 +186,5 @@ ecm_feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 configure_file(qmllint.ini.in ${CMAKE_SOURCE_DIR}/.qmllint.ini)
 
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
+
 
