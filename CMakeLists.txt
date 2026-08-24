@@ -70,6 +70,7 @@ include(ECMGenerateHeaders)
 include(CMakePackageConfigHelpers)
 include(ECMPoQmTools)
 include(ECMFindQmlModule)
+include(KDECMakeSettings)
 include(KDEGitCommitHooks)
 include(ECMQtDeclareLoggingCategory)
 include(KDEPackageAppTemplates)
@@ -185,3 +186,4 @@ ecm_feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 configure_file(qmllint.ini.in ${CMAKE_SOURCE_DIR}/.qmllint.ini)
 
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
+
