@@ -78,30 +78,32 @@ Item {
 
     ColumnLayout {
         id: layout
-        property real labelWidth: 0
-        property real twinImplicitWidth: 0
-        onImplicitWidthChanged: relayoutLabels()
-        function relayoutLabels() {
+        // Label changes must update alignment even when implicit geometry stays the same.
+        readonly property real labelWidth: {
             let w = 0;
-            for (let entry of children) {
+            for (const entry of children) {
                 w = Math.max(w, entry?.__maxTextLabelWidth ?? 0);
             }
 
             if (root.Forms.FormAlignmentGroup.group) {
-                for (let form of root.Forms.FormAlignmentGroup.group.forms) {
+                for (const form of root.Forms.FormAlignmentGroup.group.forms) {
                     if (!(form instanceof Form) || !form.visible) {
                         continue;
                     }
-                    for (let entry of form.entries) {
+                    for (const entry of form.entries) {
                         w = Math.max(w, entry?.__maxTextLabelWidth ?? 0);
                     }
                 }
             }
-
-            labelWidth = w;
+            return w;
+        }
+        property real twinImplicitWidth: 0
+        onLabelWidthChanged: relayoutLabels()
+        onImplicitWidthChanged: relayoutLabels()
+        function relayoutLabels() {
             for (let entry of children) {
                 if ("__assignedWidthForLabels" in entry) {
-                    entry.__assignedWidthForLabels = Math.round(w);
+                    entry.__assignedWidthForLabels = Math.round(labelWidth);
                 }
             }
 

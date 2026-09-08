@@ -57,17 +57,21 @@ FT.FormGroup {
             Layout.fillHeight: true
             Layout.preferredWidth: innerLayout.implicitWidthWithInvisible + root.__assignedWidthForLabels
             Layout.preferredHeight: innerLayout.implicitHeight
-            property real labelWidth: 0
+            readonly property real labelWidth: {
+                let w = 0;
+                for (const entry of children) {
+                    w = Math.max(w, entry?.__textLabelWidth ?? 0);
+                }
+                return w;
+            }
             // Consider also invisible items when
             property real implicitWidthWithInvisible: 0
             onImplicitWidthChanged: {
                 let w = 0;
-                implicitWidthWithInvisible = 0
-                for (let entry of children) {
-                    w = Math.max(w, entry?.__textLabelWidth ?? 0);
-                    implicitWidthWithInvisible = Math.max(implicitWidthWithInvisible, entry.implicitWidth, entry.Layout.preferredWidth)
+                for (const entry of children) {
+                    w = Math.max(w, entry.implicitWidth, entry.Layout.preferredWidth);
                 }
-                labelWidth = w;
+                implicitWidthWithInvisible = w;
             }
             spacing: Platform.Units.smallSpacing
         }
