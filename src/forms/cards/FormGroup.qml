@@ -45,15 +45,14 @@ FT.FormGroup {
             leftInset: rightInset
             contentItem: ColumnLayout {
                 id: innerLayout
-                property real labelWidth: 0
-                property real __assignedWidthForLabels: 0
-                onImplicitWidthChanged: {
+                readonly property real labelWidth: {
                     let w = 0;
-                    for (let entry of children) {
+                    for (const entry of children) {
                         w = Math.max(w, entry?.__textLabelWidth ?? 0);
                     }
-                    labelWidth = w;
+                    return w;
                 }
+                property real __assignedWidthForLabels: 0
                 spacing: 0
             }
         }
