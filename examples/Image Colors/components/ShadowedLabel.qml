@@ -8,14 +8,16 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls as QQC2
-import Qt5Compat.GraphicalEffects as GE
+import QtQuick.Effects as Effects
 
 QQC2.Label {
-    layer.effect: GE.DropShadow {
-        verticalOffset: 1
-        radius: 4.0
-        samples: radius * 2 + 1
-        spread: 0.35
-        color: "black"
+    layer.effect: Effects.MultiEffect {
+        shadowEnabled: true
+        shadowHorizontalOffset: 0
+        shadowVerticalOffset: 1
+        shadowBlur: 1
+        blurMax: 4
+        shadowScale: 1
+        shadowColor: "black"
     }
 }
