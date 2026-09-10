@@ -130,7 +130,7 @@ public:
     using Watcher = PlatformTheme *;
     QList<Watcher> watchers;
 
-    qreal frameContrast = DefaultFrameContrast;
+    qreal frameContrast;
 
     inline void setColorSet(PlatformTheme *sender, PlatformTheme::ColorSet set)
     {
@@ -307,6 +307,7 @@ public:
         , useAlternateBackgroundColor(false)
         , colorSet(PlatformTheme::Window)
         , colorGroup(PlatformTheme::Active)
+        , frameContrast(DefaultFrameContrast)
     {
     }
 
@@ -417,6 +418,8 @@ public:
     // to save space.
     uint8_t colorSet : 4;
     uint8_t colorGroup : 4;
+
+    float frameContrast;
 
     // Ensure the above assumption holds. Should this static assert fail, the
     // bit size above needs to be adjusted.
@@ -744,6 +747,8 @@ void PlatformTheme::setFixedWidthFont(const QFont &font)
 void PlatformTheme::setFrameContrast(qreal contrast)
 {
     PlatformThemeChangeTracker tracker(this, PlatformThemeChangeTracker::PropertyChange::FrameContrast);
+    d->frameContrast = contrast;
+
     if (d->data) {
         d->data->setFrameContrast(this, contrast);
     }
@@ -751,7 +756,7 @@ void PlatformTheme::setFrameContrast(qreal contrast)
 
 qreal PlatformTheme::frameContrast() const
 {
-    return d->data ? d->data->frameContrast : DefaultFrameContrast;
+    return d->data ? d->data->frameContrast : d->frameContrast;
 }
 
 qreal PlatformTheme::lightFrameContrast() const
@@ -1095,6 +1100,7 @@ void PlatformTheme::update()
 
         d->data->setColorSet(this, static_cast<ColorSet>(d->colorSet));
         d->data->setColorGroup(this, static_cast<ColorGroup>(d->colorGroup));
+        d->data->setFrameContrast(this, d->frameContrast);
 
         // If we normally inherit but do not do so currently due to an override,
         // copy over the old colorSet to ensure we do not suddenly change to a
