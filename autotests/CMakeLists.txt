@@ -45,6 +45,7 @@ kirigami_add_tests(
     tst_delegates.qml
     tst_dialogs.qml
     tst_formlayout.qml
+    tst_formentry_sync.qml
     tst_globaldrawer.qml
     tst_headerfooterlayout.qml
     tst_icon.qml

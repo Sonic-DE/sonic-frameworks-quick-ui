@@ -16,7 +16,8 @@ import org.kde.kirigami.forms.private.templates as FT
 FT.FormEntry {
     id: root
 
-    implicitWidth: Math.max(contentItemWrapper.implicitWidth +  Platform.Units.largeSpacing * 2, Platform.Units.gridUnit * 20 +  Platform.Units.largeSpacing * 2)
+    implicitWidth: Math.max(contentItemWrapper.implicitWidth + Platform.Units.largeSpacing * 2,
+                            Math.min(mainLayout.implicitWidth, Platform.Units.gridUnit * 20 + Platform.Units.largeSpacing * 2))
     implicitHeight: mainLayout.implicitHeight
 
     Layout.fillWidth: true
@@ -94,7 +95,9 @@ FT.FormEntry {
             right: parent.right
             top: parent.top
             bottom: parent.bottom
-            leftMargin: !mainLayout.formLayout || mainLayout.formLayout.__collapsed || root.fullWidth || !formGroup ? padding : formGroup.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
+            leftMargin: !mainLayout.formLayout || mainLayout.formLayout.__collapsed || root.fullWidth || !mainLayout.formGroup
+                ? Platform.Units.largeSpacing
+                : mainLayout.formGroup.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
         }
 
         spacing: Platform.Units.smallSpacing
