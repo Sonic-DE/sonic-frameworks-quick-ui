@@ -174,12 +174,12 @@ Item {
 
             trailingItems: [
                 QQC2.ToolButton {
-                    visible: typeof(delegate.modelData.ocsUsername) !== "undefined" && modelData.ocsUsername.length > 0
+                    visible: typeof(delegate.modelData.ocsUsername) !== "undefined" && delegate.modelData.ocsUsername.length > 0
                     icon.name: "get-hot-new-stuff-symbolic"
                     QQC2.ToolTip.delay: Platform.Units.toolTipDelay
                     QQC2.ToolTip.visible: hovered
-                    QQC2.ToolTip.text: qsTr("Visit %1's KDE Store page").arg(modelData.name)
-                    onClicked: Qt.openUrlExternally("https://store.kde.org/u/%1".arg(modelData.ocsUsername))
+                    QQC2.ToolTip.text: qsTr("Visit %1's KDE Store page").arg(delegate.modelData.name)
+                    onClicked: Qt.openUrlExternally("https://store.kde.org/u/%1".arg(delegate.modelData.ocsUsername))
                 },
                 QQC2.ToolButton {
                     visible: typeof(delegate.modelData.webAddress) !== "undefined" && delegate.modelData.webAddress.length > 0
@@ -265,21 +265,21 @@ Item {
                     icon.name: "globe-symbolic"
                     text: qsTr("Homepage")
                     onTriggered: {
-                        Qt.openUrlExternally(aboutData.homepage)
+                        Qt.openUrlExternally(aboutItem.aboutData.homepage)
                     }
                 }
                 triggerIcon.name: "open-link-symbolic"
-                visible: aboutData.homepage.toString().length > 0
+                visible: aboutItem.aboutData.homepage.toString().length > 0
             }
             KF.FormSeparator {
-                visible: aboutData.homepage.toString().length > 0
+                visible: aboutItem.aboutData.homepage.toString().length > 0
             }
             KF.FormAction {
                 action: KC.Action {
                     icon.name: "donate-symbolic"
                     text: qsTr("Donate")
                     onTriggered: {
-                        Qt.openUrlExternally(donateUrl + "?app=" + page.aboutData.componentName)
+                        Qt.openUrlExternally(aboutItem.donateUrl + "?app=" + aboutItem.aboutData.componentName)
                     }
                 }
                 triggerIcon.name: "open-link-symbolic"
@@ -293,7 +293,7 @@ Item {
                     icon.name: "applications-development-symbolic"
                     text: qsTr("Get Involved")
                     onTriggered: {
-                        Qt.openUrlExternally(getInvolvedUrl)
+                        Qt.openUrlExternally(aboutItem.getInvolvedUrl)
                     }
                 }
                 triggerIcon.name: "open-link-symbolic"
@@ -307,11 +307,11 @@ Item {
                     icon.name: "tools-report-bug-symbolic"
                     text: qsTr("Report a bug")
                     onTriggered: {
-                        if (aboutData.bugAddress !== "submit@bugs.kde.org") {
-                            Qt.openUrlExternally(aboutData.bugAddress)
+                        if (aboutItem.aboutData.bugAddress !== "submit@bugs.kde.org") {
+                            Qt.openUrlExternally(aboutItem.aboutData.bugAddress)
                         }
-                        const elements = aboutData.productName.split('/');
-                        let url = `https://bugs.kde.org/enter_bug.cgi?format=guided&product=${elements[0]}&version=${aboutData.version}`;
+                        const elements = aboutItem.aboutData.productName.split('/');
+                        let url = `https://bugs.kde.org/enter_bug.cgi?format=guided&product=${elements[0]}&version=${aboutItem.aboutData.version}`;
                         if (elements.length === 2) {
                             url += "&component=" + elements[1];
                         }
