@@ -168,6 +168,8 @@ KC.OverlayDrawer {
                 KP.ContextDrawerActionItem {
                     tAction: delegate.modelData
                     width: parent.width
+                    drawerCollapsed: root.collapsed
+                    onCloseDrawerRequested: root.drawerOpen = false
                 }
 
                 Repeater {
@@ -176,8 +178,10 @@ KC.OverlayDrawer {
 
                     delegate: KP.ContextDrawerActionItem {
                         width: parent.width
+                        drawerCollapsed: root.collapsed
                         leftPadding: Platform.Units.gridUnit
                         opacity: !root.collapsed
+                        onCloseDrawerRequested: root.drawerOpen = false
                     }
                 }
             }

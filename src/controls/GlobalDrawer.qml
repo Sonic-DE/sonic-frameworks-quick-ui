@@ -430,14 +430,14 @@ KC.OverlayDrawer {
 
         visible: kAction?.visible ?? true
 
-        KP.GlobalDrawerActionItem {
-            Layout.fillWidth: true
+        BaseGlobalDrawerActionItem {
             Platform.Theme.colorSet: !root.modal && !root.collapsed && delegate.withSections
                 ? Platform.Theme.Window : parent.Platform.Theme.colorSet
 
             visible: !delegate.isExpanded
 
             tAction: delegate.tAction
+            drawerCollapsed: root.collapsed
 
             onCheckedChanged: {
                 // move every checked item into view
@@ -500,10 +500,55 @@ KC.OverlayDrawer {
         }
     }
 
-    component NestedActionDelegate : KP.GlobalDrawerActionItem {
+    component BaseGlobalDrawerActionItem: KP.GlobalDrawerActionItem {
+        id: actionItem
+        drawerCollapsed: root.collapsed
+        Layout.fillWidth: true
+
+        onActionsMenuVisibleChanged: visible => {
+            if (visible) {
+                stackView.openSubMenu = actionItem.actionsMenu;
+            } else if (stackView.openSubMenu === actionItem.actionsMenu) {
+                stackView.openSubMenu = null;
+            }
+        }
+
+        onActionTriggered: {
+            if (hasChildren) {
+                if (root.collapsed) {
+                    if (actionsMenu.count > 0 && !actionsMenu.visible) {
+                        stackView.openSubMenu = actionsMenu;
+                        actionsMenu.popup(this, width, 0);
+                    }
+                } else {
+                    stackView.push(menuComponent, {
+                        model: kAction?.children ?? [],
+                        level: level + 1,
+                        current: tAction,
+                    });
+                }
+            } else if (root.resetMenuOnTriggered) {
+                root.resetMenu();
+            }
+        }
+
+        onHoveredChanged: {
+            if (!hovered) {
+                return;
+            }
+            if (stackView.openSubMenu) {
+                stackView.openSubMenu.visible = false;
+
+                if (actionsMenu.count > 0) {
+                    actionsMenu.popup(this, width, 0);
+                }
+            }
+        }
+    }
+
+    component NestedActionDelegate : BaseGlobalDrawerActionItem {
         required property bool withSections
 
-        Layout.fillWidth: true
         opacity: !root.collapsed
         leftPadding: withSections && !root.collapsed && !root.modal ? padding * 2 : padding * 4
     }
