@@ -12,7 +12,6 @@ import QtQuick.Layouts
 import QtQuick.Window
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
-import org.kde.kirigami.layouts as KL
 import org.kde.kirigami.forms as KF
 import org.kde.kirigami.controls as KC
 
