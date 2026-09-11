@@ -99,14 +99,14 @@ FT.FormEntry {
 
         spacing: Platform.Units.smallSpacing
 
-        readonly property Item formLayout: {
+        readonly property Form formLayout: {
             let candidate = root.parent;
             if (!candidate) {
                 return null;
             }
             while (candidate) {
                 if (candidate instanceof Form) {
-                    return candidate;
+                    return candidate as Form;
                 }
                 candidate = candidate.parent
             }

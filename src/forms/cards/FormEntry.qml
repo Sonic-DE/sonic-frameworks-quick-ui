@@ -89,11 +89,11 @@ FT.FormEntry {
         topPadding: prevIsFormEntry ? Platform.Units.largeSpacing : Platform.Units.largeSpacing + Platform.Units.smallSpacing
         bottomPadding: nextIsFormEntry ? Platform.Units.largeSpacing : Platform.Units.largeSpacing + Platform.Units.smallSpacing
 
-        readonly property Item formLayout: {
+        readonly property Form formLayout: {
             let candidate = root.parent
             while (candidate) {
                 if (candidate instanceof Form) {
-                    return candidate;
+                    return candidate as Form;
                 }
                 candidate = candidate.parent
             }
@@ -103,7 +103,7 @@ FT.FormEntry {
         hoverEnabled: !Platform.Settings.hasTransientTouchInput
 
         onClicked: {
-            if (!clickEnabled) {
+            if (!root.clickEnabled) {
                 return;
             }
             const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
