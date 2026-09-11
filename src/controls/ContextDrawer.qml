@@ -117,7 +117,7 @@ KC.OverlayDrawer {
     rightPadding: root.edge === Qt.RightEdge ? parent.SafeArea.margins.right : 0
     bottomPadding: parent.SafeArea.margins.bottom
 
-    property bool handleVisible: {
+    handleVisible: {
         if (typeof applicationWindow === "function") {
             const w = applicationWindow();
             if (w) {
