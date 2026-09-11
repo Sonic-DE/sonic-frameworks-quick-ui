@@ -162,8 +162,8 @@ FT.FormEntry {
                     target: contentItemWrapper.contentItem
                     property: "LayoutMirroring.enabled"
                     value: contentItemWrapper.contentItem instanceof QQC.Switch
-                        ? Qt.application.layoutDirection === Qt.LeftToRight
-                        : Qt.application.layoutDirection === Qt.RightToLeft
+                        ? Application.layoutDirection === Qt.LeftToRight
+                        : Application.layoutDirection === Qt.RightToLeft
                 }
             }
 
