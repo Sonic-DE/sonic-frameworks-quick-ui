@@ -34,7 +34,7 @@ FT.FormEntry {
         }
         visible: text.length > 0 && (!mainLayout.formLayout?.__collapsed ?? true) && !root.fullWidth
         Primitives.MnemonicData.enabled: {
-                const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
+                const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor as Item;
                 if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
                     // Only set mnemonic if the buddy doesn't already have one.
                     const buddyMnemonic = buddy.Primitives.MnemonicData;

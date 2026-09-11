@@ -83,7 +83,7 @@ QQC2.Page {
     readonly property bool isCurrentPage: KL.ColumnView.view
             ? (KL.ColumnView.index === KL.ColumnView.view.currentIndex && KL.ColumnView.view.parent.parent.currentItem === KL.ColumnView.view.parent)
             : (parent && parent instanceof QQC2.StackView
-                ? parent.currentItem === root
+                ? (parent as QQC2.StackView).currentItem === root
                 : true)
 
     /*!
@@ -138,7 +138,7 @@ QQC2.Page {
 
       \since 2.5
      */
-    readonly property Item globalToolBarItem: globalToolBar.item
+    readonly property Item globalToolBarItem: globalToolBar.item as Item
 
     /*!
       The style for the automatically generated global toolbar.
@@ -227,7 +227,7 @@ QQC2.Page {
     KL.ColumnView.globalHeader: Loader {
         id: globalToolBar
         z: 9999
-        Primitives.AlignedSize.height: item ? item.implicitHeight : 0
+        Primitives.AlignedSize.height: item ? (item as Item).implicitHeight : 0
 
         width: root.width
 
@@ -273,7 +273,7 @@ QQC2.Page {
         property bool pageComplete: false
 
         visible: active
-        height: visible ? bottomToolBar.item.implicitHeight : 0
+        height: visible ? (bottomToolBar.item as Item).implicitHeight : 0
 
         active: {
             // Important! Do not do anything until the page has been

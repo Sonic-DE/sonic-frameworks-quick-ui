@@ -28,7 +28,7 @@ FT.FormGroup {
         id: layout
         anchors.fill: parent
         property bool compactMargins: parentLayout.width >= parentLayout.parent.width
-        property ColumnLayout parentLayout: root.parent
+        property ColumnLayout parentLayout: root.parent as ColumnLayout
         spacing: Platform.Units.smallSpacing
 
         header: KC.Heading {
