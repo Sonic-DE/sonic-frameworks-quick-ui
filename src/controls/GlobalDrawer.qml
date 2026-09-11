@@ -516,7 +516,7 @@ KC.OverlayDrawer {
         onActionTriggered: {
             if (hasChildren) {
                 if (root.collapsed) {
-                    if (actionsMenu.count > 0 && !actionsMenu.visible) {
+                    if (actionsMenu.actions.length > 0 && !actionsMenu.visible) {
                         stackView.openSubMenu = actionsMenu;
                         actionsMenu.popup(this, width, 0);
                     }
