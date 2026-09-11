@@ -184,7 +184,7 @@ Item {
             required property int closeInterval
             required property string text
             required property string actionButtonText
-            required property QtObject callBackWrapper
+            required property CallBackWrapper callBackWrapper
 
             hoverEnabled: true
             // We force the delegate to be not visible when
@@ -272,11 +272,12 @@ Item {
             }
         }
     }
+    component CallBackWrapper: QtObject {
+        property var callBack
+    }
     Component {
         id: callBackWrapper
-        QtObject {
-            property var callBack
-        }
+        CallBackWrapper { }
     }
 }
 
