@@ -76,15 +76,13 @@ Item {
      */
     property int position: QQC2.ToolBar.Header
 
-    // These properties are items due to issues with multiple engine type registration
-    // The stronger types can probably be used after we depend on Qt 6.9
     /*!
      */
-    property /*Kirigami.PageRow*/ Item pageRow: __appWindow?.pageStack ?? null
+    property KirigamiControls.PageRow pageRow: __appWindow?.pageStack ?? null
 
     /*!
      */
-    property /*Kirigami.Page*/ Item page: pageRow?.currentItem as KirigamiControls.Page ?? null
+    property KirigamiControls.Page page: pageRow?.currentItem as KirigamiControls.Page ?? null
 
     /*!
      */
