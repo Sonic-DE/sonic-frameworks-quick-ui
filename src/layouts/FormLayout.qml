@@ -310,7 +310,7 @@ Item {
             if (!(item instanceof Repeater)) {
                 item.Layout.row = row;
                 item.Layout.column = 1;
-                row += root.wideMode && !item.KirigamiLayouts.FormData.isSection ? 1 : 2;
+                row += root.wideMode && !(item as Item).KirigamiLayouts.FormData.isSection ? 1 : 2;
             }
 
             // skip items that are already there
