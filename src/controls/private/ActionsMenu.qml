@@ -22,8 +22,35 @@ QQC2.Menu {
         visible: (action as KC.Action)?.visible ?? true
         height: visible ? implicitHeight : 0
     }
-    property Component loaderDelegate: Loader {
+    property Component loaderDelegate: FocusScope {
+        id: displayItem
+
         property T.Action action
+        property alias sourceComponent: displayLoader.sourceComponent
+
+        visible: (action as KC.Action)?.visible ?? true
+        implicitWidth: (displayLoader.item as Item)?.implicitWidth || displayLoader.initialWidth
+        implicitHeight: displayLoader.implicitHeight
+        height: visible ? implicitHeight : 0
+
+        Loader {
+            id: displayLoader
+
+            property alias action: displayItem.action
+            property real initialWidth: 0
+            focus: true
+
+            // Collapse only the menu row, not the loaded item's own height.
+            // Wait for loading to preserve its initial size before fitting the menu width.
+            onLoaded: {
+                initialWidth = implicitWidth;
+                // An item anchored to the Loader cannot provide an explicit height.
+                if (implicitHeight === 0 && (item as Item)?.implicitHeight > 0) {
+                    height = Qt.binding(() => (item as Item).implicitHeight);
+                }
+                width = Qt.binding(() => displayItem.width);
+            }
+        }
     }
     property T.Action parentAction
     property T.MenuItem parentItem
