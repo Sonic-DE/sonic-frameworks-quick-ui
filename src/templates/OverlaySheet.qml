@@ -167,7 +167,7 @@ T.Popup {
 
     Component.onCompleted: {
         Qt.callLater(() => {
-            if (!root.parent && typeof applicationWindow !== "undefined") {
+            if (!root.parent && typeof applicationWindow === "function") {
                 root.parent = applicationWindow().overlay
             }
         });
