@@ -47,6 +47,7 @@ kirigami_add_tests(
     tst_columnview.qml
     tst_delegates.qml
     tst_dialogs.qml
+    tst_dialogpositioning.qml
     tst_formlayout.qml
     tst_formentry_sync.qml
     tst_formlabelalignment.qml

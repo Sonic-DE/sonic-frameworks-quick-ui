@@ -298,9 +298,19 @@ T.Dialog {
     // we want to open the dialog in the center of the window, if possible
     parent: typeof applicationWindow === "function" ? applicationWindow().overlay : undefined
 
+    // Use the actual height, but defer it so positioning cannot feed back into
+    // the popup's current size update and cause a binding loop.
+    property real __heightForPositioning: implicitHeight
+    Binding {
+        target: root
+        property: "__heightForPositioning"
+        value: root.height
+        delayed: true
+    }
+
     // center dialog
     x: parent ? Math.round(((parent && parent.width) - width) / 2) : 0
-    y: parent ? Math.round(((parent && parent.height) - height) / 2) + Platform.Units.gridUnit * 2 * (1 - opacity) : 0 // move animation
+    y: parent ? Math.round(((parent && parent.height) - __heightForPositioning) / 2) + Platform.Units.gridUnit * 2 * (1 - opacity) : 0 // move animation
 
     // dialog enter and exit transitions
     enter: Transition {
