@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import QtTest
 import org.kde.kirigami.platform as Platform
@@ -64,11 +65,31 @@ TestCase {
         tryVerify(() => visibleTitles(entry) === 1);
     }
 
-    function test_flatFullWidthHasValidMargin() {
+    function test_flatEntryHasValidMargin_data() {
+        return [
+            {tag: "full-width", fullWidth: true, collapsed: false},
+            {tag: "collapsed", fullWidth: false, collapsed: true},
+            {tag: "label-aligned", fullWidth: false, collapsed: false},
+        ];
+    }
+
+    function test_flatEntryHasValidMargin(data) {
         failOnWarning(/ReferenceError: padding is not defined/);
         const form = createTemporaryObject(flatForm, testCase);
         verify(form);
         const entry = findChild(form, "entry");
+        entry.fullWidth = data.fullWidth;
+        if (data.collapsed) {
+            form.width = 1;
+        }
+        tryCompare(form, "__collapsed", data.collapsed);
+        const mainLayout = entry.children.find(child => child instanceof RowLayout);
+        verify(mainLayout);
+        if (data.fullWidth || data.collapsed) {
+            tryCompare(mainLayout.anchors, "leftMargin", 0);
+        } else {
+            tryVerify(() => mainLayout.anchors.leftMargin > 0);
+        }
         tryVerify(() => visibleTitles(entry) === 1);
     }
 
@@ -79,5 +100,10 @@ TestCase {
         entry.fullWidth = false;
         entry.contentItem.implicitWidth = 80;
         tryVerify(() => entry.implicitWidth < Platform.Units.gridUnit * 20);
+        tryCompare(entry, "implicitWidth", 80 + Platform.Units.largeSpacing * 2);
+        entry.contentItem.implicitWidth = 160;
+        tryCompare(entry, "implicitWidth", 160 + Platform.Units.largeSpacing * 2);
+        entry.contentItem.Layout.preferredWidth = Platform.Units.gridUnit * 30;
+        tryCompare(entry, "implicitWidth", Platform.Units.gridUnit * 30 + Platform.Units.largeSpacing * 2);
     }
 }
