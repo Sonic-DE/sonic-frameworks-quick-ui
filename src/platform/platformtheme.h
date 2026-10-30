@@ -15,6 +15,7 @@
 #include <qqmlregistration.h>
 
 #include "kirigamiplatform_export.h"
+#include "toolsarea.h"
 
 namespace Kirigami
 {
@@ -459,6 +460,19 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
      */
     Q_PROPERTY(qreal lightFrameContrast READ lightFrameContrast CONSTANT FINAL)
 
+    /*!
+     * \qmlattachedproperty ToolsArea Theme::toolsArea
+     *
+     * How the window's tools area (toolbars and main menu bar under the title bar) is
+     * drawn, as the platform gives it. The same object for every item.
+     */
+    /*!
+     * \property Kirigami::Platform::PlatformTheme::toolsArea
+     *
+     * How the window's tools area is drawn; filled by the platform plugin.
+     */
+    Q_PROPERTY(Kirigami::Platform::ToolsArea* toolsArea READ toolsArea CONSTANT FINAL)
+
 public:
     /*!
      * \value View Color set for item views, usually the lightest of all
@@ -547,6 +561,8 @@ public:
 
     qreal frameContrast() const;
     qreal lightFrameContrast() const;
+
+    ToolsArea* toolsArea() const;
 
     /*!
      * This will be used by desktopicon to fetch icons with KIconLoader.

@@ -9,6 +9,7 @@
 #include "basictheme_p.h"
 #include "platformpluginfactory.h"
 #include "stylehints.h"
+#include "toolsarea.h"
 
 #include <QDebug>
 #include <QDir>
@@ -764,6 +765,11 @@ qreal PlatformTheme::lightFrameContrast() const
     // This can be utilized to return full contrast
     // if high contrast accessibility setting is enabled
     return frameContrast() / 2.0;
+}
+
+ToolsArea* PlatformTheme::toolsArea() const
+{
+    return ToolsArea::instance();
 }
 
 // setters for QML clients
