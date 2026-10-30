@@ -224,7 +224,14 @@ QQC2.ApplicationWindow {
     LayoutMirroring.enabled: Application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    color: Platform.Theme.backgroundColor
+    // A translucent tools area shows what is behind the window: the window colour is then
+    // painted everywhere but there.
+    readonly property bool __translucentToolsArea: Platform.Theme.toolsArea.active && Platform.Theme.toolsArea.translucent
+    color: __translucentToolsArea ? "transparent" : Platform.Theme.backgroundColor
+    background: Platform.ToolsAreaWindowBackground {
+        visible: root.__translucentToolsArea
+        color: Platform.Theme.backgroundColor
+    }
 
     P.PassiveNotificationsManager {
         id: notificationsObject

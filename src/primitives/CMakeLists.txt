@@ -41,6 +41,7 @@ ecm_target_qml_sources(KirigamiPrimitives SOURCES
     IconPropertiesGroup.qml
     Separator.qml
     ShadowedImage.qml
+    ToolsAreaBackground.qml
 )
 
 set_target_properties(KirigamiPrimitives PROPERTIES
