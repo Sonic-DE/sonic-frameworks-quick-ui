@@ -73,16 +73,16 @@ Item {
     /*!
       \brief This property holds a link to a "Get Involved" page.
 
-      default: "https://community.kde.org/Get_Involved" when application id starts with "org.kde.", otherwise it is empty.
+      default: "https://github.com/Sonic-DE" when application id starts with "org.sonicde." or "org.kde.", otherwise it is empty.
      */
-    property url getInvolvedUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://community.kde.org/Get_Involved" : ""
+    property url getInvolvedUrl: /^org\.(sonicde|kde)\./.test(aboutData.desktopFileName) ? "https://github.com/Sonic-DE" : ""
 
     /*!
       \brief This property holds a link to a "Donate" page.
 
-      default: "https://kde.org/community/donations" when application id starts with "org.kde.", otherwise it is empty.
+      default: empty, as SonicDE has no donation page yet.
      */
-    property url donateUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://kde.org/community/donations" : ""
+    property url donateUrl: ""
 
     property bool _usePageStack: false
 

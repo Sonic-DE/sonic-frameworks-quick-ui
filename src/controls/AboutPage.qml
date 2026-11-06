@@ -71,7 +71,7 @@ ScrollablePage {
 
       \brief This property holds a link to a "Get Involved" page.
 
-      default: "https://community.kde.org/Get_Involved when your application id starts with "org.kde.", otherwise is empty
+      default: "https://github.com/Sonic-DE" when your application id starts with "org.sonicde." or "org.kde.", otherwise is empty
      */
     property alias getInvolvedUrl: aboutItem.getInvolvedUrl
 
@@ -81,7 +81,7 @@ ScrollablePage {
       \brief This property holds a link to a "Donate" page.
       \since 5.101
 
-      default: "https://kde.org/community/donations" when application id starts with "org.kde.", otherwise it is empty.
+      default: empty, as SonicDE has no donation page yet.
      */
     property alias donateUrl: aboutItem.donateUrl
 
