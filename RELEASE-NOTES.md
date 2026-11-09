@@ -2,10 +2,11 @@
 
 Sonic Frameworks Quick UI is the toolkit behind modern, adaptable SonicDE apps that look great on any screen size.
 
-## Unreleased
+## 6.31.0.2 (2026-11-10)
 
 - App toolbars at the top of a window can now blend with the title bar, see-through and blurred when the theme asks for it, updating as soon as the setting changes. Themes that don't use this look the same as before.
-- Behind the scenes: new toolkit pieces for app developers (`Theme.toolsArea`, `ToolsAreaBackground`, `ToolsAreaRegion`, `ToolsAreaWindowBackground`), with automatic tests.
+- The "Get Involved" links in About pages now lead to SonicDE on GitHub, and there's no donation link.
+- Behind the scenes: new toolkit pieces for app developers (`Theme.toolsArea`, `ToolsAreaBackground`, `ToolsAreaRegion`, `ToolsAreaWindowBackground`), with automatic tests, and repository tidying.
 
 ## 6.31.0 (2026-10-20)
 
