@@ -7,7 +7,6 @@ add_executable(qmltest qmltest.cpp actiondata.cpp toolsareacontrol.cpp)
 qt_add_qml_module(qmltest URI KirigamiTestUtils)
 target_link_libraries(qmltest PRIVATE Qt6::Qml Qt6::QuickTest Kirigami KirigamiPlatform)
 if (NOT QT6_IS_SHARED_LIBS_BUILD OR NOT BUILD_SHARED_LIBS)
-    target_link_libraries(qmltest PRIVATE KirigamiPolyfillplugin)
     qt6_import_qml_plugins(qmltest)
 endif()
 
@@ -61,6 +60,7 @@ kirigami_add_tests(
     tst_listskeynavigation.qml
     tst_menudialog.qml
     tst_mnemonicdata.qml
+    tst_nameutils.qml
     tst_navigationtabbar.qml
     tst_overlaysheet.qml
     tst_overlayzstacking.qml

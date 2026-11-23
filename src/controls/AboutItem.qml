@@ -84,6 +84,17 @@ Item {
      */
     property url donateUrl: ""
 
+    /*!
+      \brief This property defines whether to show "Libraries in use".
+
+      Set it to false when the about data describes a plugin rather than the
+      application itself.
+
+      default: \c true
+      \since 6.32
+     */
+    property bool showLibraries: true
+
     property bool _usePageStack: false
 
     /*!
@@ -127,44 +138,28 @@ Item {
             property bool hasAvatar: aboutItem.__hasAvatar(modelData)
 
 
-            leadingItems: Item {
+            leadingItems: KC.Avatar {
                 implicitWidth: Platform.Units.iconSizes.medium
                 implicitHeight: implicitWidth
-
-                Primitives.Icon {
-                    id: avatarIcon
-
-                    anchors.fill: parent
-
-                    fallback: "user"
-                    source: {
-                        if (delegate.hasAvatar && aboutItem.loadAvatars) {
-                            // Appending to the params of the url does not work, thus the search is set
-                            const url = new URL(delegate.modelData.avatarUrl);
-                            const params = new URLSearchParams(url.search);
-                            params.append("s", width);
-                            url.search = params.toString();
-                            return url;
-                        } else {
-                            return "user"
-                        }
+                name: delegate.modelData.name
+                source: {
+                    if (delegate.hasAvatar && aboutItem.loadAvatars) {
+                        // Appending to the params of the url does not work, thus the search is set
+                        const url = new URL(delegate.modelData.avatarUrl);
+                        const params = new URLSearchParams(url.search);
+                        params.append("s", width);
+                        url.search = params.toString();
+                        return url;
+                    } else {
+                        return "";
                     }
-                    visible: status !== Primitives.Icon.Loading
-                }
-
-                // So it's clear that something is happening while avatar images are loaded
-                QQC2.BusyIndicator {
-                    anchors.centerIn: parent
-                    implicitWidth: Platform.Units.iconSizes.medium
-                    implicitHeight: implicitWidth
-
-                    visible: avatarIcon.status === Primitives.Icon.Loading
-                    running: visible
                 }
             }
 
             contentItem: QQC2.Label {
                 readonly property bool withTask: typeof(delegate.modelData.task) !== "undefined" && delegate.modelData.task.length > 0
+                // Without a subtitle nothing else fills the row, which would push the name away from the avatar
+                Layout.fillWidth: true
                 text: delegate.modelData.name
                 wrapMode: Text.WordWrap
             }
@@ -228,8 +223,11 @@ Item {
                     source: aboutItem.aboutData.programLogo || Platform.Settings.applicationWindowIcon || aboutItem.aboutData.componentName
                 }
             }
-            KF.FormSeparator {}
+            KF.FormSeparator {
+                visible: copyrightEntry.subtitle.length > 0
+            }
             KF.FormEntry {
+                id: copyrightEntry
                 contentItem: QQC2.Label {
                     text: qsTr("Copyright")
                 }
@@ -241,7 +239,9 @@ Item {
 
         KF.FormGroup {
             title: qsTr("License")
+            visible: repLicenses.count > 0
             Repeater {
+                id: repLicenses
                 model: aboutItem.aboutData.licenses
                 delegate: KF.FormAction {
                     id: licenseLinkButton
@@ -249,7 +249,10 @@ Item {
                     action: KC.Action {
                         text: licenseLinkButton.modelData.name
                         onTriggered: {
-                            licenseSheet.text = licenseLinkButton.modelData.text
+                            // License texts are hard-wrapped at ~76 columns. Join each line with the
+                            // next one so paragraphs wrap to the sheet's width, but keep empty lines
+                            // and lines starting with whitespace (headings, list items) on their own.
+                            licenseSheet.text = licenseLinkButton.modelData.text.replace(/([^\r\n])\r?\n(?!\s)/g, "$1 ")
                             licenseSheet.title = licenseLinkButton.modelData.name
                             licenseSheet.open()
                         }
@@ -259,6 +262,31 @@ Item {
         }
 
         KF.FormGroup {
+            id: linksGroup
+
+            readonly property bool hasHomepage: aboutItem.aboutData.homepage.toString().length > 0
+            readonly property bool hasDonate: aboutItem.donateUrl.toString().length > 0
+            readonly property bool hasGetInvolved: aboutItem.getInvolvedUrl.toString().length > 0
+            readonly property string bugUrl: {
+                const bugAddress = aboutItem.aboutData.bugAddress ?? "";
+                if (bugAddress !== "submit@bugs.kde.org") {
+                    // A plain email address can only be opened with a mailto: scheme.
+                    if (bugAddress.includes("@") && !bugAddress.includes(":")) {
+                        return "mailto:" + bugAddress;
+                    }
+                    return bugAddress;
+                }
+                const elements = (aboutItem.aboutData.productName ?? "").split('/');
+                let url = `https://bugs.kde.org/enter_bug.cgi?format=guided&product=${elements[0]}&version=${aboutItem.aboutData.version}`;
+                if (elements.length === 2) {
+                    url += "&component=" + elements[1];
+                }
+                return url;
+            }
+            readonly property bool hasBugUrl: bugUrl.length > 0
+
+            visible: hasHomepage || hasDonate || hasGetInvolved || hasBugUrl
+
             KF.FormAction {
                 action: KC.Action {
                     icon.name: "globe-symbolic"
@@ -268,10 +296,10 @@ Item {
                     }
                 }
                 triggerIcon.name: "open-link-symbolic"
-                visible: aboutItem.aboutData.homepage.toString().length > 0
+                visible: linksGroup.hasHomepage
             }
             KF.FormSeparator {
-                visible: aboutItem.aboutData.homepage.toString().length > 0
+                visible: linksGroup.hasHomepage && (linksGroup.hasDonate || linksGroup.hasGetInvolved || linksGroup.hasBugUrl)
             }
             KF.FormAction {
                 action: KC.Action {
@@ -282,10 +310,10 @@ Item {
                     }
                 }
                 triggerIcon.name: "open-link-symbolic"
-                visible: aboutItem.donateUrl.toString().length > 0
+                visible: linksGroup.hasDonate
             }
             KF.FormSeparator {
-                visible: aboutItem.donateUrl.toString().length > 0
+                visible: linksGroup.hasDonate && (linksGroup.hasGetInvolved || linksGroup.hasBugUrl)
             }
             KF.FormAction {
                 action: KC.Action {
@@ -296,35 +324,29 @@ Item {
                     }
                 }
                 triggerIcon.name: "open-link-symbolic"
-                visible: aboutItem.getInvolvedUrl.toString().length > 0
+                visible: linksGroup.hasGetInvolved
             }
             KF.FormSeparator {
-                visible: aboutItem.getInvolvedUrl.toString().length > 0
+                visible: linksGroup.hasGetInvolved && linksGroup.hasBugUrl
             }
             KF.FormAction {
                 action: KC.Action {
                     icon.name: "tools-report-bug-symbolic"
                     text: qsTr("Report a bug")
                     onTriggered: {
-                        if (aboutItem.aboutData.bugAddress !== "submit@bugs.kde.org") {
-                            Qt.openUrlExternally(aboutItem.aboutData.bugAddress)
-                        }
-                        const elements = aboutItem.aboutData.productName.split('/');
-                        let url = `https://bugs.kde.org/enter_bug.cgi?format=guided&product=${elements[0]}&version=${aboutItem.aboutData.version}`;
-                        if (elements.length === 2) {
-                            url += "&component=" + elements[1];
-                        }
-                        Qt.openUrlExternally(url)
+                        Qt.openUrlExternally(linksGroup.bugUrl)
                     }
                 }
                 triggerIcon.name: "open-link-symbolic"
+                visible: linksGroup.hasBugUrl
             }
         }
 
         KF.FormGroup {
             title: qsTr("Libraries in use")
+            visible: aboutItem.showLibraries
             Repeater {
-                model: Platform.Settings.information
+                model: aboutItem.showLibraries ? Platform.Settings.information : null
                 delegate: KF.FormEntry {
                     id: delegate
                     required property string modelData
@@ -376,7 +398,7 @@ Item {
 
         OverlaySheet {
             id: licenseSheet
-            width: Math.min(aboutItem.width - Platform.Units.gridUnit * 2, bodyLabel.implicitWidth)
+            width: Math.min(aboutItem.width - Platform.Units.gridUnit * 2, Platform.Units.gridUnit * 30, bodyLabel.implicitWidth)
             height: parent.Window.window.height - Platform.Units.gridUnit * 8
             property alias text: bodyLabel.text
 
